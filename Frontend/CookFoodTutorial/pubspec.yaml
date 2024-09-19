@@ -21,6 +21,7 @@ dependencies:
   intl: ^0.19.0
   cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.4.1
+  package_info_plus: ^8.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -31,3 +32,31 @@ flutter:
 
   uses-material-design: true
 
+  assets:
+    - lib/res/image/svg/
+    - lib/res/image/png/
+    - lib/res/image/lottie/
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: lib/res/font/Inter_ExtraBold.ttf
+          weight: 800
+        - asset: lib/res/font/Inter_Bold.ttf
+          weight: 700
+        - asset: lib/res/font/Inter_SemiBold.ttf
+          weight: 600
+        - asset: lib/res/font/Inter_Medium.ttf
+          weight: 500
+        - asset: lib/res/font/Inter_Regular.ttf
+          weight: 400
+    - family: Lora
+      fonts:
+        - asset: lib/res/font/Lora_Bold.ttf
+          weight: 700
+        - asset: lib/res/font/Lora_SemiBold.ttf
+          weight: 600
+        - asset: lib/res/font/Lora_Medium.ttf
+          weight: 500
+        - asset: lib/res/font/Lora_Regular.ttf
+          weight: 400

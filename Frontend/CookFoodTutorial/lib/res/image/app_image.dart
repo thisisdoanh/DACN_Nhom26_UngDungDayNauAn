@@ -7,5 +7,8 @@ class AppImage {
   static const String icBack = '${_internalImagePathSvg}ic_back.svg';
 
   ///PNG
+  static const String imgLogo = '${_internalImagePathPng}img_logo.png';
+  static const String imgBgFood = '${_internalImagePathPng}img_bg_food.png';
+
   ///LOTTIE
 }

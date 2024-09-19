@@ -33,11 +33,11 @@ void mainDelegate() async {
 
   runApp(
     ScreenUtilInit(
-      designSize: const Size(430, 932),
+      designSize: const Size(414, 896),
       builder: (context, widget) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: AppBinding(),
-        initialRoute: AppRoute.introScreen,
+        initialRoute: AppRoute.splashScreen,
         defaultTransition: Transition.cupertino,
         getPages: AppPage.pages,
         theme: AppTheme.lightTheme,

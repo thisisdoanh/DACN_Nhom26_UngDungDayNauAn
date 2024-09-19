@@ -1,6 +1,7 @@
 ///resources
 library app_widget;
 
+export '../../res/image/app_image.dart';
 export 'resources/app_color.dart';
 export 'resources/app_text_theme.dart';
 
