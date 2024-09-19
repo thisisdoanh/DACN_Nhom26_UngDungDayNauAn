@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppController extends SuperController {
@@ -11,6 +12,10 @@ class AppController extends SuperController {
   void onReady() {
     // TODO: implement onReady
     super.onReady();
+  }
+
+  Future<void> updateLocale(Locale locale) async {
+    Get.updateLocale(locale);
   }
 
   @override

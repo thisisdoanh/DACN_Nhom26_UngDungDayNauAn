@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tutorial/common/constants/app_constants.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
+import 'package:tutorial/res/string/app_string.dart';
 
 import 'data/share_preference_utils.dart';
 import 'presentation/base/app_binding.dart';
@@ -41,6 +44,15 @@ void mainDelegate() async {
         defaultTransition: Transition.cupertino,
         getPages: AppPage.pages,
         theme: AppTheme.lightTheme,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        translations: AppString(),
+        supportedLocales: AppConstants.availableLocales,
+        locale: AppConstants.availableLocales[0],
+        fallbackLocale: AppConstants.availableLocales[0],
       ),
     ),
   );

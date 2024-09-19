@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../resources/app_color.dart';
+import 'package:tutorial/presentation/view/app_view.dart';
 
 class AppContainer extends GetView {
   const AppContainer({
@@ -15,6 +14,7 @@ class AppContainer extends GetView {
     this.coverScreenWidget,
     this.resizeToAvoidBottomInset = false,
     this.floatingActionButton,
+    this.bgImage,
   });
 
   final PreferredSizeWidget? appBar;
@@ -26,6 +26,7 @@ class AppContainer extends GetView {
   final Widget? coverScreenWidget;
   final bool? resizeToAvoidBottomInset;
   final Widget? floatingActionButton;
+  final String? bgImage;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,19 @@ class AppContainer extends GetView {
               body: SizedBox(
                 width: Get.width,
                 height: Get.height,
-                child: child ?? const SizedBox.shrink(),
+                child: Stack(
+                  children: [
+                    bgImage != null
+                        ? AppImageWidget.asset(
+                            path: bgImage!,
+                            width: Get.width,
+                            height: Get.height,
+                            fit: BoxFit.cover,
+                          )
+                        : const SizedBox.shrink(),
+                    child ?? const SizedBox.shrink(),
+                  ],
+                ),
               ),
               floatingActionButton: floatingActionButton,
               bottomNavigationBar: bottomNavigationBar,
