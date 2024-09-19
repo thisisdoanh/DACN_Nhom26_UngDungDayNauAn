@@ -37,4 +37,10 @@ class AppString extends Translations {
 class StringConstants {
   static const String deliciousCooking = "delicious_cooking";
   static const String cookingIsEasy = "cooking_is_easy";
+  static const String login = "login";
+  static const String register = "register";
+  static const String email = "email";
+  static const String password = "password";
+  static const String rePassword = "re_password";
+  static const String username = "username";
 }
