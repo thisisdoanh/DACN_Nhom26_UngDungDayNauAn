@@ -26,7 +26,7 @@ class SplashScreen extends AppBaseScreen<SplashController> {
           ),
           Obx(
             () => Positioned(
-              bottom: Get.mediaQuery.padding.bottom + 16.h,
+              bottom: 16.h,
               child: Text(
                 controller.version.value,
                 style: AppTextTheme.bodyMedium(

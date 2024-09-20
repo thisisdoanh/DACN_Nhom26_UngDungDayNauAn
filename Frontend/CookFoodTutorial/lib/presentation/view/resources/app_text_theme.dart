@@ -100,7 +100,7 @@ class AppTextTheme {
     return TextStyle(
       color: textColor,
       fontFamily: fontFamily.isEmpty ? defaultFontFamily : fontFamily,
-      fontSize: 14.0.sp,
+      fontSize: 18.0.sp,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.1,
     );
@@ -110,7 +110,7 @@ class AppTextTheme {
     return TextStyle(
       color: textColor,
       fontFamily: fontFamily.isEmpty ? defaultFontFamily : fontFamily,
-      fontSize: 12.0.sp,
+      fontSize: 16.0.sp,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.5,
     );
@@ -120,7 +120,7 @@ class AppTextTheme {
     return TextStyle(
       color: textColor,
       fontFamily: fontFamily.isEmpty ? defaultFontFamily : fontFamily,
-      fontSize: 11.0.sp,
+      fontSize: 14.0.sp,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.5,
     );

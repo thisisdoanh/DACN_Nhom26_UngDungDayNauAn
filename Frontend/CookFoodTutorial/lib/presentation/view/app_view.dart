@@ -10,4 +10,5 @@ export 'widget/app_container.dart';
 export 'widget/app_header.dart';
 export 'widget/app_image_widget.dart';
 export 'widget/app_scroll_view.dart';
+export 'widget/app_text_field.dart';
 export 'widget/app_touchable.dart';

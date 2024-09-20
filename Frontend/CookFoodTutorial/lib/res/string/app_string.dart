@@ -42,5 +42,15 @@ class StringConstants {
   static const String email = "email";
   static const String password = "password";
   static const String rePassword = "re_password";
-  static const String username = "username";
+  static const String name = "name";
+  static const String forgotPass = "forgot_pass";
+  static const String doNotHaveAccount = "do_not_have_account";
+  static const String doYouForgotPass = "do_you_forgot_pass";
+  static const String inputEmail = "input_email";
+  static const String inputOTP = "input_otp";
+  static const String next = "next";
+  static const String doYouHaveAccount = "do_you_have_account";
+  static const String valueRequire = "value_require";
+  static const String emailNotCorrectFormat = "email_not_correct_format";
+  static const String rePasswordNotCorrect = "re_password_not_correct";
 }

@@ -4,6 +4,8 @@ import 'package:tutorial/presentation/view/screen/splash/splash_screen.dart';
 
 import '../view/screen/login/login_binding.dart';
 import '../view/screen/login/login_screen.dart';
+import '../view/screen/register/register_binding.dart';
+import '../view/screen/register/register_screen.dart';
 import 'app_route.dart';
 
 class AppPage {
@@ -17,6 +19,11 @@ class AppPage {
       name: AppRoute.loginScreen,
       page: () => const LoginScreen(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: AppRoute.registerScreen,
+      page: () => const RegisterScreen(),
+      binding: RegisterBinding(),
     ),
   ];
 }

@@ -31,10 +31,18 @@ class AppContainer extends GetView {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: canPop ?? false,
+      canPop: canPop ?? true,
       onPopInvoked: onPopInvoked,
       child: Stack(
         children: [
+          bgImage != null
+              ? AppImageWidget.asset(
+                  path: bgImage!,
+                  width: Get.width,
+                  height: Get.height,
+                  fit: BoxFit.cover,
+                )
+              : const SizedBox.shrink(),
           GestureDetector(
             onTap: () {
               FocusScopeNode currentFocus = FocusScope.of(context);
@@ -44,25 +52,9 @@ class AppContainer extends GetView {
             },
             child: Scaffold(
               resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-              backgroundColor: backgroundColor ?? AppColor.background,
+              backgroundColor: backgroundColor ?? (bgImage != null ? AppColor.transparent : AppColor.background),
               appBar: appBar,
-              body: SizedBox(
-                width: Get.width,
-                height: Get.height,
-                child: Stack(
-                  children: [
-                    bgImage != null
-                        ? AppImageWidget.asset(
-                            path: bgImage!,
-                            width: Get.width,
-                            height: Get.height,
-                            fit: BoxFit.cover,
-                          )
-                        : const SizedBox.shrink(),
-                    child ?? const SizedBox.shrink(),
-                  ],
-                ),
-              ),
+              body: child ?? const SizedBox.shrink(),
               floatingActionButton: floatingActionButton,
               bottomNavigationBar: bottomNavigationBar,
             ),

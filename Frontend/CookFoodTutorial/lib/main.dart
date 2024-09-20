@@ -42,6 +42,7 @@ void mainDelegate() async {
         initialBinding: AppBinding(),
         initialRoute: AppRoute.splashScreen,
         defaultTransition: Transition.cupertino,
+        transitionDuration: const Duration(milliseconds: 500),
         getPages: AppPage.pages,
         theme: AppTheme.lightTheme,
         localizationsDelegates: const [
