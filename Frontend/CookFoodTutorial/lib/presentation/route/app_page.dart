@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
+import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_binding.dart';
+import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_screen/forgot_pass_screen.dart';
 import 'package:tutorial/presentation/view/screen/splash/splash_binding.dart';
 import 'package:tutorial/presentation/view/screen/splash/splash_screen.dart';
+import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_binding.dart';
+import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_screen.dart';
 
 import '../view/screen/login/login_binding.dart';
 import '../view/screen/login/login_screen.dart';
@@ -24,6 +28,16 @@ class AppPage {
       name: AppRoute.registerScreen,
       page: () => const RegisterScreen(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: AppRoute.forgotPassScreen,
+      page: () => const ForgotPassScreen(),
+      binding: ForgotPassBinding(),
+    ),
+    GetPage(
+      name: AppRoute.suggestFoodSreen,
+      page: () => const SuggestFoodScreen(),
+      binding: SuggestFoodBinding(),
     ),
   ];
 }

@@ -53,4 +53,10 @@ class StringConstants {
   static const String valueRequire = "value_require";
   static const String emailNotCorrectFormat = "email_not_correct_format";
   static const String rePasswordNotCorrect = "re_password_not_correct";
+  static const String inputYourEmail = "input_your_email";
+  static const String verifyAccount = "verify_account";
+  static const String verifyAccountSuccess = "verify_account_success";
+  static const String enterNewPass = "enter_new_pass";
+  static const String enterNewPassToLogin = "enter_new_pass_to_login";
+  static const String errorVerifyPass = "error_verify_pass";
 }

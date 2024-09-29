@@ -11,8 +11,10 @@ import '../../../../common/utils/app_utils.dart';
 class LoginController extends AppBaseController {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   RxBool isShowPass = false.obs;
-  final TextEditingController emailTextEditingController = TextEditingController();
-  final TextEditingController passwordTextEditingController = TextEditingController();
+  final TextEditingController emailTextEditingController =
+      TextEditingController();
+  final TextEditingController passwordTextEditingController =
+      TextEditingController();
   RxString firstErrorText = "".obs;
   RxString secondErrorText = "".obs;
   void onPressLogin() {
@@ -26,7 +28,7 @@ class LoginController extends AppBaseController {
   }
 
   void onPressForgotPass() {
-    AppLog.info("onPressForgotPass");
+    Get.toNamed(AppRoute.forgotPassScreen);
   }
 
   void onPressRegister() {
