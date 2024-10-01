@@ -17,4 +17,10 @@ const englishString = {
   "value_require": "@value can't be empty",
   "email_not_correct_format": "Email is not in correct format",
   "re_password_not_correct": "Re-enter password does not match",
+  "input_your_email": "Enter your email",
+  "verify_account": "Verify your email",
+  "verify_account_success": "Verify your account success",
+  "enter_new_pass": "Enter new password",
+  "error_verify_pass": "Re_enter incorrect password",
+  "enter_new_pass_to_login":"Please, enter new password to login"
 };

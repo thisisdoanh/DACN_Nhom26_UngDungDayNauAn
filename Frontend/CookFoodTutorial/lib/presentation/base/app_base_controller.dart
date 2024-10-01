@@ -17,4 +17,10 @@ class AppBaseController extends GetxController {
   void hideLoading() {
     isShowLoading.value = false;
   }
+
+  void hideKeyboard() {
+    if (FocusScope.of(context).hasFocus) {
+      FocusScope.of(context).unfocus();
+    }
+  }
 }

@@ -69,7 +69,8 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                       ),
                       hintText: StringConstants.email.tr,
                       keyboardType: TextInputType.emailAddress,
-                      textEditingController: controller.emailTextEditingController,
+                      textEditingController:
+                          controller.emailTextEditingController,
                       errorText: controller.firstErrorText.value,
                       onChanged: controller.onFirstInputChange,
                     ),
@@ -94,12 +95,15 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                       suffixIcon: AppTouchable(
                         onPressed: () => controller.onPressShowPassword(),
                         child: Icon(
-                          controller.isShowPass.value ? Icons.visibility_off : Icons.visibility,
+                          controller.isShowPass.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: AppColor.white,
                           size: 24.sp,
                         ),
                       ),
-                      textEditingController: controller.passwordTextEditingController,
+                      textEditingController:
+                          controller.passwordTextEditingController,
                       errorText: controller.secondErrorText.value,
                       onChanged: controller.onSecondInputChange,
                     ),
@@ -135,9 +139,14 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                     borderRadius: BorderRadius.circular(20.sp),
                     width: 344.w,
                     height: 56.h,
+                    border: Border.all(
+                      color: AppColor.white,
+                      width: 2.sp,
+                    ),
                     child: Text(
                       StringConstants.login.tr,
-                      style: AppTextTheme.headlineSmall(AppColor.white)?.copyWith(
+                      style:
+                          AppTextTheme.headlineSmall(AppColor.white)?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -160,7 +169,8 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                 onPressed: () => controller.onPressRegister(),
                 child: Text(
                   StringConstants.register.tr,
-                  style: AppTextTheme.titleMedium(AppColor.primaryColor)?.copyWith(
+                  style:
+                      AppTextTheme.titleMedium(AppColor.primaryColor)?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),

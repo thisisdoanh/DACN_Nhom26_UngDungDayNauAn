@@ -17,4 +17,10 @@ const viString = {
   "value_require": "@value không được để trống",
   "email_not_correct_format": "Email không đúng định dạng",
   "re_password_not_correct": "Nhập lại mật khẩu không khớp",
+  "input_your_email": "Nhập email của bạn",
+  "verify_account": "Xác minh tài khoản của bạn",
+  "verify_account_success": "Xác minh tài khoản thành công",
+  "enter_new_pass": "Nhập mật khẩu mới",
+  "error_verify_pass": "Nhập lại mật khẩu không đúng",
+  "enter_new_pass_to_login": "Vui lòng nhập mật khẩu mới để đăng nhập",
 };

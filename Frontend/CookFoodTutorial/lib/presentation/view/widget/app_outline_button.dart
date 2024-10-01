@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../app_view.dart';
 
@@ -10,6 +9,7 @@ class AppOutlineButton extends StatelessWidget {
   final Widget child;
   final double? width, height;
   final Color? color;
+  final BoxBorder? border;
 
   const AppOutlineButton({
     super.key,
@@ -20,6 +20,7 @@ class AppOutlineButton extends StatelessWidget {
     required this.child,
     this.width,
     this.height,
+    this.border,
     this.color,
   });
 
@@ -35,10 +36,7 @@ class AppOutlineButton extends StatelessWidget {
         color: color ?? AppColor.transparent,
         shape: BoxShape.rectangle,
         borderRadius: borderRadius ?? BorderRadius.zero,
-        border: Border.all(
-          color: AppColor.white,
-          width: 2.sp,
-        ),
+        border: border,
       ),
       child: child,
     );

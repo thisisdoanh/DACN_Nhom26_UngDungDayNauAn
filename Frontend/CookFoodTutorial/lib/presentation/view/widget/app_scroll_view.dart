@@ -8,11 +8,11 @@ class AppScrollView extends StatelessWidget {
   final ScrollPhysics? physics;
 
   const AppScrollView({
-    Key? key,
+    super.key,
     required this.child,
     this.padding,
     this.physics,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
