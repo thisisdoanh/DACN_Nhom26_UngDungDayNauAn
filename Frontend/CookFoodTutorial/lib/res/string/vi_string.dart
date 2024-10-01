@@ -23,4 +23,8 @@ const viString = {
   "enter_new_pass": "Nhập mật khẩu mới",
   "error_verify_pass": "Nhập lại mật khẩu không đúng",
   "enter_new_pass_to_login": "Vui lòng nhập mật khẩu mới để đăng nhập",
+
+  //home
+  "search_recipe": "Tìm kiếm công thức",
+  "mots_favorite": "Được yêu thích nhất",
 };

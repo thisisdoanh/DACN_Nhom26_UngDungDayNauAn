@@ -35,6 +35,7 @@ class AppString extends Translations {
 }
 
 class StringConstants {
+  //login
   static const String deliciousCooking = "delicious_cooking";
   static const String cookingIsEasy = "cooking_is_easy";
   static const String login = "login";
@@ -59,4 +60,8 @@ class StringConstants {
   static const String enterNewPass = "enter_new_pass";
   static const String enterNewPassToLogin = "enter_new_pass_to_login";
   static const String errorVerifyPass = "error_verify_pass";
+
+//home
+  static const String searchRecipe = "search_recipe";
+  static const String motsFavorite = "mots_favorite";
 }

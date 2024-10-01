@@ -22,5 +22,9 @@ const englishString = {
   "verify_account_success": "Verify your account success",
   "enter_new_pass": "Enter new password",
   "error_verify_pass": "Re_enter incorrect password",
-  "enter_new_pass_to_login":"Please, enter new password to login"
+  "enter_new_pass_to_login": "Please, enter new password to login",
+
+  //home
+  "search_recipe": "Search recipes",
+  "mots_favorite": "Most favorites",
 };

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
-import 'package:tutorial/presentation/view/resources/app_dimen.dart'; // Để hiển thị đánh giá sao
+import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 
 class FoodCard extends StatelessWidget {
   final FoodModel food;
@@ -16,7 +16,7 @@ class FoodCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
       decoration: BoxDecoration(
-        color: AppColor.primaryGray.withOpacity(0.5),
+        color: AppColor.primaryGray.withOpacity(0.4),
         borderRadius: BorderRadius.circular(AppDimens.radius16),
       ),
       child: Column(
@@ -78,7 +78,7 @@ class FoodCard extends StatelessWidget {
     return UtilWidget.buildText(
       food.mealType,
       fontSize: AppDimens.fontSmall,
-      textColor: AppColor.dsPrimaryBlueBlue,
+      textColor: const Color.fromARGB(255, 0, 157, 255),
     );
   }
 

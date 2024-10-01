@@ -20,6 +20,8 @@ class AppTextField extends StatelessWidget {
   final Color? outlineColor;
   final Widget? prefixIcon;
   final bool? isHide;
+  final BoxBorder? border;
+  final BorderRadiusGeometry? borderRadius;
 
   const AppTextField({
     super.key,
@@ -38,6 +40,8 @@ class AppTextField extends StatelessWidget {
     this.outlineColor,
     this.prefixIcon,
     this.isHide,
+    this.border,
+    this.borderRadius,
   });
 
   @override
@@ -48,12 +52,14 @@ class AppTextField extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: backgroundColor ?? AppColor.white,
-            border: Border(
-              bottom: BorderSide(
-                color: AppColor.white,
-                width: 1.sp,
-              ),
-            ),
+            borderRadius: borderRadius,
+            border: border ??
+                Border(
+                  bottom: BorderSide(
+                    color: AppColor.white,
+                    width: 1.sp,
+                  ),
+                ),
           ),
           child: TextField(
             readOnly: readOnly ?? false,
@@ -75,7 +81,8 @@ class AppTextField extends StatelessWidget {
                     horizontal: 16.0.sp,
                   ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: outlineColor ?? Colors.transparent),
+                borderSide:
+                    BorderSide(color: outlineColor ?? Colors.transparent),
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               errorBorder: OutlineInputBorder(
@@ -83,11 +90,12 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: outlineColor ?? Colors.transparent),
+                borderSide:
+                    BorderSide(color: outlineColor ?? Colors.transparent),
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               hintText: hintText,
-              hintStyle: AppTextTheme.labelLarge(AppColor.white),
+              hintStyle: AppTextTheme.labelLarge(AppColor.dsGray4),
               suffixIcon: suffixIcon,
               isDense: true,
               focusColor: AppColor.white,

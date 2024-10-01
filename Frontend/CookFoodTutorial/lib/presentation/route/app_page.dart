@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:tutorial/presentation/view/screen/favorite_food/suggest_food_binding.dart';
+import 'package:tutorial/presentation/view/screen/favorite_food/suggest_food_screen.dart';
 import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_binding.dart';
 import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_screen/forgot_pass_screen.dart';
 import 'package:tutorial/presentation/view/screen/splash/splash_binding.dart';
@@ -38,6 +40,11 @@ class AppPage {
       name: AppRoute.suggestFoodSreen,
       page: () => const SuggestFoodScreen(),
       binding: SuggestFoodBinding(),
+    ),
+    GetPage(
+      name: AppRoute.favoriteFoodSreen,
+      page: () => const FavoriteFoodScreen(),
+      binding: FavoriteFoodBinding(),
     ),
   ];
 }
