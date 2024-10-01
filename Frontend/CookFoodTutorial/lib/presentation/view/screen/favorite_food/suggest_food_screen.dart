@@ -6,11 +6,11 @@ import 'package:tutorial/presentation/component/backgroud_screen.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
-import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_controller.dart';
+import 'package:tutorial/presentation/view/screen/favorite_food/suggest_food_controller.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
-class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
-  const SuggestFoodScreen({super.key});
+class FavoriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
+  const FavoriteFoodScreen({super.key});
 
   @override
   Widget buildWidget() {

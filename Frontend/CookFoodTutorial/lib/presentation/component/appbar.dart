@@ -21,9 +21,16 @@ class AppBarShare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      titleSpacing: 0,
       backgroundColor: AppColor.transparent,
       title: title != null
-          ? UtilWidget.buildText(title!)
+          ? UtilWidget.buildText(
+              title!,
+              textAlign: TextAlign.start,
+              fontSize: AppDimens.fontMedium,
+              textColor: AppColor.white,
+              fontWeight: FontWeight.bold,
+            )
           : const SizedBox.shrink(),
       leading: hasBackIcon
           ? IconButton(
