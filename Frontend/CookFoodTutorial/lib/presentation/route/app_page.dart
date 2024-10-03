@@ -3,6 +3,8 @@ import 'package:tutorial/presentation/view/screen/favorite_food/suggest_food_bin
 import 'package:tutorial/presentation/view/screen/favorite_food/suggest_food_screen.dart';
 import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_binding.dart';
 import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_screen/forgot_pass_screen.dart';
+import 'package:tutorial/presentation/view/screen/home/home_binding.dart';
+import 'package:tutorial/presentation/view/screen/home/home_screen.dart';
 import 'package:tutorial/presentation/view/screen/splash/splash_binding.dart';
 import 'package:tutorial/presentation/view/screen/splash/splash_screen.dart';
 import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_binding.dart';
@@ -25,6 +27,11 @@ class AppPage {
       name: AppRoute.loginScreen,
       page: () => const LoginScreen(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: AppRoute.homeScreen,
+      page: () => const HomeScreen(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: AppRoute.registerScreen,

@@ -17,7 +17,8 @@ class LoginController extends AppBaseController {
   RxString secondErrorText = "".obs;
   void onPressLogin() {
     AppLog.info("onPressLogin");
-    _validate();
+    // _validate();
+    Get.toNamed(AppRoute.homeScreen);
   }
 
   void onPressShowPassword() {

@@ -8,8 +8,10 @@ import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 
 class FoodCard extends StatelessWidget {
   final FoodModel food;
+  final IconData? timerIcon;
+  final Color? timerColor;
 
-  const FoodCard({super.key, required this.food});
+  const FoodCard({super.key, required this.food, this.timerIcon, this.timerColor});
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +54,15 @@ class FoodCard extends StatelessWidget {
   Widget _buildTime() {
     return Row(
       children: [
-        const Icon(
-          Icons.timer_outlined,
-          color: AppColor.primaryColor,
+        Icon(
+          timerIcon ?? Icons.timer_outlined,
+          color: timerColor ?? AppColor.primaryColor,
         ),
         Gap(4.w),
         UtilWidget.buildText(
           food.time,
-          textColor: AppColor.primaryColor,
-          fontSize: AppDimens.fontMedium,
+          textColor: timerColor ?? AppColor.primaryColor,
+          fontSize: AppDimens.fontSmall,
         ),
       ],
     );

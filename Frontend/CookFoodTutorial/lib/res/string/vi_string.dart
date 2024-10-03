@@ -27,4 +27,16 @@ const viString = {
   //home
   "search_recipe": "Tìm kiếm công thức",
   "mots_favorite": "Được yêu thích nhất",
+
+  "hello": "Xin chào",
+  "what_want_to_cook": "Bạn muốn nấu gì hôm nay?",
+  "suggest": "Gợi ý",
+  "see_all": "Xem tất cả",
+  "home": "Trang chủ",
+  "favorite": "Yêu thích",
+  "history": "Lịch sử",
+  "help": "Trợ giúp",
+  "logOut": "Đăng xuất",
+  "personal_info": "Thông tin cá nhân",
+  "": "",
 };

@@ -12,17 +12,19 @@ class AppBarShare extends StatelessWidget {
     this.title,
     this.leading,
     this.action,
+    this.bgColor,
   });
   final bool hasBackIcon;
   final String? title;
   final Widget? leading;
   final Widget? action;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       titleSpacing: 0,
-      backgroundColor: AppColor.transparent,
+      backgroundColor: bgColor ?? AppColor.transparent,
       title: title != null
           ? UtilWidget.buildText(
               title!,

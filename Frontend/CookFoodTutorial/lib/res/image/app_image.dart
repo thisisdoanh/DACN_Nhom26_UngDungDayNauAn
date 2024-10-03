@@ -9,6 +9,8 @@ class AppImage {
   static const String icEye = '${_internalImagePathSvg}ic_eye.svg';
   static const String icKey = '${_internalImagePathSvg}ic_key.svg';
   static const String icUser = '${_internalImagePathSvg}ic_user.svg';
+  static const String icNoti = '${_internalImagePathSvg}ic_noti.svg';
+  static const String icMenu = '${_internalImagePathSvg}ic_menu.svg';
 
   ///PNG
   static const String imgLogo = '${_internalImagePathPng}img_logo.png';
