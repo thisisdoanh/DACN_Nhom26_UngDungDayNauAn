@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:tutorial/res/string/app_string.dart';
 
 import '../../presentation/view/resources/app_color.dart';
 
@@ -47,4 +49,34 @@ bool checkValidEmail(String email) {
   Pattern pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+";
   RegExp regex = RegExp(pattern as String);
   return regex.hasMatch(textEmail);
+}
+
+String validateEmailAndReturnValue(String email) {
+  if (email.isEmpty || email == "") {
+    return StringConstants.valueRequire.tr.trParams({
+      "value": StringConstants.email.tr,
+    });
+  }
+
+  if (!checkValidEmail(email)) {
+    return StringConstants.emailNotCorrectFormat.tr;
+  }
+
+  return "";
+}
+
+String validateValueNotEmpty(String value, String valueReplace) {
+  if (value.isEmpty || value == "") {
+    return StringConstants.valueRequire.tr.trParams({
+      "value": valueReplace,
+    });
+  }
+  return "";
+}
+
+String validatePasswordAndRePassword(String password, String rePassword) {
+  if (password != rePassword) {
+    return StringConstants.rePasswordNotCorrect.tr;
+  }
+  return "";
 }

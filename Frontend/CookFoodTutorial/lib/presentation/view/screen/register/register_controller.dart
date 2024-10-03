@@ -7,7 +7,7 @@ import '../../../../res/string/app_string.dart';
 import '../../../base/app_base_controller.dart';
 
 class RegisterController extends AppBaseController {
-  RxBool isShowPass = false.obs;
+  RxBool isHidePass = true.obs;
   final TextEditingController nameTextEditingController = TextEditingController();
   final TextEditingController emailTextEditingController = TextEditingController();
   final TextEditingController passwordTextEditingController = TextEditingController();
@@ -18,6 +18,7 @@ class RegisterController extends AppBaseController {
   RxString fourthErrorText = "".obs;
   void onPressShowPassword() {
     AppLog.info("onPressShowPassword");
+    isHidePass.value = !isHidePass.value;
   }
 
   void onPressLogin() {
@@ -27,51 +28,28 @@ class RegisterController extends AppBaseController {
 
   void onPressRegister() {
     AppLog.info("onPressRegister");
+    _validate();
   }
 
   bool _validate() {
-    bool isValid = true;
+    firstErrorText.value = validateValueNotEmpty(nameTextEditingController.text.trim(), StringConstants.name.tr);
+    secondErrorText.value = validateEmailAndReturnValue(emailTextEditingController.text.trim());
+    thirdErrorText.value = validateValueNotEmpty(passwordTextEditingController.text, StringConstants.password.tr);
+    fourthErrorText.value = validateValueNotEmpty(rePasswordTextEditingController.text, StringConstants.rePassword.tr);
 
-    if (nameTextEditingController.text.trim().isEmpty) {
-      firstErrorText.value = StringConstants.valueRequire.tr.trParams({
-        "value": StringConstants.name.tr,
-      });
-      isValid = false;
+    if (thirdErrorText.value.isEmpty && fourthErrorText.value.isEmpty) {
+      fourthErrorText.value =
+          validatePasswordAndRePassword(passwordTextEditingController.text, rePasswordTextEditingController.text);
     }
 
-    if (emailTextEditingController.text.trim().isEmpty) {
-      secondErrorText.value = StringConstants.valueRequire.tr.trParams({
-        "value": StringConstants.email.tr,
-      });
-      isValid = false;
-    } else {
-      if (!checkValidEmail(emailTextEditingController.text.trim())) {
-        secondErrorText.value = StringConstants.emailNotCorrectFormat.tr;
-        isValid = false;
-      }
+    if (firstErrorText.value.isNotEmpty ||
+        secondErrorText.value.isNotEmpty ||
+        thirdErrorText.value.isNotEmpty ||
+        fourthErrorText.value.isNotEmpty) {
+      return false;
     }
 
-    if (passwordTextEditingController.text.isEmpty) {
-      thirdErrorText.value = StringConstants.valueRequire.tr.trParams({
-        "value": StringConstants.password.tr,
-      });
-      isValid = false;
-    }
-
-    if (rePasswordTextEditingController.text.isEmpty) {
-      fourthErrorText.value = StringConstants.valueRequire.tr.trParams({
-        "value": StringConstants.rePassword.tr,
-      });
-      isValid = false;
-    }
-
-    if (rePasswordTextEditingController.text.trim().isNotEmpty &&
-        passwordTextEditingController.text.isNotEmpty &&
-        rePasswordTextEditingController.text == passwordTextEditingController.text) {
-      fourthErrorText.value = StringConstants.rePasswordNotCorrect.tr;
-      isValid = false;
-    }
-    return isValid;
+    return true;
   }
 
   void onFirstInputChange(String text) {
@@ -83,6 +61,18 @@ class RegisterController extends AppBaseController {
   void onSecondInputChange(String text) {
     if (secondErrorText.value.isNotEmpty) {
       secondErrorText.value = '';
+    }
+  }
+
+  void onThirdInputChange(String text) {
+    if (thirdErrorText.value.isNotEmpty) {
+      thirdErrorText.value = '';
+    }
+  }
+
+  void onFourthInputChange(String text) {
+    if (fourthErrorText.value.isNotEmpty) {
+      fourthErrorText.value = '';
     }
   }
 }

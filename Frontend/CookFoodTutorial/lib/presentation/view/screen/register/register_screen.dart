@@ -54,89 +54,107 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                     ),
                   ),
                   Gap(40.h),
-                  AppTextField(
-                    maxLines: 1,
-                    maxLength: 255,
-                    backgroundColor: AppColor.transparent,
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.sp,
-                        horizontal: 12.sp,
+                  Obx(
+                    () => AppTextField(
+                      maxLines: 1,
+                      maxLength: 255,
+                      backgroundColor: AppColor.transparent,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8.sp,
+                          horizontal: 12.sp,
+                        ),
+                        child: AppImageWidget.asset(
+                          path: AppImage.icUser,
+                        ),
                       ),
-                      child: AppImageWidget.asset(
-                        path: AppImage.icUser,
-                      ),
-                    ),
-                    hintText: StringConstants.name.tr,
-                    keyboardType: TextInputType.text,
-                  ),
-                  Gap(8.h),
-                  AppTextField(
-                    maxLines: 1,
-                    maxLength: 255,
-                    backgroundColor: AppColor.transparent,
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.sp,
-                        horizontal: 12.sp,
-                      ),
-                      child: AppImageWidget.asset(
-                        path: AppImage.icEmail,
-                      ),
-                    ),
-                    hintText: StringConstants.email.tr,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  Gap(8.h),
-                  AppTextField(
-                    maxLines: 1,
-                    maxLength: 255,
-                    backgroundColor: AppColor.transparent,
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.sp,
-                        horizontal: 12.sp,
-                      ),
-                      child: AppImageWidget.asset(
-                        path: AppImage.icKey,
-                      ),
-                    ),
-                    hintText: StringConstants.password.tr,
-                    suffixIcon: AppTouchable(
-                      onPressed: () => controller.onPressShowPassword(),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.sp,
-                        horizontal: 12.sp,
-                      ),
-                      child: AppImageWidget.asset(
-                        path: AppImage.icEye,
-                      ),
+                      hintText: StringConstants.name.tr,
+                      keyboardType: TextInputType.text,
+                      errorText: controller.firstErrorText.value,
+                      onChanged: controller.onFirstInputChange,
+                      textEditingController: controller.nameTextEditingController,
                     ),
                   ),
                   Gap(8.h),
-                  AppTextField(
-                    maxLines: 1,
-                    maxLength: 255,
-                    backgroundColor: AppColor.transparent,
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.sp,
-                        horizontal: 12.sp,
+                  Obx(
+                    () => AppTextField(
+                      maxLines: 1,
+                      maxLength: 255,
+                      backgroundColor: AppColor.transparent,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8.sp,
+                          horizontal: 12.sp,
+                        ),
+                        child: AppImageWidget.asset(
+                          path: AppImage.icEmail,
+                        ),
                       ),
-                      child: AppImageWidget.asset(
-                        path: AppImage.icKey,
-                      ),
+                      hintText: StringConstants.email.tr,
+                      keyboardType: TextInputType.emailAddress,
+                      errorText: controller.secondErrorText.value,
+                      onChanged: controller.onSecondInputChange,
+                      textEditingController: controller.emailTextEditingController,
                     ),
-                    hintText: StringConstants.rePassword.tr,
-                    suffixIcon: AppTouchable(
-                      onPressed: () => controller.onPressShowPassword(),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.sp,
-                        horizontal: 12.sp,
+                  ),
+                  Gap(8.h),
+                  Obx(
+                    () => AppTextField(
+                      maxLines: 1,
+                      maxLength: 255,
+                      backgroundColor: AppColor.transparent,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8.sp,
+                          horizontal: 12.sp,
+                        ),
+                        child: AppImageWidget.asset(
+                          path: AppImage.icKey,
+                        ),
                       ),
-                      child: AppImageWidget.asset(
-                        path: AppImage.icEye,
+                      hintText: StringConstants.password.tr,
+                      suffixIcon: AppTouchable(
+                        onPressed: () => controller.onPressShowPassword(),
+                        child: Icon(
+                          controller.isHidePass.value ? Icons.visibility : Icons.visibility_off,
+                          color: AppColor.white,
+                          size: 24.sp,
+                        ),
                       ),
+                      isHide: controller.isHidePass.value,
+                      errorText: controller.thirdErrorText.value,
+                      onChanged: controller.onThirdInputChange,
+                      textEditingController: controller.passwordTextEditingController,
+                    ),
+                  ),
+                  Gap(8.h),
+                  Obx(
+                    () => AppTextField(
+                      maxLines: 1,
+                      maxLength: 255,
+                      backgroundColor: AppColor.transparent,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8.sp,
+                          horizontal: 12.sp,
+                        ),
+                        child: AppImageWidget.asset(
+                          path: AppImage.icKey,
+                        ),
+                      ),
+                      hintText: StringConstants.rePassword.tr,
+                      isHide: controller.isHidePass.value,
+                      suffixIcon: AppTouchable(
+                        onPressed: () => controller.onPressShowPassword(),
+                        child: Icon(
+                          controller.isHidePass.value ? Icons.visibility : Icons.visibility_off,
+                          color: AppColor.white,
+                          size: 24.sp,
+                        ),
+                      ),
+                      errorText: controller.fourthErrorText.value,
+                      onChanged: controller.onFourthInputChange,
+                      textEditingController: controller.rePasswordTextEditingController,
                     ),
                   ),
                   Gap(32.h),
