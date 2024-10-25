@@ -21,6 +21,7 @@ class AppBarShare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leadingWidth: !hasBackIcon && leading == null ? 0 : null,
       titleSpacing: 0,
       backgroundColor: AppColor.transparent,
       title: title != null
@@ -37,6 +38,7 @@ class AppBarShare extends StatelessWidget {
               onPressed: Get.back,
               icon: const Icon(
                 Icons.arrow_back_sharp,
+                
                 color: AppColor.primaryColor,
                 size: AppDimens.fontLargest,
               ),

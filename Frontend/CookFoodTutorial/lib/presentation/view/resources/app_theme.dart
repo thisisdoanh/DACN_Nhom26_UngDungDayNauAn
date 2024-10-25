@@ -31,7 +31,7 @@ class AppTheme {
     ),
   );
 
-  static final ThemeData darkTheme = ThemeData(
+  static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     primaryColor: AppColor.primaryColor,
     colorScheme: ColorScheme.fromSeed(
@@ -39,8 +39,14 @@ class AppTheme {
       outlineVariant: AppColor.primaryColor.withOpacity(0.4),
     ),
     fontFamily: "Lora",
+    iconTheme: const IconThemeData(color: AppColor.white),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor: WidgetStateProperty.all(AppColor.white),
+      ),
+    ),
     scaffoldBackgroundColor: AppColor.primaryColor,
-    textTheme: AppTextTheme.textTheme(AppColor.primaryColor),
+    textTheme: AppTextTheme.textTheme(AppColor.white),
     dialogBackgroundColor: Colors.white,
     unselectedWidgetColor: Colors.black,
     checkboxTheme: CheckboxThemeData(

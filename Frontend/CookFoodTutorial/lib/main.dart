@@ -40,11 +40,11 @@ void mainDelegate() async {
       builder: (context, widget) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: AppBinding(),
-        initialRoute: AppRoute.loginScreen,
+        initialRoute: AppRoute.foodDetailScreen,
         defaultTransition: Transition.cupertino,
         transitionDuration: const Duration(milliseconds: 500),
         getPages: AppPage.pages,
-        theme: AppTheme.lightTheme,
+        theme: AppTheme.darkTheme,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

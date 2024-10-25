@@ -44,19 +44,24 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
   }
 
   Widget _buildBtnCountinue() {
-    return AppOutlineButton(
-      color: AppColor.primaryColor,
-      onPressed: controller.verifyAccount,
-      borderRadius: BorderRadius.circular(20.sp),
-      width: double.infinity,
-      height: AppDimens.btnDefault,
-      child: Text(
-        StringConstants.next.tr,
-        style: AppTextTheme.headlineSmall(AppColor.white)?.copyWith(
-          fontWeight: FontWeight.w700,
+    return Obx(() {
+      final isActive = controller.isActiveBtnOtp.value;
+      return AppOutlineButton(
+        color: isActive ? AppColor.primaryColor : AppColor.dsGray3,
+        onPressed: isActive ? controller.verifyOtp : null,
+        borderRadius: BorderRadius.circular(20.sp),
+        width: double.infinity,
+        height: AppDimens.btnDefault,
+        child: Text(
+          StringConstants.next.tr,
+          style: AppTextTheme.headlineSmall(
+            isActive ? AppColor.white : AppColor.dsGray2,
+          )?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
         ),
-      ),
-    ).paddingAll(AppDimens.paddingMedium);
+      ).paddingAll(AppDimens.paddingMedium);
+    });
   }
 
   Widget _buildInputOtp() {

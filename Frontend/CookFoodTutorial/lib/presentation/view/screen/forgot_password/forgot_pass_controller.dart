@@ -11,17 +11,18 @@ class ForgotPassController extends AppBaseController {
   final TextEditingController emailTextEditingController =
       TextEditingController();
 
-  RxString emailErrorText = "".obs;
+  final RxString emailErrorText = "".obs;
 
   RxList<String> otpValues = RxList(List.generate(4, (index) => ''));
 
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
-  RxBool isShowPass = false.obs;
-  RxBool isShowVerifyPass = false.obs;
+  final RxBool isHidePass = false.obs;
+  final RxBool isHideVerifyPass = false.obs;
+  final RxBool isActiveBtnOtp = false.obs;
   final TextEditingController passwordCtrl = TextEditingController();
   final TextEditingController verifyPasswordCtrl = TextEditingController();
-  RxString passwordError = "".obs;
-  RxString verifyPassError = "".obs;
+  final RxString passwordError = "".obs;
+  final RxString verifyPassError = "".obs;
 
   void onEmailInputChange(String text) {
     if (emailErrorText.value.isNotEmpty) {
@@ -66,26 +67,28 @@ class ForgotPassController extends AppBaseController {
     }
   }
 
-  forgotPassSuccess() {
+  void forgotPassSuccess() {
     if (_validatePass()) {
       Get.toNamed(AppRoute.suggestFoodSreen);
     }
   }
 
-  void verifyAccount() {
+  void verifyOtp() {
     Get.to(const VerifyAccSuccessScreen());
   }
 
   void updateOtpValue(int index, String value) {
     otpValues[index] = value;
 
+    isActiveBtnOtp.value = !otpValues.any((value) => value.isEmpty);
+
     if (value.isNotEmpty) {
       if (index < otpValues.length - 1) {
         focusNodes[index + 1].requestFocus();
-      } else {
-        showAboutDialog(
-          context: context,
-        );
+      }
+    } else {
+      if (index > 0) {
+        focusNodes[index - 1].requestFocus();
       }
     }
   }
@@ -100,5 +103,9 @@ class ForgotPassController extends AppBaseController {
     if (verifyPassError.value.isNotEmpty) {
       verifyPassError.value = '';
     }
+  }
+
+  void validateOtp() {
+    isActiveBtnOtp.value = otpValues.any((value) => value.isEmpty);
   }
 }

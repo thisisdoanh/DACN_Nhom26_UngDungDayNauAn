@@ -6,11 +6,11 @@ import 'package:tutorial/presentation/component/backgroud_screen.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
-import 'package:tutorial/presentation/view/screen/favorite_food/suggest_food_controller.dart';
+import 'package:tutorial/presentation/view/screen/favourite_food/favourite_food_controller.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
-class FavoriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
-  const FavoriteFoodScreen({super.key});
+class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
+  const FavouriteFoodScreen({super.key});
 
   @override
   Widget buildWidget() {
@@ -42,7 +42,7 @@ class FavoriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
         ),
         itemCount: 20,
         itemBuilder: (context, index) {
-          return FoodCard(food: foodTest);
+          return FoodCard(food: FoodModel.foodTest);
         },
       ),
     );
@@ -101,11 +101,3 @@ class FavoriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
     );
   }
 }
-
-final FoodModel foodTest = FoodModel(
-    mealType: "Bữa sáng",
-    foodName: "Bữa nướng",
-    time: '10:02',
-    rating: 4.5,
-    imageUrl:
-        'https://ik.imagekit.io/tvlk/blog/2017/01/30-mon-ngon-nuc-long-nhat-dinh-phai-thu-khi-toi-ha-noi-phan-1.jpg?tr=dpr-2,w-675');

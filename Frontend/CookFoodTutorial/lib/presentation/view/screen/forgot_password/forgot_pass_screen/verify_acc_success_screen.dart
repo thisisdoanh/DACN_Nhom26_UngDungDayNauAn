@@ -63,11 +63,11 @@ class VerifyAccSuccessScreen extends AppBaseScreen<ForgotPassController> {
           ),
         ),
         hintText: StringConstants.enterNewPass.tr,
-        isHide: !controller.isShowPass.value,
+        isHide: controller.isHideVerifyPass.value,
         suffixIcon: AppTouchable(
-          onPressed: controller.isShowVerifyPass.toggle,
+          onPressed: controller.isHideVerifyPass.toggle,
           child: Icon(
-            controller.isShowVerifyPass.value
+            controller.isHideVerifyPass.value
                 ? Icons.visibility_off
                 : Icons.visibility,
             color: AppColor.white,
@@ -97,11 +97,11 @@ class VerifyAccSuccessScreen extends AppBaseScreen<ForgotPassController> {
           ),
         ),
         hintText: StringConstants.enterNewPass.tr,
-        isHide: !controller.isShowPass.value,
+        isHide: controller.isHidePass.value,
         suffixIcon: AppTouchable(
-          onPressed: controller.isShowPass.toggle,
+          onPressed: controller.isHidePass.toggle,
           child: Icon(
-            controller.isShowPass.value
+            controller.isHidePass.value
                 ? Icons.visibility_off
                 : Icons.visibility,
             color: AppColor.white,

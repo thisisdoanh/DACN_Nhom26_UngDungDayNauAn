@@ -5,11 +5,12 @@ class AppColor {
   static const Color white = Color(0xFFFFFFFF);
   static const Color background = Color(0xFFF1F1F1);
   static const Color primaryText = Color(0xFF151515);
+  static const Color textNote = Color.fromARGB(255, 0, 157, 255);
   static const Color primaryGray = Color(0xFF97A3AD);
   static const Color primaryColor = Color(0xFFFF6B00);
   static const Color transparent = Colors.transparent;
 
-    //backgroud
+  //backgroud
   static const Color colorBackgroundAppbar = Color(0xfff29e38);
   static const Color colorBackground1 = Color(0xFFec4444);
   static const Color colorBackground2 = Color(0xffde5f4b);
@@ -55,5 +56,4 @@ class AppColor {
   static const Color dsGray2 = Color(0xFF58647A);
   static const Color dsGray3 = Color(0xFF9BA3B1);
   static const Color dsGray4 = Color(0xFFD5D8DD);
-
 }

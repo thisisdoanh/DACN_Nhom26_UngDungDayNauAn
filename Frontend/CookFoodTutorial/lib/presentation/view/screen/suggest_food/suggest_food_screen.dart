@@ -18,7 +18,10 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
     const double itemHeight = 250;
     return BackGroundShare(
       body: Column(
-        children: [_buildAppBar(), _buildBody(itemWidth, itemHeight)],
+        children: [
+          _buildAppBar(),
+          _buildBody(itemWidth, itemHeight),
+        ],
       ).paddingSymmetric(horizontal: AppDimens.paddingMedium),
     );
   }
@@ -42,7 +45,7 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
         ),
         itemCount: 20,
         itemBuilder: (context, index) {
-          return FoodCard(food: foodTest);
+          return FoodCard(food: FoodModel.foodTest);
         },
       ),
     );
@@ -89,6 +92,7 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   Widget _buildAppBar() {
     return AppBarShare(
+      
       title: StringConstants.motsFavorite.tr,
       action: InkWell(
         onTap: Get.back,
@@ -101,11 +105,3 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
     );
   }
 }
-
-final FoodModel foodTest = FoodModel(
-    mealType: "Bữa sáng",
-    foodName: "Bữa nướng",
-    time: '10:02',
-    rating: 4.5,
-    imageUrl:
-        'https://ik.imagekit.io/tvlk/blog/2017/01/30-mon-ngon-nuc-long-nhat-dinh-phai-thu-khi-toi-ha-noi-phan-1.jpg?tr=dpr-2,w-675');
