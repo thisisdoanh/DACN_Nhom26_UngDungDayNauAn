@@ -17,6 +17,7 @@ class AppImage {
   static const String imgBgFood = '${_internalImagePathPng}img_bg_food.png';
   static const String icGoogle = '${_internalImagePathPng}ic_google.png';
   static const String imgBackGound = '${_internalImagePathPng}back_ground.png';
+  static const String bgDrawer = '${_internalImagePathPng}bg_drawer.png';
 
   ///LOTTIE
 }
