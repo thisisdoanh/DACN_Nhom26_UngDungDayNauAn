@@ -27,4 +27,9 @@ const viString = {
   //home
   "search_recipe": "Tìm kiếm công thức",
   "mots_favorite": "Được yêu thích nhất",
+
+  //food detail
+  "ingredient": "Nguyên liệu",
+  "guide": "Guide",
+  "rate": "Review",
 };

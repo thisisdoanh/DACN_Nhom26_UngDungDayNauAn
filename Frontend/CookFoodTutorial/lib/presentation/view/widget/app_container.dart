@@ -52,7 +52,10 @@ class AppContainer extends GetView {
             },
             child: Scaffold(
               resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-              backgroundColor: backgroundColor ?? (bgImage != null ? AppColor.transparent : AppColor.background),
+              backgroundColor: backgroundColor ??
+                  (bgImage != null
+                      ? AppColors.transparent
+                      : AppColors.background),
               appBar: appBar,
               body: child ?? const SizedBox.shrink(),
               floatingActionButton: floatingActionButton,

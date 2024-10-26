@@ -33,7 +33,7 @@ class AppOutlineButton extends StatelessWidget {
       padding: padding ?? EdgeInsets.zero,
       margin: margin ?? EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: color ?? AppColor.transparent,
+        color: color ?? AppColors.transparent,
         shape: BoxShape.rectangle,
         borderRadius: borderRadius ?? BorderRadius.zero,
         border: border,

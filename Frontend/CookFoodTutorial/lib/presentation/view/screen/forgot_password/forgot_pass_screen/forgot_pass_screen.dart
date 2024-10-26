@@ -46,14 +46,14 @@ class ForgotPassScreen extends AppBaseScreen<ForgotPassController> {
 
   Widget _buildBtnCountinue() {
     return AppOutlineButton(
-      color: AppColor.primaryColor,
+      color: AppColors.primaryColor,
       onPressed: controller.forgotPass,
       borderRadius: BorderRadius.circular(20.sp),
       width: double.infinity,
       height: AppDimens.btnDefault,
       child: Text(
         StringConstants.next.tr,
-        style: AppTextTheme.headlineSmall(AppColor.white)?.copyWith(
+        style: AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -65,7 +65,7 @@ class ForgotPassScreen extends AppBaseScreen<ForgotPassController> {
       () => AppTextField(
         maxLines: 1,
         maxLength: 255,
-        backgroundColor: AppColor.transparent,
+        backgroundColor: AppColors.transparent,
         prefixIcon: Padding(
           padding: EdgeInsets.symmetric(
             vertical: 8.sp,
@@ -87,7 +87,7 @@ class ForgotPassScreen extends AppBaseScreen<ForgotPassController> {
   Widget _buildLableTextField() {
     return Text(
       StringConstants.inputYourEmail.tr,
-      style: AppTextTheme.labelLarge(AppColor.white)?.copyWith(
+      style: AppTextTheme.labelLarge(AppColors.white)?.copyWith(
         fontWeight: FontWeight.w700,
       ),
     );
@@ -96,7 +96,7 @@ class ForgotPassScreen extends AppBaseScreen<ForgotPassController> {
   Widget buildLableScreen() {
     return Text(
       StringConstants.forgotPass.tr,
-      style: AppTextTheme.headlineLarge(AppColor.primaryColor)?.copyWith(
+      style: AppTextTheme.headlineLarge(AppColors.primaryColor)?.copyWith(
         fontWeight: FontWeight.w700,
       ),
     );

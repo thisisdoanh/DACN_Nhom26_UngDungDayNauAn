@@ -48,7 +48,7 @@ class AppImageWidget extends StatelessWidget {
         width: loadingSize ?? 20.0.sp,
         height: loadingSize ?? 20.0.sp,
         child: const CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(AppColor.black),
+          valueColor: AlwaysStoppedAnimation<Color>(AppColors.black),
           strokeWidth: 2,
         ),
       ),
@@ -93,7 +93,8 @@ class AppImageWidget extends StatelessWidget {
         fit: fit ?? BoxFit.contain,
         width: width,
         height: height,
-        colorFilter: color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
+        colorFilter:
+            color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
       );
     }
     return SvgPicture.network(

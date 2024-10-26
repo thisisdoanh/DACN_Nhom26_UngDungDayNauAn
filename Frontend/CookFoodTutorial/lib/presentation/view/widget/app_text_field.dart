@@ -51,12 +51,12 @@ class AppTextField extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: backgroundColor ?? AppColor.white,
+            color: backgroundColor ?? AppColors.white,
             borderRadius: borderRadius,
             border: border ??
                 Border(
                   bottom: BorderSide(
-                    color: AppColor.white,
+                    color: AppColors.white,
                     width: 1.sp,
                   ),
                 ),
@@ -71,8 +71,8 @@ class AppTextField extends StatelessWidget {
             maxLines: maxLines,
             onChanged: onChanged,
             keyboardType: keyboardType,
-            style: AppTextTheme.labelLarge(AppColor.white),
-            cursorColor: AppColor.white,
+            style: AppTextTheme.labelLarge(AppColors.white),
+            cursorColor: AppColors.white,
             obscureText: isHide ?? false,
             decoration: InputDecoration(
               contentPadding: contentPadding ??
@@ -95,10 +95,10 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               hintText: hintText,
-              hintStyle: AppTextTheme.labelLarge(AppColor.dsGray4),
+              hintStyle: AppTextTheme.labelLarge(AppColors.dsGray4),
               suffixIcon: suffixIcon,
               isDense: true,
-              focusColor: AppColor.white,
+              focusColor: AppColors.white,
               prefixIcon: prefixIcon,
             ),
           ),

@@ -68,10 +68,10 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimens.radius8),
-          border: Border.all(color: AppColor.white)),
+          border: Border.all(color: AppColors.white)),
       child: const Icon(
         Icons.filter_alt_rounded,
-        color: AppColor.white,
+        color: AppColors.white,
       ),
     );
   }
@@ -80,9 +80,9 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
     return Expanded(
       child: AppTextField(
         hintText: StringConstants.searchRecipe.tr,
-        backgroundColor: AppColor.transparent,
+        backgroundColor: AppColors.transparent,
         border: Border.all(
-          color: AppColor.white,
+          color: AppColors.white,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
@@ -92,13 +92,12 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   Widget _buildAppBar() {
     return AppBarShare(
-      
       title: StringConstants.motsFavorite.tr,
       action: InkWell(
         onTap: Get.back,
         child: const Icon(
           Icons.arrow_back_outlined,
-          color: AppColor.primaryColor,
+          color: AppColors.primaryColor,
           size: AppDimens.fontLarge,
         ),
       ),

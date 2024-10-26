@@ -65,10 +65,10 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimens.radius8),
-          border: Border.all(color: AppColor.white)),
+          border: Border.all(color: AppColors.white)),
       child: const Icon(
         Icons.filter_alt_rounded,
-        color: AppColor.white,
+        color: AppColors.white,
       ),
     );
   }
@@ -77,9 +77,9 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
     return Expanded(
       child: AppTextField(
         hintText: StringConstants.searchRecipe.tr,
-        backgroundColor: AppColor.transparent,
+        backgroundColor: AppColors.transparent,
         border: Border.all(
-          color: AppColor.white,
+          color: AppColors.white,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
@@ -94,7 +94,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
         onTap: Get.back,
         child: const Icon(
           Icons.arrow_back_outlined,
-          color: AppColor.primaryColor,
+          color: AppColors.primaryColor,
           size: AppDimens.fontLarge,
         ),
       ),

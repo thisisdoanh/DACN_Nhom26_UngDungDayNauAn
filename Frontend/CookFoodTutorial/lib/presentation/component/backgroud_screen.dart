@@ -19,8 +19,8 @@ class BackGroundShare extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                AppColor.primaryText,
-                AppColor.dsGray3,
+                AppColors.primaryText,
+                AppColors.dsGray3,
               ],
             ),
           ),

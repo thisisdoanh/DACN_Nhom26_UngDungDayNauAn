@@ -26,7 +26,7 @@ class AccountInforScreen extends AppBaseScreen<AccountInforController> {
           AppTextField(
             maxLines: 1,
             maxLength: 255,
-            backgroundColor: AppColor.transparent,
+            backgroundColor: AppColors.transparent,
             prefixIcon: Icon(Icons.person),
             readOnly: controller.canEdit.value,
             // textEditingController: controller.verifyPasswordCtrl,

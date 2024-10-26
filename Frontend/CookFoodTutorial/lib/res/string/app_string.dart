@@ -64,4 +64,9 @@ class StringConstants {
 //home
   static const String searchRecipe = "search_recipe";
   static const String motsFavorite = "mots_favorite";
+
+  //food detail
+  static const String ingredient = "ingredient";
+  static const String guide = "guide";
+  static const String rate = "rate";
 }

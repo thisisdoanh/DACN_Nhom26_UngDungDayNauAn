@@ -27,4 +27,9 @@ const englishString = {
   //home
   "search_recipe": "Search recipes",
   "mots_favorite": "Most favorites",
+
+  //food detail
+  "ingredient": "Nguyên liệu",
+  "guide": "Hướng dẫn",
+  "rate": "Đánh giá",
 };

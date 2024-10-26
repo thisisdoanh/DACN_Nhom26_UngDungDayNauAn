@@ -23,13 +23,13 @@ class AppBarShare extends StatelessWidget {
     return AppBar(
       leadingWidth: !hasBackIcon && leading == null ? 0 : null,
       titleSpacing: 0,
-      backgroundColor: AppColor.transparent,
+      backgroundColor: AppColors.transparent,
       title: title != null
           ? UtilWidget.buildText(
               title!,
               textAlign: TextAlign.start,
               fontSize: AppDimens.fontMedium,
-              textColor: AppColor.white,
+              textColor: AppColors.white,
               fontWeight: FontWeight.bold,
             )
           : const SizedBox.shrink(),
@@ -38,8 +38,7 @@ class AppBarShare extends StatelessWidget {
               onPressed: Get.back,
               icon: const Icon(
                 Icons.arrow_back_sharp,
-                
-                color: AppColor.primaryColor,
+                color: AppColors.primaryColor,
                 size: AppDimens.fontLargest,
               ),
             )
