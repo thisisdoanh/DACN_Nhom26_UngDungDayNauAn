@@ -30,6 +30,9 @@ const viString = {
 
   //food detail
   "ingredient": "Nguyên liệu",
-  "guide": "Guide",
-  "rate": "Review",
+  "instruction": "Hướng dẫn",
+  "rating": "Đánh giá",
+  "rating_lable_dialog": "Vui lòng đánh giá món ăn",
+  "making": "Cách làm",
+  "cancel": "Hủy bỏ",
 };

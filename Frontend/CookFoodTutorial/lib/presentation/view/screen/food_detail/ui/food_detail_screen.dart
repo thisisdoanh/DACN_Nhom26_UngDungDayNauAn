@@ -11,6 +11,8 @@ import 'package:tutorial/presentation/view/resources/app_color.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 import 'package:tutorial/presentation/view/resources/app_text_theme.dart';
 import 'package:tutorial/presentation/view/screen/food_detail/food_detail_controller.dart';
+import 'package:tutorial/presentation/view/screen/food_detail/ui/instruction_screen.dart';
+import 'package:tutorial/presentation/view/screen/food_detail/ui/rating_screen.dart';
 import 'package:tutorial/presentation/view/widget/app_outline_button.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
@@ -52,38 +54,32 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
               ),
             ),
           ),
-          _buildBtnGuide(),
-          _buildBtnRate(),
+          _buildBtn(
+            text: StringConstants.instruction.tr,
+            onPressed: () =>
+                controller.goToGuideScreen(const InstructionScreen()),
+          ),
+          _buildBtn(
+            text: StringConstants.rating.tr,
+            onPressed: () => controller.goToRatingScreen(const RatingScreen()),
+          ),
         ],
       ).paddingAll(AppDimens.paddingMedium),
     );
   }
 
-  Widget _buildBtnRate() {
+  Widget _buildBtn({
+    required String text,
+    required VoidCallback onPressed,
+  }) {
     return AppOutlineButton(
       color: AppColors.primaryColor,
-      onPressed: () {},
+      onPressed: onPressed,
       borderRadius: BorderRadius.circular(20.sp),
       width: double.infinity,
       height: AppDimens.btnDefault,
       child: Text(
-        StringConstants.rate.tr,
-        style: AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-    ).paddingSymmetric(vertical: AppDimens.paddingSmall);
-  }
-
-  Widget _buildBtnGuide() {
-    return AppOutlineButton(
-      color: AppColors.primaryColor,
-      onPressed: () => controller.guide(Container()),
-      borderRadius: BorderRadius.circular(20.sp),
-      width: double.infinity,
-      height: AppDimens.btnDefault,
-      child: Text(
-        StringConstants.guide.tr,
+        text,
         style: AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
           fontWeight: FontWeight.w700,
         ),
@@ -133,52 +129,53 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
 
   Widget _buildTimeAndImage() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.timer_outlined,
-                  color: AppColors.dsGray3,
-                ),
-                Gap(4.w),
-                UtilWidget.buildText(
-                  FoodModel.foodTest.time,
-                  textColor: AppColors.dsGray3,
-                  fontSize: AppDimens.fontSmall,
-                ),
-              ],
+            //timer
+            _buildRowCustom(
+              Icons.timer_outlined,
+              FoodModel.foodTest.time,
             ),
             Gap(16.h),
-            Row(
-              children: [
-                const Icon(
-                  Icons.food_bank_outlined,
-                  color: AppColors.dsGray3,
-                ),
-                Gap(4.w),
-                UtilWidget.buildText(
-                  '4 Khẩu phần ăn',
-                  textColor: AppColors.dsGray3,
-                  fontSize: AppDimens.fontSmall,
-                ),
-              ],
+            //portion
+            _buildRowCustom(
+              Icons.food_bank_outlined,
+              '4 khẩu phần ăn',
             ),
           ],
-        ).paddingOnly(right: AppDimens.paddingLarge),
-        Expanded(
-          child: ClipOval(
-            // borderRadius: BorderRadius.circular(AppDimens.radius8),
-            child: Image.network(
-              FoodModel.foodTest.imageUrl,
-              fit: BoxFit.cover,
-            ),
-          ),
+        ),
+        _buildFoodImage(),
+      ],
+    );
+  }
+
+  Widget _buildRowCustom(IconData icon, String text) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: AppColors.dsGray3,
+        ),
+        Gap(4.w),
+        UtilWidget.buildText(
+          text,
+          textColor: AppColors.dsGray3,
+          fontSize: AppDimens.fontSmall,
         ),
       ],
+    );
+  }
+
+  Widget _buildFoodImage() {
+    return Expanded(
+      child: ClipOval(
+        child: Image.network(
+          FoodModel.foodTest.imageUrl,
+          fit: BoxFit.cover,
+        ),
+      ).paddingOnly(left: AppDimens.paddingLarge),
     );
   }
 
@@ -220,7 +217,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
     );
   }
 
-  AppBarShare _buildAppBar() {
+  Widget _buildAppBar() {
     return AppBarShare(
       hasBackIcon: true,
       action: IconButton(

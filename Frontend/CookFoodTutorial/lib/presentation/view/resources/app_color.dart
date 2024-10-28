@@ -25,7 +25,6 @@ class AppColors {
   //Icon
   static const Color colorIconDefault = Colors.black54;
 
-  static const Color backgroundColor = Colors.white;
   static const Color colorSuccessGreen = Color(0xff09b409);
   static const Color colorRedError = Color(0xccEF4444);
   static const Color colorAttention = Color(0xccEF4444);
@@ -52,6 +51,7 @@ class AppColors {
   static const Color dsSecondaryGreen4 = Color(0xFFE4F1E6);
   static const Color dsSecondaryGreen5 = Color(0xFFEDF6EE);
 
+  static const Color dsGray = Colors.grey;
   static const Color dsGray1 = Color(0xFF16243D);
   static const Color dsGray2 = Color(0xFF58647A);
   static const Color dsGray3 = Color(0xFF9BA3B1);

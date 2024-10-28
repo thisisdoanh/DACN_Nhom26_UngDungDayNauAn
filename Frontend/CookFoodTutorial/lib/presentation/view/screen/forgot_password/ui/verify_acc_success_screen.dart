@@ -41,13 +41,13 @@ class VerifyAccSuccessScreen extends AppBaseScreen<ForgotPassController> {
               ).paddingAll(AppDimens.paddingMedium),
             ),
           ),
-          _buildBtnCountinue(),
+          _buildBtnContinue(),
         ],
       ),
     );
   }
 
-  Obx _buildInputVerifyNewPass() {
+  Widget _buildInputVerifyNewPass() {
     return Obx(
       () => AppTextField(
         maxLines: 1,
@@ -81,7 +81,7 @@ class VerifyAccSuccessScreen extends AppBaseScreen<ForgotPassController> {
     );
   }
 
-  Obx _buildInputNewPass() {
+  Widget _buildInputNewPass() {
     return Obx(
       () => AppTextField(
         maxLines: 1,
@@ -115,7 +115,7 @@ class VerifyAccSuccessScreen extends AppBaseScreen<ForgotPassController> {
     );
   }
 
-  Widget _buildBtnCountinue() {
+  Widget _buildBtnContinue() {
     return AppOutlineButton(
       color: AppColors.primaryColor,
       onPressed: () => controller.forgotPassSuccess(),

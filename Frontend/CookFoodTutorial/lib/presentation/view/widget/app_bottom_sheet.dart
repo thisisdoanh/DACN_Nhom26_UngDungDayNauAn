@@ -103,7 +103,8 @@ class SDSBottomSheet extends StatelessWidget {
                       ],
                     ),
               Expanded(
-                child: body,
+                child:
+                    body.paddingSymmetric(horizontal: AppDimens.defaultPadding),
               ),
             ],
           ).paddingSymmetric(

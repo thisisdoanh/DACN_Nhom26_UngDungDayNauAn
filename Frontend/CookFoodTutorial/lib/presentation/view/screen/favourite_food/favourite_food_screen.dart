@@ -4,6 +4,7 @@ import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
 import 'package:tutorial/presentation/component/backgroud_screen.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
+import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 import 'package:tutorial/presentation/view/screen/favourite_food/favourite_food_controller.dart';
@@ -42,7 +43,11 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
         ),
         itemCount: 20,
         itemBuilder: (context, index) {
-          return FoodCard(food: FoodModel.foodTest);
+          return InkWell(
+              onTap: () {
+                Get.toNamed(AppRoute.foodDetailScreen);
+              },
+              child: FoodCard(food: FoodModel.foodTest));
         },
       ),
     );

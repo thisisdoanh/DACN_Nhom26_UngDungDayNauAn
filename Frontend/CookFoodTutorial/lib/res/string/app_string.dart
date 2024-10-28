@@ -67,6 +67,9 @@ class StringConstants {
 
   //food detail
   static const String ingredient = "ingredient";
-  static const String guide = "guide";
-  static const String rate = "rate";
+  static const String instruction = "instruction";
+  static const String rating = "rating";
+  static const String ratingLableDialog = "rating_lable_dialog";
+  static const String making = "making";
+  static const String cancel = "cancel";
 }

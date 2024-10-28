@@ -38,13 +38,13 @@ class ForgotPassScreen extends AppBaseScreen<ForgotPassController> {
               ).paddingAll(AppDimens.paddingMedium),
             ),
           ),
-          _buildBtnCountinue(),
+          _buildBtnContinue(),
         ],
       ),
     );
   }
 
-  Widget _buildBtnCountinue() {
+  Widget _buildBtnContinue() {
     return AppOutlineButton(
       color: AppColors.primaryColor,
       onPressed: controller.forgotPass,

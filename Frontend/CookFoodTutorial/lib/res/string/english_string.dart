@@ -29,7 +29,10 @@ const englishString = {
   "mots_favorite": "Most favorites",
 
   //food detail
-  "ingredient": "Nguyên liệu",
-  "guide": "Hướng dẫn",
-  "rate": "Đánh giá",
+  "ingredient": "Ingredients",
+  "instruction": "Instruction",
+  "rating": "Review",
+  "rating_lable_dialog": "Please rate the dish",
+  "making": "Making",
+  "cancel": "Cancel",
 };

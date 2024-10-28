@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:tutorial/common/utils/app_utils.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
-import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_screen/input_otp_screen.dart';
-import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_screen/verify_acc_success_screen.dart';
+import 'package:tutorial/presentation/view/screen/forgot_password/ui/input_otp_screen.dart';
+import 'package:tutorial/presentation/view/screen/forgot_password/ui/verify_acc_success_screen.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
 class ForgotPassController extends AppBaseController {

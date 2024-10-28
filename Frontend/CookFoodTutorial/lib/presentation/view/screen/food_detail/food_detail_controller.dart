@@ -5,7 +5,9 @@ import 'package:tutorial/presentation/component/food_suggest_item.dart';
 import 'package:tutorial/presentation/view/widget/app_bottom_sheet.dart';
 
 class FoodDetailController extends AppBaseController {
-  void guide(Widget guideScreen) {
+  final RxInt curentStart = 5.obs;
+
+  void goToGuideScreen(Widget guideScreen) {
     Get.bottomSheet(
       SDSBottomSheet(
         title: FoodModel.foodTest.foodName,
@@ -16,5 +18,11 @@ class FoodDetailController extends AppBaseController {
     );
   }
 
-  void rate() {}
+  void goToRatingScreen(Widget ratingScreen) {
+    Get.dialog(ratingScreen);
+  }
+
+  void rating(int index) {
+    curentStart.value = index;
+  }
 }

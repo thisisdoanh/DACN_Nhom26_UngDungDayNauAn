@@ -126,6 +126,7 @@ class FoodModel {
   final double rating;
   final RxBool isFavorite;
   final String imageUrl;
+  final int calo;
 
   FoodModel({
     required this.mealType,
@@ -134,12 +135,14 @@ class FoodModel {
     required this.rating,
     required this.imageUrl,
     required this.isFavorite,
+    required this.calo,
   });
   static final FoodModel foodTest = FoodModel(
     mealType: "Bữa sáng",
     foodName: "Bữa nướng",
     time: '10:02',
     rating: 4.5,
+    calo: 280,
     imageUrl:
         'https://ik.imagekit.io/tvlk/blog/2017/01/30-mon-ngon-nuc-long-nhat-dinh-phai-thu-khi-toi-ha-noi-phan-1.jpg?tr=dpr-2,w-675',
     isFavorite: false.obs,

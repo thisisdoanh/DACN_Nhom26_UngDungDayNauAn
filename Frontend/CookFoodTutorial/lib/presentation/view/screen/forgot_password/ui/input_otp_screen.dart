@@ -36,14 +36,14 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
                 ).paddingAll(AppDimens.paddingMedium),
               ),
             ),
-            _buildBtnCountinue(),
+            _buildBtnContinue(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBtnCountinue() {
+  Widget _buildBtnContinue() {
     return Obx(() {
       final isActive = controller.isActiveBtnOtp.value;
       return AppOutlineButton(

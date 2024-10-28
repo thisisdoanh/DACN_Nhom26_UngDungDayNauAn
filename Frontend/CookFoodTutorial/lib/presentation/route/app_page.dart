@@ -4,11 +4,9 @@ import 'package:tutorial/presentation/view/screen/account_info/account_infor_scr
 import 'package:tutorial/presentation/view/screen/favourite_food/favourite_food_binding.dart';
 import 'package:tutorial/presentation/view/screen/favourite_food/favourite_food_screen.dart';
 import 'package:tutorial/presentation/view/screen/food_detail/food_detail_binding.dart';
-import 'package:tutorial/presentation/view/screen/food_detail/food_detail_screen.dart';
-import 'package:tutorial/presentation/view/screen/food_instruction/food_instruction_binding.dart';
-import 'package:tutorial/presentation/view/screen/food_instruction/food_instruction_screen.dart';
+import 'package:tutorial/presentation/view/screen/food_detail/ui/food_detail_screen.dart';
 import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_binding.dart';
-import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_screen/forgot_pass_screen.dart';
+import 'package:tutorial/presentation/view/screen/forgot_password/ui/forgot_pass_screen.dart';
 import 'package:tutorial/presentation/view/screen/splash/splash_binding.dart';
 import 'package:tutorial/presentation/view/screen/splash/splash_screen.dart';
 import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_binding.dart';
@@ -56,11 +54,6 @@ class AppPage {
       name: AppRoute.foodDetailScreen,
       page: () => const FoodDetailScreen(),
       binding: FoodDetailBinding(),
-    ),
-    GetPage(
-      name: AppRoute.foodInstructionScreen,
-      page: () => const FoodInstructionScreen(),
-      binding: FoodInstructionBinding(),
     ),
     GetPage(
       name: AppRoute.favouriteFoodSreen,

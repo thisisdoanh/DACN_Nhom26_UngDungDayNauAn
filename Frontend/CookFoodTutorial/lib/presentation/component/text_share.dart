@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class UtilWidget {
@@ -12,21 +14,20 @@ class UtilWidget {
     FontStyle? fontStyle,
     TextOverflow? overflow,
     TextDecoration? decoration,
-    TextStyle? textStyle,
+    String? fontFamily = "Lora",
   }) {
-    final defaultTextStyle = Get.textTheme.bodySmall?.copyWith(
-      color: textColor,
-      fontWeight: fontWeight,
-      overflow: overflow,
-      fontSize: fontSize,
-      fontStyle: fontStyle,
-      decoration: decoration,
-    );
-    return Text(
-      text.tr,
-      maxLines: maxLines,
-      textAlign: textAlign,
-      style: textStyle ?? defaultTextStyle,
-    );
+    return AutoSizeText(text.tr,
+        maxLines: maxLines,
+        overflow: TextOverflow.ellipsis,
+        textAlign: textAlign,
+        style: Get.textTheme.bodySmall?.copyWith(
+          color: textColor,
+          fontWeight: fontWeight ,
+          overflow: overflow,
+          fontSize: fontSize,
+          fontStyle: fontStyle,
+          fontFamily: fontFamily,
+          decoration: decoration,
+        ));
   }
 }
