@@ -10,21 +10,20 @@ import '../../../../common/utils/app_utils.dart';
 
 class LoginController extends AppBaseController {
   final GoogleSignIn googleSignIn = GoogleSignIn();
-  RxBool isShowPass = false.obs;
-  final TextEditingController emailTextEditingController =
-      TextEditingController();
-  final TextEditingController passwordTextEditingController =
-      TextEditingController();
+  RxBool isHidePass = true.obs;
+  final TextEditingController emailTextEditingController = TextEditingController();
+  final TextEditingController passwordTextEditingController = TextEditingController();
   RxString firstErrorText = "".obs;
   RxString secondErrorText = "".obs;
   void onPressLogin() {
     AppLog.info("onPressLogin");
-    _validate();
+    // _validate();
+    Get.toNamed(AppRoute.homeScreen);
   }
 
   void onPressShowPassword() {
     AppLog.info("onPressShowPassword");
-    isShowPass.value = !isShowPass.value;
+    isHidePass.value = !isHidePass.value;
   }
 
   void onPressForgotPass() {
@@ -50,25 +49,15 @@ class LoginController extends AppBaseController {
   }
 
   bool _validate() {
-    bool isValid = true;
-    if (emailTextEditingController.text.trim().isEmpty) {
-      firstErrorText.value = StringConstants.valueRequire.tr.trParams({
-        "value": StringConstants.email.tr,
-      });
-      isValid = false;
-    } else {
-      if (!checkValidEmail(emailTextEditingController.text.trim())) {
-        firstErrorText.value = StringConstants.emailNotCorrectFormat.tr;
-        isValid = false;
-      }
+    firstErrorText.value = validateEmailAndReturnValue(emailTextEditingController.text.trim());
+    secondErrorText.value =
+        validateValueNotEmpty(passwordTextEditingController.text.trim(), StringConstants.password.tr);
+
+    if (firstErrorText.value.isNotEmpty || secondErrorText.value.isNotEmpty) {
+      return false;
     }
-    if (passwordTextEditingController.text.trim().isEmpty) {
-      secondErrorText.value = StringConstants.valueRequire.tr.trParams({
-        "value": StringConstants.password.tr,
-      });
-      isValid = false;
-    }
-    return isValid;
+
+    return true;
   }
 
   void onFirstInputChange(String text) {

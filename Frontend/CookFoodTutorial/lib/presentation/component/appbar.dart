@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
@@ -12,23 +11,26 @@ class AppBarShare extends StatelessWidget {
     this.title,
     this.leading,
     this.action,
+    this.bgColor,
   });
   final bool hasBackIcon;
   final String? title;
   final Widget? leading;
   final Widget? action;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       leadingWidth: !hasBackIcon && leading == null ? 0 : null,
       titleSpacing: 0,
-      backgroundColor: AppColors.transparent,
+      backgroundColor: bgColor ?? AppColors.transparent,
       title: title != null
           ? UtilWidget.buildText(
               title!,
               textAlign: TextAlign.start,
-              fontSize: AppDimens.fontMedium,
+              fontSize: AppDimens.fontLarge,
               textColor: AppColors.white,
               fontWeight: FontWeight.bold,
             )
@@ -39,7 +41,7 @@ class AppBarShare extends StatelessWidget {
               icon: const Icon(
                 Icons.arrow_back_sharp,
                 color: AppColors.primaryColor,
-                size: AppDimens.fontLargest,
+                size: AppDimens.sizeImage35,
               ),
             )
           : leading,

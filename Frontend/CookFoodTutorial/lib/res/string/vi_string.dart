@@ -26,7 +26,7 @@ const viString = {
 
   //home
   "search_recipe": "Tìm kiếm công thức",
-  "mots_favorite": "Được yêu thích nhất",
+  "most_favourite": "Được yêu thích nhất",
 
   //food detail
   "ingredient": "Nguyên liệu",
@@ -35,4 +35,15 @@ const viString = {
   "rating_lable_dialog": "Vui lòng đánh giá món ăn",
   "making": "Cách làm",
   "cancel": "Hủy bỏ",
+  "hello": "Xin chào",
+  "what_want_to_cook": "Bạn muốn nấu gì hôm nay?",
+  "suggest": "Gợi ý",
+  "see_all": "Xem tất cả",
+  "home": "Trang chủ",
+  "favorite": "Yêu thích",
+  "history": "Lịch sử",
+  "help": "Trợ giúp",
+  "logOut": "Đăng xuất",
+  "personal_info": "Thông tin cá nhân",
+  "": "",
 };

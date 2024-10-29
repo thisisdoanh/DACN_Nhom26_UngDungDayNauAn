@@ -92,13 +92,13 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                         ),
                       ),
                       hintText: StringConstants.password.tr,
-                      isHide: !controller.isShowPass.value,
+                      isHide: controller.isHidePass.value,
                       suffixIcon: AppTouchable(
                         onPressed: () => controller.onPressShowPassword(),
                         child: Icon(
-                          controller.isShowPass.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                          controller.isHidePass.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                           color: AppColors.white,
                           size: 24.sp,
                         ),
@@ -140,10 +140,16 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                     borderRadius: BorderRadius.circular(20.sp),
                     width: 344.w,
                     height: 56.h,
-                    border: Border.all(
-                      color: AppColors.white,
-                      width: 2.sp,
-                    ),
+// <<<<<<< HEAD
+//                     border: Border.all(
+//                       color: AppColors.white,
+//                       width: 2.sp,
+//                     ),
+//                     child: Text(
+//                       StringConstants.login.tr,
+//                       style:
+//                           AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
+// =======
                     child: Text(
                       StringConstants.login.tr,
                       style:

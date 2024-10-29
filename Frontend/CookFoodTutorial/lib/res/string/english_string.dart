@@ -26,7 +26,7 @@ const englishString = {
 
   //home
   "search_recipe": "Search recipes",
-  "mots_favorite": "Most favorites",
+  "most_favourite": "Most favourites",
 
   //food detail
   "ingredient": "Ingredients",
@@ -35,4 +35,14 @@ const englishString = {
   "rating_lable_dialog": "Please rate the dish",
   "making": "Making",
   "cancel": "Cancel",
+  "hello": "Hello",
+  "what_want_to_cook": "What do you want to cook today?",
+  "suggest": "Suggest",
+  "see_all": "See all",
+  "home": "Home",
+  "favorite": "Favorite",
+  "history": "History",
+  "help": "Help",
+  "log_out": "Log out",
+  "personal_info": "Personal information",
 };

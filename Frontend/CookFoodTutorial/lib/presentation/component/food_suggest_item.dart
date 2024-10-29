@@ -10,8 +10,11 @@ import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 
 class FoodCard extends StatelessWidget {
   final FoodModel food;
+  final IconData? timerIcon;
+  final Color? timerColor;
 
-  const FoodCard({super.key, required this.food});
+  const FoodCard(
+      {super.key, required this.food, this.timerIcon, this.timerColor});
 
   @override
   Widget build(BuildContext context) {
@@ -54,15 +57,15 @@ class FoodCard extends StatelessWidget {
   Widget _buildTime() {
     return Row(
       children: [
-        const Icon(
-          Icons.timer_outlined,
-          color: AppColors.primaryColor,
+        Icon(
+          timerIcon ?? Icons.timer_outlined,
+          color: timerColor ?? AppColors.primaryColor,
         ),
         Gap(4.w),
         UtilWidget.buildText(
           food.time,
-          textColor: AppColors.primaryColor,
-          fontSize: AppDimens.fontMedium,
+          textColor: timerColor ?? AppColors.primaryColor,
+          fontSize: AppDimens.fontSmall,
         ),
       ],
     );
@@ -127,6 +130,7 @@ class FoodModel {
   final RxBool isFavorite;
   final String imageUrl;
   final int calo;
+  final int portion;
 
   FoodModel({
     required this.mealType,
@@ -136,10 +140,12 @@ class FoodModel {
     required this.imageUrl,
     required this.isFavorite,
     required this.calo,
+    required this.portion,
   });
   static final FoodModel foodTest = FoodModel(
     mealType: "Bữa sáng",
     foodName: "Bữa nướng",
+    portion: 4,
     time: '10:02',
     rating: 4.5,
     calo: 280,
