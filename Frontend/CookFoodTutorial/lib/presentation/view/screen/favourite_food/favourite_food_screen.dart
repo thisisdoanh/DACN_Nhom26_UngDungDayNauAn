@@ -19,15 +19,21 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
     const double itemHeight = 250;
     return BackGroundShare(
       body: Column(
-        children: [_buildAppBar(), _buildBody(itemWidth, itemHeight)],
-      ).paddingSymmetric(horizontal: AppDimens.paddingMedium),
+        children: [
+          _buildAppBar(),
+          _buildBody(itemWidth, itemHeight),
+        ],
+      ),
     );
   }
 
   Widget _buildBody(double itemWidth, double itemHeight) {
     return Expanded(
       child: Column(
-        children: [_buildSearchBar(), _buildListFood(itemWidth, itemHeight)],
+        children: [
+          _buildSearchBar(),
+          _buildListFood(itemWidth, itemHeight),
+        ],
       ),
     );
   }
@@ -58,7 +64,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _buildTextFieldSearch(),
-        _buildIconFilter().paddingOnly(left: AppDimens.paddingSmall),
+        _buildIconFilter(),
       ],
     );
   }
@@ -75,7 +81,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
         Icons.filter_alt_rounded,
         color: AppColors.white,
       ),
-    );
+    ).paddingOnly(left: AppDimens.paddingSmall);
   }
 
   Widget _buildTextFieldSearch() {

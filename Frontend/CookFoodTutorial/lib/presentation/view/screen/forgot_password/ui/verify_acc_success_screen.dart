@@ -22,6 +22,7 @@ class VerifyAccSuccessScreen extends AppBaseScreen<ForgotPassController> {
   @override
   Widget buildWidget() {
     return BackGroundShare(
+      padding: EdgeInsets.zero,
       body: Column(
         children: [
           const AppBarShare(hasBackIcon: true),

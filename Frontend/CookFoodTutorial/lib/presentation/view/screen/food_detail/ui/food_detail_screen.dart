@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
+import 'package:tutorial/presentation/component/backgroud_screen.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/view/resources/app_color.dart';
@@ -21,18 +22,26 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
 
   @override
   Widget buildWidget() {
-    return SafeArea(
-      top: false,
-      child: Scaffold(
-        backgroundColor: AppColors.primaryText,
-        body: Column(
-          children: [
-            _buildAppBar(),
-            _buildBody(),
-          ],
-        ),
+    return BackGroundShare(
+      body: Column(
+        children: [
+          _buildAppBar(),
+          _buildBody(),
+        ],
       ),
     );
+    //  SafeArea(
+    //   top: false,
+    //   child: Scaffold(
+    //     backgroundColor: AppColors.primaryText,
+    //     body: Column(
+    //       children: [
+    //         _buildAppBar(),
+    //         _buildBody(),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 
   Widget _buildBody() {

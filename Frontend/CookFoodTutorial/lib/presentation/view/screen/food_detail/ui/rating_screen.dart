@@ -87,13 +87,26 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
         rating: controller.curentStart.value.toDouble(),
         itemPadding:
             const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmallest),
-        itemBuilder: (context, index) => InkWell(
-          onTap: () => controller.rating(index + 1),
-          child: const Icon(
-            Icons.star,
-            color: AppColors.primaryColor,
-          ),
-        ),
+        itemBuilder: (context, index) {
+          bool isStarSelected = controller.curentStart.value == index + 1;
+
+          return TweenAnimationBuilder<double>(
+            duration: const Duration(milliseconds: 150),
+            tween: Tween<double>(begin: 1.0, end: isStarSelected ? 1.5 : 1.0),
+            builder: (context, scale, child) {
+              return Transform.scale(
+                scale: scale,
+                child: InkWell(
+                  onTap: () => controller.rating(index + 1),
+                  child: const Icon(
+                    Icons.star,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              );
+            },
+          );
+        },
         itemCount: 5,
         itemSize: (Get.width - 40) / 10,
         direction: Axis.horizontal,
@@ -104,5 +117,5 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
   Widget _buildDivider() => const Divider(
         color: AppColors.dsGray3,
         thickness: 0.5,
-      ).paddingSymmetric(vertical: AppDimens.paddingSmallest);
+      ).paddingSymmetric(vertical: AppDimens.paddingVerySmall);
 }

@@ -56,7 +56,7 @@ class SDSBottomSheet extends StatelessWidget {
             maxHeight: miniSizeHeight ?? Get.height / 2,
           ),
           decoration: BoxDecoration(
-            color: backgroundColor ?? AppColors.colorBackgrounDialog,
+            color: backgroundColor ?? AppColors.black,
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(
                 AppDimens.radius16,

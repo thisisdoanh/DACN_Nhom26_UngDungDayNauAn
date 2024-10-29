@@ -23,7 +23,7 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
           _buildAppBar(),
           _buildBody(itemWidth, itemHeight),
         ],
-      ).paddingSymmetric(horizontal: AppDimens.paddingMedium),
+      ),
     );
   }
 

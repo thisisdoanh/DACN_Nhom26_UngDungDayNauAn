@@ -121,7 +121,8 @@ class AppTextField extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                )),
+                ),
+              ),
       ],
     );
   }

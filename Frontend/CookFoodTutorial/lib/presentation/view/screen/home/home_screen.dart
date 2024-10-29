@@ -274,8 +274,6 @@ class HomeScreen extends AppBaseScreen<HomeController> {
             _buildAppbar(),
             Expanded(
               child: AppScrollView(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppDimens.paddingMedium),
                 child: Column(
                   children: [
                     _buildTextHeader(),

@@ -19,6 +19,7 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
   Widget buildWidget() {
     return SafeArea(
       child: BackGroundShare(
+        padding: EdgeInsets.zero,
         body: Column(
           children: [
             const AppBarShare(hasBackIcon: true),
@@ -45,22 +46,24 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
 
   Widget _buildBtnContinue() {
     return Obx(() {
-      final isActive = controller.isActiveBtnOtp.value;
-      return AppOutlineButton(
-        color: isActive ? AppColors.primaryColor : AppColors.dsGray3,
-        onPressed: isActive ? controller.verifyOtp : null,
-        borderRadius: BorderRadius.circular(20.sp),
-        width: double.infinity,
-        height: AppDimens.btnDefault,
-        child: Text(
-          StringConstants.next.tr,
-          style: AppTextTheme.headlineSmall(
-            isActive ? AppColors.white : AppColors.dsGray2,
-          )?.copyWith(
-            fontWeight: FontWeight.w700,
+      return Visibility(
+        visible: controller.isActiveBtnOtp.value,
+        child: AppOutlineButton(
+          color: AppColors.primaryColor,
+          onPressed: controller.verifyOtp,
+          borderRadius: BorderRadius.circular(20.sp),
+          width: double.infinity,
+          height: AppDimens.btnDefault,
+          child: Text(
+            StringConstants.next.tr,
+            style: AppTextTheme.headlineSmall(
+              AppColors.white
+            )?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
-      ).paddingAll(AppDimens.paddingMedium);
+        ).paddingAll(AppDimens.paddingMedium),
+      );
     });
   }
 

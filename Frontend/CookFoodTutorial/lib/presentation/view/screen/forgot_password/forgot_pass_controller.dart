@@ -69,7 +69,7 @@ class ForgotPassController extends AppBaseController {
 
   void forgotPassSuccess() {
     if (_validatePass()) {
-      Get.toNamed(AppRoute.suggestFoodSreen);
+      Get.toNamed(AppRoute.homeScreen);
     }
   }
 
