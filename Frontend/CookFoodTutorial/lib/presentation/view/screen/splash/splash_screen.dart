@@ -30,7 +30,7 @@ class SplashScreen extends AppBaseScreen<SplashController> {
               child: Text(
                 controller.version.value,
                 style: AppTextTheme.bodyMedium(
-                  AppColor.white,
+                  AppColors.white,
                 ),
               ),
             ),

@@ -44,9 +44,12 @@ class AppTouchable extends StatelessWidget {
         onPressed: onPressed,
         onLongPress: onLongPressed ?? () {},
         style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all(backgroundColor ?? Colors.transparent),
-          overlayColor: WidgetStateProperty.all(rippleColor ?? Colors.transparent),
-          foregroundColor: WidgetStateProperty.all(foregroundColor ?? AppColor.black),
+          backgroundColor:
+              WidgetStateProperty.all(backgroundColor ?? Colors.transparent),
+          overlayColor:
+              WidgetStateProperty.all(rippleColor ?? Colors.transparent),
+          foregroundColor:
+              WidgetStateProperty.all(foregroundColor ?? AppColors.black),
           shape: WidgetStateProperty.all(
             outlinedBorder ??
                 RoundedRectangleBorder(

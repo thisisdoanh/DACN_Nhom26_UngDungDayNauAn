@@ -35,7 +35,7 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                   Text(
                     StringConstants.deliciousCooking.tr.toUpperCase(),
                     style: TextStyle(
-                      color: AppColor.white,
+                      color: AppColors.white,
                       fontSize: 37.sp,
                       fontWeight: FontWeight.w700,
                     ),
@@ -43,22 +43,24 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                   Text(
                     StringConstants.cookingIsEasy.tr,
                     style: AppTextTheme.titleMedium(
-                      AppColor.white,
+                      AppColors.white,
                     ),
                   ),
                   Gap(28.h),
                   Text(
                     StringConstants.register.tr,
-                    style: AppTextTheme.headlineLarge(AppColor.white)?.copyWith(
+                    style:
+                        AppTextTheme.headlineLarge(AppColors.white)?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   Gap(40.h),
+
                   Obx(
                     () => AppTextField(
                       maxLines: 1,
                       maxLength: 255,
-                      backgroundColor: AppColor.transparent,
+                      backgroundColor: AppColors.transparent,
                       prefixIcon: Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: 8.sp,
@@ -80,7 +82,7 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                     () => AppTextField(
                       maxLines: 1,
                       maxLength: 255,
-                      backgroundColor: AppColor.transparent,
+                      backgroundColor: AppColors.transparent,
                       prefixIcon: Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: 8.sp,
@@ -102,7 +104,7 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                     () => AppTextField(
                       maxLines: 1,
                       maxLength: 255,
-                      backgroundColor: AppColor.transparent,
+                      backgroundColor: AppColors.transparent,
                       prefixIcon: Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: 8.sp,
@@ -117,7 +119,7 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                         onPressed: () => controller.onPressShowPassword(),
                         child: Icon(
                           controller.isHidePass.value ? Icons.visibility : Icons.visibility_off,
-                          color: AppColor.white,
+                          color: AppColors.white,
                           size: 24.sp,
                         ),
                       ),
@@ -132,7 +134,7 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                     () => AppTextField(
                       maxLines: 1,
                       maxLength: 255,
-                      backgroundColor: AppColor.transparent,
+                      backgroundColor: AppColors.transparent,
                       prefixIcon: Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: 8.sp,
@@ -148,7 +150,7 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                         onPressed: () => controller.onPressShowPassword(),
                         child: Icon(
                           controller.isHidePass.value ? Icons.visibility : Icons.visibility_off,
-                          color: AppColor.white,
+                          color: AppColors.white,
                           size: 24.sp,
                         ),
                       ),
@@ -163,10 +165,11 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                     borderRadius: BorderRadius.circular(20.sp),
                     width: 344.w,
                     height: 56.h,
-                    color: AppColor.primaryColor,
+                    color: AppColors.primaryColor,
                     child: Text(
                       StringConstants.register.tr,
-                      style: AppTextTheme.headlineSmall(AppColor.white)?.copyWith(
+                      style:
+                          AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -181,7 +184,7 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
             children: [
               Text(
                 StringConstants.doYouHaveAccount.tr,
-                style: AppTextTheme.titleMedium(AppColor.white)?.copyWith(
+                style: AppTextTheme.titleMedium(AppColors.white)?.copyWith(
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -189,7 +192,8 @@ class RegisterScreen extends AppBaseScreen<RegisterController> {
                 onPressed: () => controller.onPressLogin(),
                 child: Text(
                   StringConstants.login.tr,
-                  style: AppTextTheme.titleMedium(AppColor.primaryColor)?.copyWith(
+                  style: AppTextTheme.titleMedium(AppColors.primaryColor)
+                      ?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),

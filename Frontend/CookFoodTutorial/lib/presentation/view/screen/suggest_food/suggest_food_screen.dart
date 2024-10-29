@@ -4,6 +4,7 @@ import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
 import 'package:tutorial/presentation/component/backgroud_screen.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
+import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_controller.dart';
@@ -18,7 +19,10 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
     const double itemHeight = 250;
     return BackGroundShare(
       body: Column(
-        children: [_buildAppBar(), _buildBody(itemWidth, itemHeight)],
+        children: [
+          _buildAppBar(),
+          _buildBody(itemWidth, itemHeight),
+        ],
       ).paddingSymmetric(horizontal: AppDimens.paddingMedium),
     );
   }
@@ -26,7 +30,10 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
   Widget _buildBody(double itemWidth, double itemHeight) {
     return Expanded(
       child: Column(
-        children: [_buildSearchBar(), _buildListFood(itemWidth, itemHeight)],
+        children: [
+          _buildSearchBar(),
+          _buildListFood(itemWidth, itemHeight),
+        ],
       ),
     );
   }
@@ -42,7 +49,9 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
         ),
         itemCount: 20,
         itemBuilder: (context, index) {
-          return FoodCard(food: foodTest);
+          return InkWell(
+              onTap: () => Get.toNamed(AppRoute.foodDetailScreen),
+              child: FoodCard(food: FoodModel.foodTest));
         },
       ),
     );
@@ -53,7 +62,7 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _buildTextFieldSearch(),
-        _buildIconFilter().paddingOnly(left: AppDimens.paddingSmall),
+        _buildIconFilter(),
       ],
     );
   }
@@ -65,21 +74,21 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimens.radius8),
-          border: Border.all(color: AppColor.white)),
+          border: Border.all(color: AppColors.white)),
       child: const Icon(
         Icons.filter_alt_rounded,
-        color: AppColor.white,
+        color: AppColors.white,
       ),
-    );
+    ).paddingOnly(left: AppDimens.paddingSmall);
   }
 
   Widget _buildTextFieldSearch() {
     return Expanded(
       child: AppTextField(
         hintText: StringConstants.searchRecipe.tr,
-        backgroundColor: AppColor.transparent,
+        backgroundColor: AppColors.transparent,
         border: Border.all(
-          color: AppColor.white,
+          color: AppColors.white,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
@@ -89,23 +98,15 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   Widget _buildAppBar() {
     return AppBarShare(
-      title: StringConstants.motsFavorite.tr,
+      title: StringConstants.suggest.tr,
       action: InkWell(
         onTap: Get.back,
         child: const Icon(
           Icons.arrow_back_outlined,
-          color: AppColor.primaryColor,
-          size: AppDimens.fontLarge,
+          color: AppColors.primaryColor,
+          size: AppDimens.sizeImage35,
         ),
       ),
     );
   }
 }
-
-final FoodModel foodTest = FoodModel(
-    mealType: "Bữa sáng",
-    foodName: "Bữa nướng",
-    time: '10:02',
-    rating: 4.5,
-    imageUrl:
-        'https://ik.imagekit.io/tvlk/blog/2017/01/30-mon-ngon-nuc-long-nhat-dinh-phai-thu-khi-toi-ha-noi-phan-1.jpg?tr=dpr-2,w-675');

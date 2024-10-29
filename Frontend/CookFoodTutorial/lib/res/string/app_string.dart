@@ -63,7 +63,15 @@ class StringConstants {
 
 //home
   static const String searchRecipe = "search_recipe";
-  static const String motsFavorite = "mots_favorite";
+  static const String mostFavourite = "most_favourite";
+
+//food detail
+  static const String ingredient = "ingredient";
+  static const String instruction = "instruction";
+  static const String rating = "rating";
+  static const String ratingLableDialog = "rating_lable_dialog";
+  static const String making = "making";
+  static const String cancel = "cancel";
   static const String hello = "hello";
   static const String whatWantToCook = "what_want_to_cook";
   static const String suggest = "suggest";

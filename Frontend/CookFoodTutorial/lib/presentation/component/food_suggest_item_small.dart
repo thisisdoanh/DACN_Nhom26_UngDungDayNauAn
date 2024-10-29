@@ -24,8 +24,8 @@ class FoodSuggestItemSmall extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        shadows: [
-          const BoxShadow(
+        shadows: const [
+          BoxShadow(
             color: Color(0x3F000000),
             blurRadius: 4,
             offset: Offset(0, 5),
@@ -47,7 +47,7 @@ class FoodSuggestItemSmall extends StatelessWidget {
                   Text(
                     food.foodName,
                     style: TextStyle(
-                      color: AppColor.white,
+                      color: AppColors.white,
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w700,
                     ),
@@ -56,7 +56,7 @@ class FoodSuggestItemSmall extends StatelessWidget {
                     rating: food.rating,
                     itemBuilder: (context, index) => const Icon(
                       Icons.star,
-                      color: AppColor.primaryColor,
+                      color: AppColors.primaryColor,
                     ),
                     itemCount: 5,
                     itemSize: 20.0,
@@ -69,19 +69,19 @@ class FoodSuggestItemSmall extends StatelessWidget {
           Column(
             children: [
               Icon(
-                food.isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: AppColor.primaryColor,
+                FoodModel.foodTest.isFavorite.value ? Icons.favorite : Icons.favorite_border,
+                color: AppColors.primaryColor,
               ),
               Row(
                 children: [
                   const Icon(
                     Icons.timer,
-                    color: AppColor.white,
+                    color: AppColors.white,
                   ),
                   Gap(4.w),
                   UtilWidget.buildText(
                     food.time,
-                    textColor: AppColor.primaryColor,
+                    textColor: AppColors.primaryColor,
                     fontSize: AppDimens.fontSmall,
                   ),
                 ],

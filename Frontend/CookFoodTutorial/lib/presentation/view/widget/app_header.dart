@@ -41,7 +41,8 @@ class AppHeader extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0.sp),
             child: Row(
-              crossAxisAlignment: crossAxisAlignmentMainRow ?? CrossAxisAlignment.center,
+              crossAxisAlignment:
+                  crossAxisAlignmentMainRow ?? CrossAxisAlignment.center,
               children: [
                 leftWidget ??
                     AppTouchable(
@@ -57,7 +58,7 @@ class AppHeader extends StatelessWidget {
                       Text(
                         title ?? '',
                         textAlign: TextAlign.center,
-                        style: AppTextTheme.displayLarge(AppColor.black),
+                        style: AppTextTheme.displayLarge(AppColors.black),
                       ),
                 ),
                 rightWidget ?? SizedBox(width: 40.0.sp),

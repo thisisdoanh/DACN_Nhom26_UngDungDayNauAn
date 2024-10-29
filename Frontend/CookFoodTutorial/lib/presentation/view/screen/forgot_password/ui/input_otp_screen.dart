@@ -36,27 +36,32 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
                 ).paddingAll(AppDimens.paddingMedium),
               ),
             ),
-            _buildBtnCountinue(),
+            _buildBtnContinue(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBtnCountinue() {
-    return AppOutlineButton(
-      color: AppColor.primaryColor,
-      onPressed: controller.verifyAccount,
-      borderRadius: BorderRadius.circular(20.sp),
-      width: double.infinity,
-      height: AppDimens.btnDefault,
-      child: Text(
-        StringConstants.next.tr,
-        style: AppTextTheme.headlineSmall(AppColor.white)?.copyWith(
-          fontWeight: FontWeight.w700,
+  Widget _buildBtnContinue() {
+    return Obx(() {
+      final isActive = controller.isActiveBtnOtp.value;
+      return AppOutlineButton(
+        color: isActive ? AppColors.primaryColor : AppColors.dsGray3,
+        onPressed: isActive ? controller.verifyOtp : null,
+        borderRadius: BorderRadius.circular(20.sp),
+        width: double.infinity,
+        height: AppDimens.btnDefault,
+        child: Text(
+          StringConstants.next.tr,
+          style: AppTextTheme.headlineSmall(
+            isActive ? AppColors.white : AppColors.dsGray2,
+          )?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
         ),
-      ),
-    ).paddingAll(AppDimens.paddingMedium);
+      ).paddingAll(AppDimens.paddingMedium);
+    });
   }
 
   Widget _buildInputOtp() {
@@ -78,7 +83,7 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
       margin:
           const EdgeInsets.symmetric(horizontal: AppDimens.paddingVerySmall),
       decoration: BoxDecoration(
-        color: AppColor.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(AppDimens.radius8),
       ),
       child: Center(
@@ -90,7 +95,7 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
           maxLength: 1,
           textAlign: TextAlign.center,
           style: const TextStyle(
-              fontSize: AppDimens.fontMedium, color: AppColor.black),
+              fontSize: AppDimens.fontMedium, color: AppColors.black),
           decoration: const InputDecoration(
             counterText: '',
             border: InputBorder.none,
@@ -103,7 +108,7 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
   Widget _buildLableTextField() {
     return Text(
       StringConstants.inputOTP.tr,
-      style: AppTextTheme.labelLarge(AppColor.white)?.copyWith(
+      style: AppTextTheme.labelLarge(AppColors.white)?.copyWith(
         fontWeight: FontWeight.w700,
       ),
     );
@@ -112,7 +117,7 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
   Widget buildLableScreen() {
     return Text(
       StringConstants.verifyAccount.tr,
-      style: AppTextTheme.headlineLarge(AppColor.primaryColor)?.copyWith(
+      style: AppTextTheme.headlineLarge(AppColors.primaryColor)?.copyWith(
         fontWeight: FontWeight.w700,
       ),
     );

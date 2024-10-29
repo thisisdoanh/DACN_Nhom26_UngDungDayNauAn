@@ -44,7 +44,7 @@ void mainDelegate() async {
         defaultTransition: Transition.cupertino,
         transitionDuration: const Duration(milliseconds: 500),
         getPages: AppPage.pages,
-        theme: AppTheme.lightTheme,
+        theme: AppTheme.darkTheme,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

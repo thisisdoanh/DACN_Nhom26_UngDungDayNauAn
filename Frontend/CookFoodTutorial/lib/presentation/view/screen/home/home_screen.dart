@@ -9,6 +9,7 @@ import 'package:tutorial/presentation/component/backgroud_screen.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
 import 'package:tutorial/presentation/component/food_suggest_item_small.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
+import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/screen/home/home_controller.dart';
 import 'package:tutorial/res/string/app_string.dart';
@@ -33,13 +34,11 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           ),
         ),
       ),
-      action: Container(
-        margin: EdgeInsets.only(right: 16.w),
-        alignment: Alignment.center,
-        child: AppImageWidget.asset(
-          path: AppImage.icNoti,
-          height: 24.sp,
-          width: 24.sp,
+      action: IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.notifications,
+          size: AppDimens.sizeImage35,
         ),
       ),
     );
@@ -55,7 +54,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               TextSpan(
                 text: StringConstants.hello.tr,
                 style: TextStyle(
-                  color: AppColor.white,
+                  color: AppColors.white,
                   fontSize: 23.sp,
                   fontWeight: FontWeight.w600,
                 ),
@@ -63,7 +62,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               TextSpan(
                 text: ' Denny',
                 style: TextStyle(
-                  color: AppColor.primaryColor,
+                  color: AppColors.primaryColor,
                   fontSize: 23.sp,
                   fontWeight: FontWeight.w600,
                 ),
@@ -91,16 +90,19 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             UtilWidget.buildText(
-              StringConstants.motsFavorite,
-              textColor: AppColor.white,
+              StringConstants.mostFavourite,
+              textColor: AppColors.white,
               fontSize: 18.sp,
               fontWeight: FontWeight.w700,
             ),
-            UtilWidget.buildText(
-              StringConstants.seeAll,
-              textColor: AppColor.primaryColor,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
+            InkWell(
+              onTap: () => Get.toNamed(AppRoute.favouriteFoodSreen),
+              child: UtilWidget.buildText(
+                StringConstants.seeAll,
+                textColor: AppColors.primaryColor,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ],
         ),
@@ -118,9 +120,9 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                 right: 10.w,
               ),
               child: FoodCard(
-                food: foodTest,
+                food: FoodModel.foodTest,
                 timerIcon: Icons.timer,
-                timerColor: AppColor.white,
+                timerColor: AppColors.white,
               ),
             ),
           ),
@@ -138,16 +140,19 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           children: [
             UtilWidget.buildText(
               StringConstants.suggest,
-              textColor: AppColor.white,
+              textColor: AppColors.white,
               fontSize: 18.sp,
               fontWeight: FontWeight.w700,
             ),
-            UtilWidget.buildText(
-              StringConstants.seeAll,
-              textColor: AppColor.primaryColor,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
-            ),
+            InkWell(
+              onTap: () => Get.toNamed(AppRoute.suggestFoodSreen),
+              child: UtilWidget.buildText(
+                StringConstants.seeAll,
+                textColor: AppColors.primaryColor,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            )
           ],
         ),
         Gap(10.h),
@@ -161,7 +166,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               height: 8.sp,
             );
           },
-          itemBuilder: (context, index) => FoodSuggestItemSmall(food: foodTest),
+          itemBuilder: (context, index) =>
+              FoodSuggestItemSmall(food: FoodModel.foodTest),
         ),
         Gap(20.h),
       ],
@@ -180,9 +186,9 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     return Expanded(
       child: AppTextField(
         hintText: StringConstants.searchRecipe.tr,
-        backgroundColor: AppColor.transparent,
+        backgroundColor: AppColors.transparent,
         border: Border.all(
-          color: AppColor.white,
+          color: AppColors.white,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
@@ -207,7 +213,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               Text(
                 'Denny',
                 style: TextStyle(
-                  color: AppColor.white,
+                  color: AppColors.white,
                   fontSize: 28.sp,
                   fontWeight: FontWeight.w700,
                 ),
@@ -228,7 +234,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               onPressed: Get.back,
               icon: const Icon(
                 Icons.arrow_back_sharp,
-                color: AppColor.primaryColor,
+                color: AppColors.primaryColor,
                 size: AppDimens.fontLargest,
               ),
             )),
@@ -268,7 +274,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
             _buildAppbar(),
             Expanded(
               child: AppScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMedium),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimens.paddingMedium),
                 child: Column(
                   children: [
                     _buildTextHeader(),
@@ -284,12 +291,3 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     );
   }
 }
-
-final FoodModel foodTest = FoodModel(
-  mealType: "Bữa sáng",
-  foodName: "Bánh Chocolate",
-  time: '10:02',
-  rating: 4.5,
-  imageUrl:
-      'https://ik.imagekit.io/tvlk/blog/2017/01/30-mon-ngon-nuc-long-nhat-dinh-phai-thu-khi-toi-ha-noi-phan-1.jpg?tr=dpr-2,w-675',
-);

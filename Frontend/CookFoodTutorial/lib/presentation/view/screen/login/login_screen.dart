@@ -34,7 +34,7 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                   Text(
                     StringConstants.deliciousCooking.tr.toUpperCase(),
                     style: TextStyle(
-                      color: AppColor.white,
+                      color: AppColors.white,
                       fontSize: 37.sp,
                       fontWeight: FontWeight.w700,
                     ),
@@ -42,13 +42,14 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                   Text(
                     StringConstants.cookingIsEasy.tr,
                     style: AppTextTheme.titleMedium(
-                      AppColor.white,
+                      AppColors.white,
                     ),
                   ),
                   Gap(28.h),
                   Text(
                     StringConstants.login.tr,
-                    style: AppTextTheme.headlineLarge(AppColor.white)?.copyWith(
+                    style:
+                        AppTextTheme.headlineLarge(AppColors.white)?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -57,7 +58,7 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                     () => AppTextField(
                       maxLines: 1,
                       maxLength: 255,
-                      backgroundColor: AppColor.transparent,
+                      backgroundColor: AppColors.transparent,
                       prefixIcon: Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: 8.sp,
@@ -69,7 +70,8 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                       ),
                       hintText: StringConstants.email.tr,
                       keyboardType: TextInputType.emailAddress,
-                      textEditingController: controller.emailTextEditingController,
+                      textEditingController:
+                          controller.emailTextEditingController,
                       errorText: controller.firstErrorText.value,
                       onChanged: controller.onFirstInputChange,
                     ),
@@ -79,7 +81,7 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                     () => AppTextField(
                       maxLines: 1,
                       maxLength: 255,
-                      backgroundColor: AppColor.transparent,
+                      backgroundColor: AppColors.transparent,
                       prefixIcon: Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: 8.sp,
@@ -94,12 +96,15 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                       suffixIcon: AppTouchable(
                         onPressed: () => controller.onPressShowPassword(),
                         child: Icon(
-                          controller.isHidePass.value ? Icons.visibility : Icons.visibility_off,
-                          color: AppColor.white,
+                          controller.isHidePass.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: AppColors.white,
                           size: 24.sp,
                         ),
                       ),
-                      textEditingController: controller.passwordTextEditingController,
+                      textEditingController:
+                          controller.passwordTextEditingController,
                       errorText: controller.secondErrorText.value,
                       onChanged: controller.onSecondInputChange,
                     ),
@@ -111,7 +116,7 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                       onPressed: () => controller.onPressForgotPass(),
                       child: Text(
                         StringConstants.forgotPass.tr,
-                        style: AppTextTheme.bodyLarge(AppColor.primaryColor),
+                        style: AppTextTheme.bodyLarge(AppColors.primaryColor),
                       ),
                     ),
                   ),
@@ -135,9 +140,20 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                     borderRadius: BorderRadius.circular(20.sp),
                     width: 344.w,
                     height: 56.h,
+// <<<<<<< HEAD
+//                     border: Border.all(
+//                       color: AppColors.white,
+//                       width: 2.sp,
+//                     ),
+//                     child: Text(
+//                       StringConstants.login.tr,
+//                       style:
+//                           AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
+// =======
                     child: Text(
                       StringConstants.login.tr,
-                      style: AppTextTheme.headlineSmall(AppColor.white)?.copyWith(
+                      style:
+                          AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -152,7 +168,7 @@ class LoginScreen extends AppBaseScreen<LoginController> {
             children: [
               Text(
                 StringConstants.doNotHaveAccount.tr,
-                style: AppTextTheme.titleMedium(AppColor.white)?.copyWith(
+                style: AppTextTheme.titleMedium(AppColors.white)?.copyWith(
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -160,7 +176,8 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                 onPressed: () => controller.onPressRegister(),
                 child: Text(
                   StringConstants.register.tr,
-                  style: AppTextTheme.titleMedium(AppColor.primaryColor)?.copyWith(
+                  style: AppTextTheme.titleMedium(AppColors.primaryColor)
+                      ?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class AppColor {
+class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color background = Color(0xFFF1F1F1);
   static const Color primaryText = Color(0xFF151515);
+  static const Color textNote = Color.fromARGB(255, 0, 157, 255);
   static const Color primaryGray = Color(0xFF97A3AD);
   static const Color primaryColor = Color(0xFFFF6B00);
   static const Color transparent = Colors.transparent;
 
-    //backgroud
+  //backgroud
   static const Color colorBackgroundAppbar = Color(0xfff29e38);
   static const Color colorBackground1 = Color(0xFFec4444);
   static const Color colorBackground2 = Color(0xffde5f4b);
@@ -24,7 +25,6 @@ class AppColor {
   //Icon
   static const Color colorIconDefault = Colors.black54;
 
-  static const Color backgroundColor = Colors.white;
   static const Color colorSuccessGreen = Color(0xff09b409);
   static const Color colorRedError = Color(0xccEF4444);
   static const Color colorAttention = Color(0xccEF4444);
@@ -51,9 +51,9 @@ class AppColor {
   static const Color dsSecondaryGreen4 = Color(0xFFE4F1E6);
   static const Color dsSecondaryGreen5 = Color(0xFFEDF6EE);
 
+  static const Color dsGray = Colors.grey;
   static const Color dsGray1 = Color(0xFF16243D);
   static const Color dsGray2 = Color(0xFF58647A);
   static const Color dsGray3 = Color(0xFF9BA3B1);
   static const Color dsGray4 = Color(0xFFD5D8DD);
-
 }

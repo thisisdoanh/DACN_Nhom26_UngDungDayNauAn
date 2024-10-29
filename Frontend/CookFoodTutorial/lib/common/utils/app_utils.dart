@@ -16,8 +16,8 @@ showToast(String text, {bool isLong = true}) {
     toastLength: isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: 3,
-    backgroundColor: AppColor.black.withOpacity(0.9),
-    textColor: AppColor.white,
+    backgroundColor: AppColors.black.withOpacity(0.9),
+    textColor: AppColors.white,
     fontSize: 16,
   );
 }
@@ -30,7 +30,8 @@ bool isNullEmpty(Object? o) => o == null || "" == o || o == "null";
 
 bool isNullEmptyOrFalse(Object? o) => o == null || false == o || "" == o;
 
-bool isNullEmptyFalseOrZero(Object? o) => o == null || false == o || 0 == o || "" == o || "0" == o;
+bool isNullEmptyFalseOrZero(Object? o) =>
+    o == null || false == o || 0 == o || "" == o || "0" == o;
 
 bool isNullEmptyList<T>(List<T>? t) => t == null || [] == t || t.isEmpty;
 
@@ -46,7 +47,8 @@ bool isNumeric(dynamic s) {
 
 bool checkValidEmail(String email) {
   String textEmail = email.trim();
-  Pattern pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+";
+  Pattern pattern =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+";
   RegExp regex = RegExp(pattern as String);
   return regex.hasMatch(textEmail);
 }

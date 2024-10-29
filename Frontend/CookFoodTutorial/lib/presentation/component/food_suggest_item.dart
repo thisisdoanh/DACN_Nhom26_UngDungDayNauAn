@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
@@ -11,14 +13,15 @@ class FoodCard extends StatelessWidget {
   final IconData? timerIcon;
   final Color? timerColor;
 
-  const FoodCard({super.key, required this.food, this.timerIcon, this.timerColor});
+  const FoodCard(
+      {super.key, required this.food, this.timerIcon, this.timerColor});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
       decoration: BoxDecoration(
-        color: AppColor.primaryGray.withOpacity(0.4),
+        color: AppColors.primaryGray.withOpacity(0.4),
         borderRadius: BorderRadius.circular(AppDimens.radius16),
       ),
       child: Column(
@@ -43,7 +46,7 @@ class FoodCard extends StatelessWidget {
       rating: food.rating,
       itemBuilder: (context, index) => const Icon(
         Icons.star,
-        color: AppColor.primaryColor,
+        color: AppColors.primaryColor,
       ),
       itemCount: 5,
       itemSize: 20.0,
@@ -56,12 +59,12 @@ class FoodCard extends StatelessWidget {
       children: [
         Icon(
           timerIcon ?? Icons.timer_outlined,
-          color: timerColor ?? AppColor.primaryColor,
+          color: timerColor ?? AppColors.primaryColor,
         ),
         Gap(4.w),
         UtilWidget.buildText(
           food.time,
-          textColor: timerColor ?? AppColor.primaryColor,
+          textColor: timerColor ?? AppColors.primaryColor,
           fontSize: AppDimens.fontSmall,
         ),
       ],
@@ -72,7 +75,7 @@ class FoodCard extends StatelessWidget {
     return UtilWidget.buildText(
       food.foodName,
       fontSize: AppDimens.fontSmall,
-      textColor: AppColor.white,
+      textColor: AppColors.white,
     );
   }
 
@@ -92,9 +95,16 @@ class FoodCard extends StatelessWidget {
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
-            child: Icon(
-              food.isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: AppColor.primaryColor,
+            child: InkWell(
+              onTap: food.isFavorite.toggle,
+              child: Obx(
+                () => Icon(
+                  food.isFavorite.value
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  color: AppColors.primaryColor,
+                ),
+              ),
             ),
           ),
         ),
@@ -117,8 +127,10 @@ class FoodModel {
   final String foodName;
   final String time;
   final double rating;
-  final bool isFavorite;
+  final RxBool isFavorite;
   final String imageUrl;
+  final int calo;
+  final int portion;
 
   FoodModel({
     required this.mealType,
@@ -126,6 +138,19 @@ class FoodModel {
     required this.time,
     required this.rating,
     required this.imageUrl,
-    this.isFavorite = false,
+    required this.isFavorite,
+    required this.calo,
+    required this.portion,
   });
+  static final FoodModel foodTest = FoodModel(
+    mealType: "Bữa sáng",
+    foodName: "Bữa nướng",
+    portion: 4,
+    time: '10:02',
+    rating: 4.5,
+    calo: 280,
+    imageUrl:
+        'https://ik.imagekit.io/tvlk/blog/2017/01/30-mon-ngon-nuc-long-nhat-dinh-phai-thu-khi-toi-ha-noi-phan-1.jpg?tr=dpr-2,w-675',
+    isFavorite: false.obs,
+  );
 }
