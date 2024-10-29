@@ -4,7 +4,7 @@ class AppDimens {
   static const double fontSmallest = 12;
   static const double fontSmall = 16;
   static const double fontMedium = 20;
-  static const double fontLarge = 28;
+  static const double fontLarge = 24;
   static const double fontLargest = 36;
   static const double fontHuge = 40;
   static const double sizeImage = 190;

@@ -102,7 +102,7 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
   }
 
   Widget _buildDivider() => const Divider(
-        color: AppColors.dsGray4,
+        color: AppColors.dsGray3,
         thickness: 0.5,
       ).paddingSymmetric(vertical: AppDimens.paddingSmallest);
 }

@@ -94,13 +94,13 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
 
   Widget _buildAppBar() {
     return AppBarShare(
-      title: StringConstants.motsFavorite.tr,
+      title: StringConstants.mostFavourite.tr,
       action: InkWell(
         onTap: Get.back,
         child: const Icon(
           Icons.arrow_back_outlined,
           color: AppColors.primaryColor,
-          size: AppDimens.fontLarge,
+          size: AppDimens.sizeImage35,
         ),
       ),
     );

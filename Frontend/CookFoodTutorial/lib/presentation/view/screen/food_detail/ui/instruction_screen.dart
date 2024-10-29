@@ -68,12 +68,12 @@ class InstructionScreen extends AppBaseScreen<FoodDetailController> {
         ),
         Gap(12.w),
         const Icon(
-          Icons.timer_outlined,
+          Icons.food_bank_outlined,
           color: AppColors.dsGray3,
         ),
         Gap(4.w),
         UtilWidget.buildText(
-          FoodModel.foodTest.time,
+          '${FoodModel.foodTest.portion} Khẩu phần ăn',
           textColor: AppColors.dsGray3,
           fontSize: AppDimens.font14,
         ),

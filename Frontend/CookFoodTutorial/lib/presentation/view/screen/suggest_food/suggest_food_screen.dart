@@ -4,6 +4,7 @@ import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
 import 'package:tutorial/presentation/component/backgroud_screen.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
+import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_controller.dart';
@@ -29,7 +30,10 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
   Widget _buildBody(double itemWidth, double itemHeight) {
     return Expanded(
       child: Column(
-        children: [_buildSearchBar(), _buildListFood(itemWidth, itemHeight)],
+        children: [
+          _buildSearchBar(),
+          _buildListFood(itemWidth, itemHeight),
+        ],
       ),
     );
   }
@@ -45,7 +49,9 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
         ),
         itemCount: 20,
         itemBuilder: (context, index) {
-          return FoodCard(food: FoodModel.foodTest);
+          return InkWell(
+              onTap: () => Get.toNamed(AppRoute.foodDetailScreen),
+              child: FoodCard(food: FoodModel.foodTest));
         },
       ),
     );
@@ -56,7 +62,7 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _buildTextFieldSearch(),
-        _buildIconFilter().paddingOnly(left: AppDimens.paddingSmall),
+        _buildIconFilter(),
       ],
     );
   }
@@ -73,7 +79,7 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
         Icons.filter_alt_rounded,
         color: AppColors.white,
       ),
-    );
+    ).paddingOnly(left: AppDimens.paddingSmall);
   }
 
   Widget _buildTextFieldSearch() {
@@ -92,13 +98,13 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   Widget _buildAppBar() {
     return AppBarShare(
-      title: StringConstants.motsFavorite.tr,
+      title: StringConstants.suggest.tr,
       action: InkWell(
         onTap: Get.back,
         child: const Icon(
           Icons.arrow_back_outlined,
           color: AppColors.primaryColor,
-          size: AppDimens.fontLarge,
+          size: AppDimens.sizeImage35,
         ),
       ),
     );
