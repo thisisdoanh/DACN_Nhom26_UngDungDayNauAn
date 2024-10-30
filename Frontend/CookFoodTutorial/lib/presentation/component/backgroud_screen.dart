@@ -7,17 +7,19 @@ class BackGroundShare extends StatelessWidget {
     super.key,
     this.body,
     this.padding,
+    this.drawer,
   });
   final Widget? body;
+  final Widget? drawer;
   final EdgeInsetsGeometry? padding;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Scaffold(
+        drawer: drawer,
         body: Container(
-          padding: padding ??
-              const EdgeInsets.symmetric(horizontal: AppDimens.paddingMedium),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: AppDimens.paddingMedium),
           color: AppColors.black,
           // decoration: const BoxDecoration(
           //   gradient: LinearGradient(

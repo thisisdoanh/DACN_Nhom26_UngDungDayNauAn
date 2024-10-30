@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -20,25 +19,28 @@ class HomeScreen extends AppBaseScreen<HomeController> {
   const HomeScreen({super.key});
 
   Widget _buildAppbar() {
-    return AppBarShare(
-      leading: AppTouchable(
-        margin: EdgeInsets.only(left: 16.w),
-        onPressed: () {
-          controller.advancedDrawerController.showDrawer();
-        },
-        child: Center(
-          child: AppImageWidget.asset(
-            path: AppImage.icMenu,
-            height: 24.sp,
-            width: 24.sp,
+    return Builder(
+      builder: (context) => AppBarShare(
+        leading: AppTouchable(
+          margin: EdgeInsets.only(left: 16.w),
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+            // controller.advancedDrawerController.showDrawer();
+          },
+          child: Center(
+            child: AppImageWidget.asset(
+              path: AppImage.icMenu,
+              height: 24.sp,
+              width: 24.sp,
+            ),
           ),
         ),
-      ),
-      action: IconButton(
-        onPressed: () {},
-        icon: const Icon(
-          Icons.notifications,
-          size: AppDimens.sizeImage35,
+        action: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.notifications,
+            size: AppDimens.sizeImage35,
+          ),
         ),
       ),
     );
@@ -166,8 +168,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               height: 8.sp,
             );
           },
-          itemBuilder: (context, index) =>
-              FoodSuggestItemSmall(food: FoodModel.foodTest),
+          itemBuilder: (context, index) => FoodSuggestItemSmall(food: FoodModel.foodTest),
         ),
         Gap(20.h),
       ],
@@ -196,10 +197,10 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     );
   }
 
-  Widget _buildUserInfo() {
+  Widget _buildUserInfo(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
+        const CircleAvatar(
           foregroundImage: NetworkImage(
             "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.933601817.1727827200&semt=ais_hybrid",
           ),
@@ -227,64 +228,115 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           ),
         ),
         AppTouchable(
-            onPressed: () {
-              controller.advancedDrawerController.hideDrawer();
-            },
-            child: IconButton(
-              onPressed: Get.back,
-              icon: const Icon(
-                Icons.arrow_back_sharp,
-                color: AppColors.primaryColor,
-                size: AppDimens.fontLargest,
-              ),
-            )),
+          onPressed: () {
+            Scaffold.of(context).closeDrawer();
+            // controller.advancedDrawerController.hideDrawer();
+          },
+          child: const Icon(
+            Icons.arrow_back_sharp,
+            color: AppColors.primaryColor,
+            size: AppDimens.fontLargest,
+          ),
+        ),
       ],
+    );
+  }
+
+  _buildItemDrawer({required Function() function, required String icon, required String title}) {
+    return AppTouchable(
+      onPressed: function,
+      child: Row(
+        children: [
+          AppImageWidget.asset(
+            path: icon,
+            height: 28.sp,
+            width: 28.sp,
+          ),
+          Gap(20.w),
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.sp,
+              fontFamily: 'Lora',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   @override
   Widget buildWidget() {
-    return AdvancedDrawer(
-      controller: controller.advancedDrawerController,
-      openScale: 1,
-      openRatio: 1,
-      backdrop: AppImageWidget.asset(
-        path: AppImage.bgDrawer,
-        width: Get.width,
-        height: Get.height,
-        fit: BoxFit.cover,
-      ),
-      drawer: AppScrollView(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20.w,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Gap(60.h),
-            _buildUserInfo(),
-          ],
-        ),
-      ),
-      disabledGestures: true,
-      child: BackGroundShare(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildAppbar(),
-            Expanded(
-              child: AppScrollView(
+    return BackGroundShare(
+      drawer: Builder(
+        builder: (context) => Drawer(
+          width: Get.width,
+          backgroundColor: AppColors.black,
+          child: Stack(
+            children: [
+              AppImageWidget.asset(
+                path: AppImage.bgDrawer,
+                width: Get.width,
+                height: Get.height,
+                fit: BoxFit.cover,
+              ),
+              Positioned.fill(
+                child: ColoredBox(
+                  color: AppColors.black.withOpacity(0.3),
+                ),
+              ),
+              AppScrollView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    _buildTextHeader(),
-                    _buildHighRatingList(),
-                    _buildSuggestList(),
+                    Gap(60.h),
+                    _buildUserInfo(context),
+                    Gap(30.h),
+                    _buildItemDrawer(
+                      function: () => controller.onPressHome(),
+                      icon: AppImage.icHome,
+                      title: StringConstants.home.tr,
+                    ),
+                    Gap(30.h),
+                    _buildItemDrawer(
+                      function: () => controller.onPressFavorite(),
+                      icon: AppImage.icFavorite,
+                      title: StringConstants.favorite.tr,
+                    ),
+                    Gap(30.h),
+                    _buildItemDrawer(
+                      function: () => controller.onPressHistory(),
+                      icon: AppImage.icHistory,
+                      title: StringConstants.history.tr,
+                    ),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildAppbar(),
+          Expanded(
+            child: AppScrollView(
+              child: Column(
+                children: [
+                  _buildTextHeader(),
+                  _buildHighRatingList(),
+                  _buildSuggestList(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

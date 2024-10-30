@@ -18,7 +18,7 @@ class LoginController extends AppBaseController {
   void onPressLogin() {
     AppLog.info("onPressLogin");
     // _validate();
-    Get.toNamed(AppRoute.homeScreen);
+    Get.offAllNamed(AppRoute.homeScreen);
   }
 
   void onPressShowPassword() {
@@ -43,6 +43,10 @@ class LoginController extends AppBaseController {
     try {
       var user = await googleSignIn.signIn();
       AppLog.info("User info: $user");
+
+      if (user != null) {
+        Get.offAllNamed(AppRoute.homeScreen);
+      }
     } catch (e) {
       AppLog.error(e, tag: "onPressLoginWithGoogle");
     }
