@@ -12,7 +12,7 @@ class FoodDetailController extends AppBaseController {
       SDSBottomSheet(
         title: FoodModel.foodTest.foodName,
         body: guideScreen,
-        miniSizeHeight: Get.height * 0.7,
+        miniSizeHeight: Get.height * 0.8,
       ),
       isScrollControlled: true,
     );

@@ -20,4 +20,5 @@ class AppImage {
   static const String bgDrawer = '${_internalImagePathPng}bg_drawer.png';
 
   ///LOTTIE
+  static const String icChatBox = '${_internalImagePathLottie}chat_box.gif';
 }

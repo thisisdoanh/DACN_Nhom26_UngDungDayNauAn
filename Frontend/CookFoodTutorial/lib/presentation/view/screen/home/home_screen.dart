@@ -74,6 +74,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           StringConstants.whatWantToCook,
           fontWeight: FontWeight.w700,
           fontSize: 35.sp,
+          maxLines: 2,
         ),
         Gap(10.h),
         _buildSearchBar(),
@@ -82,7 +83,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
   }
 
   Widget _buildHighRatingList() {
-    final double itemWidth = Get.width / 2.2;
+    final double itemWidth = Get.width / 2.5;
     return Column(
       children: [
         Gap(10.h),
@@ -192,6 +193,10 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           width: 1,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
+        suffixIcon: const Icon(
+          Icons.search,
+          color: AppColors.white,
+        ),
       ),
     );
   }
@@ -268,6 +273,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
       ),
       disabledGestures: true,
       child: BackGroundShare(
+        hasChatBox: true,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

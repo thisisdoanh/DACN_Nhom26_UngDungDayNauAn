@@ -15,43 +15,42 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   @override
   Widget buildWidget() {
-    final double itemWidth = Get.width / 2;
-    const double itemHeight = 250;
     return BackGroundShare(
       body: Column(
         children: [
           _buildAppBar(),
-          _buildBody(itemWidth, itemHeight),
+          _buildBody(),
         ],
       ),
     );
   }
 
-  Widget _buildBody(double itemWidth, double itemHeight) {
+  Widget _buildBody() {
     return Expanded(
       child: Column(
         children: [
           _buildSearchBar(),
-          _buildListFood(itemWidth, itemHeight),
+          _buildListFood(),
         ],
       ),
     );
   }
 
-  Widget _buildListFood(double itemWidth, double itemHeight) {
+  Widget _buildListFood() {
     return Expanded(
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: itemWidth / itemHeight,
-          crossAxisSpacing: AppDimens.paddingMedium,
-          mainAxisSpacing: AppDimens.paddingMedium,
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 200,
+          mainAxisExtent: 220,
+          mainAxisSpacing: AppDimens.paddingSmall,
+          crossAxisSpacing: AppDimens.paddingVerySmall,
         ),
-        itemCount: 20,
+        shrinkWrap: true,
         itemBuilder: (context, index) {
           return InkWell(
-              onTap: () => Get.toNamed(AppRoute.foodDetailScreen),
-              child: FoodCard(food: FoodModel.foodTest));
+            onTap: () => Get.toNamed(AppRoute.foodDetailScreen),
+            child: FoodCard(food: FoodModel.foodTest),
+          );
         },
       ),
     );
@@ -69,12 +68,13 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   Widget _buildIconFilter() {
     return Container(
-      height: AppDimens.sizeIconLineChart,
+      height: AppDimens.sizeTextField,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimens.radius8),
-          border: Border.all(color: AppColors.white)),
+        borderRadius: BorderRadius.circular(AppDimens.radius8),
+        border: Border.all(color: AppColors.white),
+      ),
       child: const Icon(
         Icons.filter_alt_rounded,
         color: AppColors.white,
@@ -90,6 +90,10 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
         border: Border.all(
           color: AppColors.white,
           width: 1,
+        ),
+        suffixIcon: const Icon(
+          Icons.search,
+          color: AppColors.white,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
       ),

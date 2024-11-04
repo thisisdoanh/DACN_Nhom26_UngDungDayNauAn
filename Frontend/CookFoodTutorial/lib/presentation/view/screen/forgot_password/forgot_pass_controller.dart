@@ -16,8 +16,8 @@ class ForgotPassController extends AppBaseController {
   RxList<String> otpValues = RxList(List.generate(4, (index) => ''));
 
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
-  final RxBool isHidePass = false.obs;
-  final RxBool isHideVerifyPass = false.obs;
+  final RxBool isHidePass = true.obs;
+  final RxBool isHideVerifyPass = true.obs;
   final RxBool isActiveBtnOtp = false.obs;
   final TextEditingController passwordCtrl = TextEditingController();
   final TextEditingController verifyPasswordCtrl = TextEditingController();
@@ -103,9 +103,5 @@ class ForgotPassController extends AppBaseController {
     if (verifyPassError.value.isNotEmpty) {
       verifyPassError.value = '';
     }
-  }
-
-  void validateOtp() {
-    isActiveBtnOtp.value = otpValues.any((value) => value.isEmpty);
   }
 }

@@ -39,13 +39,14 @@ class AppTheme {
       outlineVariant: AppColors.primaryColor.withOpacity(0.4),
     ),
     fontFamily: "Lora",
+    primaryIconTheme: const IconThemeData(color: AppColors.white),
     iconTheme: const IconThemeData(color: AppColors.white),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
         iconColor: WidgetStateProperty.all(AppColors.white),
       ),
     ),
-    scaffoldBackgroundColor: AppColors.primaryColor,
+    scaffoldBackgroundColor: AppColors.black,
     textTheme: AppTextTheme.textTheme(AppColors.white),
     dialogBackgroundColor: Colors.white,
     unselectedWidgetColor: Colors.black,
