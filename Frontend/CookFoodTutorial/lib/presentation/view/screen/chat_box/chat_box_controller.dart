@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
@@ -8,8 +9,8 @@ import 'package:tutorial/presentation/view/screen/chat_box/resoure.dart';
 
 class ChatBoxController extends AppBaseController {
   late GenerativeModel model;
-    final Rx<File?> imageFile = Rx<File?>(null);
-
+  final RxList<File?> imageFiles = RxList<File?>();
+  final TextEditingController textCtrl = TextEditingController();
 
   @override
   onInit() async {
@@ -55,6 +56,7 @@ class ChatBoxController extends AppBaseController {
     print('Response:');
     print(response.text);
   }
+
   @override
   Future<void> pickImage({
     bool isFromCamera = true,
@@ -70,7 +72,9 @@ class ChatBoxController extends AppBaseController {
       imageQuality: quality,
     );
     if (pickedFile != null) {
-      imageFile.value = File(pickedFile.path);
+      imageFiles.add(
+        File(pickedFile.path),
+      );
     }
   }
 }
