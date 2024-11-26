@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
+import 'package:tutorial/presentation/view/screen/chat_box/message_model.dart';
 import 'package:tutorial/presentation/view/screen/chat_box/resoure.dart';
 
 class ChatBoxController extends AppBaseController {
   late GenerativeModel model;
   final RxList<File?> imageFiles = RxList<File?>();
   final TextEditingController textCtrl = TextEditingController();
+  final RxList<Message> messages = RxList<Message>();
 
   @override
   onInit() async {
@@ -36,7 +38,7 @@ class ChatBoxController extends AppBaseController {
 
 //   }
 
-  void getResponseMessage() async {
+  void getResponseMessagee() async {
     final prompt = 'What do you see?';
 
     final (catBytes, sconeBytes) = await (
@@ -57,7 +59,6 @@ class ChatBoxController extends AppBaseController {
     print(response.text);
   }
 
-  @override
   Future<void> pickImage({
     bool isFromCamera = true,
   }) async {
@@ -76,5 +77,30 @@ class ChatBoxController extends AppBaseController {
         File(pickedFile.path),
       );
     }
+  }
+
+  Future<String> getResponseMessage({
+    required String messages,
+    required List<File?> imageFiles,
+  }) async {
+    // Đọc các file ảnh thành byte array
+    final imageBytes = await Future.wait(
+      imageFiles
+          .map((file) async => file != null ? await file.readAsBytes() : null),
+    );
+
+    // Tạo content từ message và imageBytes
+    final content = [
+      Content.multi([
+        TextPart(messages.t),
+        ...imageBytes.where((bytes) => bytes != null).map(
+              (bytes) => DataPart('image/jpeg', bytes!),
+            ),
+      ]),
+    ];
+
+    // Gọi API generateContent
+    final response = await model.generateContent(content);
+    return response.text??"not found";
   }
 }

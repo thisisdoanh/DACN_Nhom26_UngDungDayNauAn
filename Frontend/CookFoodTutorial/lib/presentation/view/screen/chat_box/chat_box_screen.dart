@@ -19,7 +19,12 @@ class ChatBoxScreen extends AppBaseScreen<ChatBoxController> {
       () => SafeArea(
         child: Column(
           children: [
-            Expanded(child: SingleChildScrollView()),
+            Expanded(child: ListView.builder(
+              reverse: true,
+              shrinkWrap: true,
+              itemCount: controller.messages.length,
+              itemBuilder: (context, index) => Text(controller.messages[index].text),
+            )),
             _buildTextFieldAndIconSend(),
             Gap(16.h),
           ],
@@ -58,7 +63,10 @@ class ChatBoxScreen extends AppBaseScreen<ChatBoxController> {
                       ),
                 TextField(
                   controller: controller.textCtrl,
-                  maxLines: 5,
+                  maxLines: null,
+                  maxLength: 255,
+                  scrollPadding: EdgeInsets.zero,
+
                   //onChanged: onChanged,
                   style: AppTextTheme.labelLarge(AppColors.white),
                   cursorColor: AppColors.white,
@@ -68,7 +76,7 @@ class ChatBoxScreen extends AppBaseScreen<ChatBoxController> {
                       vertical: 8.sp,
                       horizontal: 16.0.sp,
                     ),
-                    hintText: "hint",
+                    hintText: "Enter your message",
                     hintStyle: AppTextTheme.labelLarge(AppColors.dsGray4),
                     suffixIcon: Row(
                       mainAxisSize: MainAxisSize.min,
