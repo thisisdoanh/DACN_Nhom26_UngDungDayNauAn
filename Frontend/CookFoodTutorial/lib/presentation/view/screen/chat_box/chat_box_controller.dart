@@ -12,20 +12,16 @@ class ChatBoxController extends AppBaseController {
   late GenerativeModel model;
   final RxList<File?> imageFiles = RxList<File?>();
   final TextEditingController textCtrl = TextEditingController();
-  final RxList<Message> messages = RxList<Message>();
+  final RxList<Message> messageList = RxList<Message>();
 
   @override
   onInit() async {
-    // super.onInit();
-    // final apiKey = Platform.environment['GEMINI_API_KEY'];
-    // if (apiKey == null) {
-    //   stderr.writeln(r'No $GEMINI_API_KEY environment variable');
-    //   exit(1);
-    // }
-    // model = GenerativeModel(
-    //   model: 'gemini-1.5-flash-latest',
-    //   apiKey: apiKey,
-    // );
+    super.onInit();
+    const apiKey = "AIzaSyB10JQnQl57aPWbyfyEPg_bj9WXcW8mAtk";
+    model = GenerativeModel(
+      model: 'gemini-1.5-flash-latest',
+      apiKey: apiKey,
+    );
   }
 //   Future pickImage()async{
 //     final ImagePicker picker = ImagePicker();
@@ -79,20 +75,16 @@ class ChatBoxController extends AppBaseController {
     }
   }
 
-  Future<String> getResponseMessage({
-    required String messages,
-    required List<File?> imageFiles,
-  }) async {
+  Future<String> getResponseMessage(Message message) async {
     // Đọc các file ảnh thành byte array
     final imageBytes = await Future.wait(
-      imageFiles
+      message.images
           .map((file) async => file != null ? await file.readAsBytes() : null),
     );
 
-    // Tạo content từ message và imageBytes
     final content = [
       Content.multi([
-        TextPart(messages.t),
+        TextPart(message.text),
         ...imageBytes.where((bytes) => bytes != null).map(
               (bytes) => DataPart('image/jpeg', bytes!),
             ),
@@ -101,6 +93,21 @@ class ChatBoxController extends AppBaseController {
 
     // Gọi API generateContent
     final response = await model.generateContent(content);
-    return response.text??"not found";
+    return response.text ?? "not found";
+  }
+
+  void sendQuestion() async {
+    final question = textCtrl.text;
+    final message =
+        Message(text: question, images: List.from(imageFiles), isMe: true);
+    messageList.add(message);
+    textCtrl.clear();
+
+    showLoading();
+    final response = await getResponseMessage(message);
+    hideLoading();
+    messageList.add(Message(text: response, images: [], isMe: false));
+    // messageList.refresh();
+    imageFiles.clear();
   }
 }

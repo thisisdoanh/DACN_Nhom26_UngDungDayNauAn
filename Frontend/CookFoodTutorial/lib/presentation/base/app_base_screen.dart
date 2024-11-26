@@ -30,7 +30,9 @@ abstract class AppBaseScreen<T extends AppBaseController> extends GetView<T> {
                 height: 40.sp,
                 width: 40.sp,
                 child: const Center(
-                  child: CupertinoActivityIndicator(),
+                  child: CupertinoActivityIndicator(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             )
