@@ -19,6 +19,8 @@ class FoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: double.infinity,
+      width: double.infinity,
       padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
       decoration: BoxDecoration(
         color: AppColors.primaryGray.withOpacity(0.4),
@@ -26,6 +28,7 @@ class FoodCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           _buildFavourAndImage(),
           Gap(8.h),
@@ -49,7 +52,7 @@ class FoodCard extends StatelessWidget {
         color: AppColors.primaryColor,
       ),
       itemCount: 5,
-      itemSize: 20.0,
+      itemSize: AppDimens.btnSmall,
       direction: Axis.horizontal,
     );
   }
@@ -62,10 +65,13 @@ class FoodCard extends StatelessWidget {
           color: timerColor ?? AppColors.primaryColor,
         ),
         Gap(4.w),
-        UtilWidget.buildText(
-          food.time,
-          textColor: timerColor ?? AppColors.primaryColor,
-          fontSize: AppDimens.fontSmall,
+        Expanded(
+          child: UtilWidget.buildText(
+            textAlign: TextAlign.left,
+            food.time,
+            textColor: timerColor ?? AppColors.primaryColor,
+            fontSize: AppDimens.fontSmall,
+          ),
         ),
       ],
     );
@@ -82,42 +88,46 @@ class FoodCard extends StatelessWidget {
   Widget _buildMealType() {
     return UtilWidget.buildText(
       food.mealType,
-      fontSize: AppDimens.fontSmall,
+      fontSize: AppDimens.font14,
       textColor: const Color.fromARGB(255, 0, 157, 255),
     );
   }
 
   Widget _buildFavourAndImage() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: InkWell(
-              onTap: food.isFavorite.toggle,
-              child: Obx(
-                () => Icon(
-                  food.isFavorite.value
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                  color: AppColors.primaryColor,
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 4,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: InkWell(
+                onTap: food.isFavorite.toggle,
+                child: Obx(
+                  () => Icon(
+                    food.isFavorite.value
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: AppColors.primaryColor,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(AppDimens.radius8),
-            child: Image.network(
-              food.imageUrl,
-              fit: BoxFit.cover,
+          Expanded(
+            flex: 6,
+            child: ClipOval(
+              //borderRadius: BorderRadius.circular(AppDimens.radius8),
+              child: Image.network(
+                food.imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

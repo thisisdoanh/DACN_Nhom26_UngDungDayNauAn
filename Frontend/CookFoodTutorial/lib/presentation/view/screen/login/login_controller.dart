@@ -15,6 +15,7 @@ class LoginController extends AppBaseController {
   final TextEditingController passwordTextEditingController = TextEditingController();
   RxString firstErrorText = "".obs;
   RxString secondErrorText = "".obs;
+
   void onPressLogin() {
     AppLog.info("onPressLogin");
     // _validate();

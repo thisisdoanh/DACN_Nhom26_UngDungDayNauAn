@@ -85,7 +85,7 @@ class AppDimens {
   static const double heightBoxSearchMin = 50;
 
   static const double sizeLineChart = 4.0;
-  static const double sizeIconLineChart = 42.0;
+  static const double sizeTextField = 44;
   static const double sizeIconBorderWidth = 2.0;
 
   // radiusBorder

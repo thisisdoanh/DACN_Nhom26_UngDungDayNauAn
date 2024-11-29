@@ -76,6 +76,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           StringConstants.whatWantToCook,
           fontWeight: FontWeight.w700,
           fontSize: 35.sp,
+          maxLines: 2,
         ),
         Gap(10.h),
         _buildSearchBar(),
@@ -84,7 +85,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
   }
 
   Widget _buildHighRatingList() {
-    final double itemWidth = Get.width / 2.2;
+    final double itemWidth = Get.width / 2.5;
     return Column(
       children: [
         Gap(10.h),
@@ -168,7 +169,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               height: 8.sp,
             );
           },
-          itemBuilder: (context, index) => FoodSuggestItemSmall(food: FoodModel.foodTest),
+          itemBuilder: (context, index) =>
+              FoodSuggestItemSmall(food: FoodModel.foodTest),
         ),
         Gap(20.h),
       ],
@@ -193,6 +195,10 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           width: 1,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
+        suffixIcon: const Icon(
+          Icons.search,
+          color: AppColors.white,
+        ),
       ),
     );
   }
@@ -242,7 +248,10 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     );
   }
 
-  _buildItemDrawer({required Function() function, required String icon, required String title}) {
+  _buildItemDrawer(
+      {required Function() function,
+      required String icon,
+      required String title}) {
     return AppTouchable(
       onPressed: function,
       child: Row(

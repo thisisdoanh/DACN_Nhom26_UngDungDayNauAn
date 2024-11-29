@@ -140,16 +140,6 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                     borderRadius: BorderRadius.circular(20.sp),
                     width: 344.w,
                     height: 56.h,
-// <<<<<<< HEAD
-//                     border: Border.all(
-//                       color: AppColors.white,
-//                       width: 2.sp,
-//                     ),
-//                     child: Text(
-//                       StringConstants.login.tr,
-//                       style:
-//                           AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
-// =======
                     child: Text(
                       StringConstants.login.tr,
                       style:

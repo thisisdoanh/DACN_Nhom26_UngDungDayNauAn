@@ -30,18 +30,6 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
         ],
       ),
     );
-    //  SafeArea(
-    //   top: false,
-    //   child: Scaffold(
-    //     backgroundColor: AppColors.primaryText,
-    //     body: Column(
-    //       children: [
-    //         _buildAppBar(),
-    //         _buildBody(),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 
   Widget _buildBody() {

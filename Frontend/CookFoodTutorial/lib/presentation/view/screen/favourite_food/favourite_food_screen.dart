@@ -71,7 +71,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
 
   Widget _buildIconFilter() {
     return Container(
-      height: AppDimens.sizeIconLineChart,
+      height: AppDimens.sizeTextField,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
@@ -92,6 +92,10 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
         border: Border.all(
           color: AppColors.white,
           width: 1,
+        ),
+        suffixIcon: const Icon(
+          Icons.search,
+          color: AppColors.white,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
       ),

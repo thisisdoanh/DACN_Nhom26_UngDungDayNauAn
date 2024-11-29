@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 
 import '../app_view.dart';
 
@@ -50,6 +51,7 @@ class AppTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          height: AppDimens.sizeTextField,
           decoration: BoxDecoration(
             color: backgroundColor ?? AppColors.white,
             borderRadius: borderRadius,

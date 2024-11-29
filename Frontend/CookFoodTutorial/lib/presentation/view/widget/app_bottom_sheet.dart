@@ -48,12 +48,10 @@ class SDSBottomSheet extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Container(
+          height: miniSizeHeight ?? Get.height / 2,
+          width: AppDimens.bottomSheetMaxWidth(maxWidth: maxWidth),
           padding: EdgeInsets.symmetric(
             horizontal: paddingPage ?? AppDimens.paddingVerySmall,
-          ),
-          constraints: BoxConstraints(
-            maxWidth: AppDimens.bottomSheetMaxWidth(maxWidth: maxWidth),
-            maxHeight: miniSizeHeight ?? Get.height / 2,
           ),
           decoration: BoxDecoration(
             color: backgroundColor ?? AppColors.black,
