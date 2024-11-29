@@ -1,29 +1,16 @@
 import 'dart:io';
 
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
 class Message {
-  final String text;
+  final Rx<String> text;
   final List<File?> images;
   final bool isMe;
 
   Message({
-    required this.text,
+    required String initialText,
     required this.images,
     this.isMe = false,
-  });
-
-    // copyWith method
-   Message copyWith({
-    String? text,
-    List<File?>? images,
-    bool? isMe,
-  }) {
-    return Message(
-      text: text ??
-          this.text, 
-      images: images ??
-          this.images, 
-      isMe: isMe ??
-          this.isMe, 
-    );
-  }
+  }) : text = initialText.obs; 
 }
+

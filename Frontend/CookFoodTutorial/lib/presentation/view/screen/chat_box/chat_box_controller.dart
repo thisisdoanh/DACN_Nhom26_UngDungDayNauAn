@@ -6,13 +6,13 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 import 'package:tutorial/presentation/view/screen/chat_box/message_model.dart';
-import 'package:tutorial/presentation/view/screen/chat_box/resoure.dart';
 
 class ChatBoxController extends AppBaseController {
   late GenerativeModel model;
   final RxList<File?> imageFiles = RxList<File?>();
   final TextEditingController textCtrl = TextEditingController();
   final RxList<Message> messageList = RxList<Message>();
+  final scrollController = ScrollController();
 
   @override
   onInit() async {
@@ -22,37 +22,11 @@ class ChatBoxController extends AppBaseController {
       model: 'gemini-1.5-flash-latest',
       apiKey: apiKey,
     );
-  }
-//   Future pickImage()async{
-//     final ImagePicker picker = ImagePicker();
-// // // Pick an image.
-// // final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-// // Capture a photo.
-// final XFile? photo = await picker.pickImage(source: ImageSource.camera);
-// // Pick multiple images.
-// //final List<XFile> medias = await picker.pickMultipleMedia();
-
-//   }
-
-  void getResponseMessagee() async {
-    final prompt = 'What do you see?';
-
-    final (catBytes, sconeBytes) = await (
-      readResource('cat.jpg'),
-      readResource('scones.jpg'),
-    ).wait;
-    final content = [
-      Content.multi([
-        TextPart(prompt),
-        // The only accepted mime types are image/*.
-        DataPart('image/jpeg', catBytes),
-        DataPart('image/jpeg', sconeBytes),
-      ])
-    ];
-
-    final response = await model.generateContent(content);
-    print('Response:');
-    print(response.text);
+    messageList.listen((_) async {
+      if (scrollController.hasClients) {
+        await scrollToBottom();
+      }
+    });
   }
 
   Future<void> pickImage({
@@ -84,30 +58,49 @@ class ChatBoxController extends AppBaseController {
 
     final content = [
       Content.multi([
-        TextPart(message.text),
+        TextPart(message.text.value),
         ...imageBytes.where((bytes) => bytes != null).map(
               (bytes) => DataPart('image/jpeg', bytes!),
             ),
       ]),
     ];
+    try {
+      final response = await model.generateContent(content);
+      return response.text?.trim() ?? "not found";
+    } catch (e) {
+      return "not found..";
+    }
+  }
 
-    // Gọi API generateContent
-    final response = await model.generateContent(content);
-    return response.text ?? "not found";
+  //hàm cuộn listView XUống dưới
+  Future<void> scrollToBottom() async {
+    if (scrollController.hasClients) {
+      await scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   void sendQuestion() async {
+    //await scrollToBottom();
     final question = textCtrl.text;
-    final message =
-        Message(text: question, images: List.from(imageFiles), isMe: true);
+    final message = Message(
+        initialText: question, images: List.from(imageFiles), isMe: true);
     messageList.add(message);
-    textCtrl.clear();
 
-    showLoading();
-    final response = await getResponseMessage(message);
-    hideLoading();
-    messageList.add(Message(text: response, images: [], isMe: false));
-    // messageList.refresh();
+    textCtrl.clear();
     imageFiles.clear();
+
+    final messageResponse = Message(initialText: '', images: [], isMe: false);
+    messageList.add(messageResponse);
+
+    isShowLoading.value = true;
+    final response = await getResponseMessage(message);
+    isShowLoading.value = false;
+
+    messageResponse.text.value = response;
+   // await scrollToBottom();
   }
 }

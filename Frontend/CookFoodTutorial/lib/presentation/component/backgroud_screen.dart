@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/presentation/view/resources/app_color.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
+import 'package:tutorial/presentation/view/screen/chat_box/chat_box_controller.dart';
 import 'package:tutorial/presentation/view/screen/chat_box/chat_box_screen.dart';
 import 'package:tutorial/presentation/view/widget/app_bottom_sheet.dart';
 import 'package:tutorial/presentation/view/widget/app_image_widget.dart';
