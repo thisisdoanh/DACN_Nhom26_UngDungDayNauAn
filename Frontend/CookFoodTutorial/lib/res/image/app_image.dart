@@ -11,6 +11,9 @@ class AppImage {
   static const String icUser = '${_internalImagePathSvg}ic_user.svg';
   static const String icNoti = '${_internalImagePathSvg}ic_noti.svg';
   static const String icMenu = '${_internalImagePathSvg}ic_menu.svg';
+  static const String icFavorite = '${_internalImagePathSvg}ic_favorite.svg';
+  static const String icHistory = '${_internalImagePathSvg}ic_history.svg';
+  static const String icHome = '${_internalImagePathSvg}ic_home.svg';
 
   ///PNG
   static const String imgLogo = '${_internalImagePathPng}img_logo.png';
