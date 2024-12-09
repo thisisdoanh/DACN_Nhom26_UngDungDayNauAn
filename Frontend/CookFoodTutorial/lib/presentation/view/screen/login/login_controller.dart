@@ -6,6 +6,7 @@ import 'package:tutorial/data/model/user_token_model.dart';
 import 'package:tutorial/data/provider/api_service.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
+import 'package:tutorial/presentation/view/widget/dialog/show_app_dialog.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
 import '../../../../common/utils/app_utils.dart';
@@ -18,13 +19,33 @@ class LoginController extends AppBaseController {
   RxString firstErrorText = "".obs;
   RxString secondErrorText = "".obs;
 
+  @override
+  void onReady() async {
+    appController.listCategory.value = await ApiService.getCategories();
+    appController.listRecipe.value = await ApiService.getRecipes();
+
+    super.onReady();
+  }
+
   void onPressLogin() async {
     AppLog.info("onPressLogin");
     if (_validate()) {
+      showLoading();
       UserToken? userToken = await ApiService.getVerifyAccount(
         mail: emailTextEditingController.text.trim(),
         password: passwordTextEditingController.text,
       );
+      hideLoading();
+
+      if (userToken == null || userToken.data == null) {
+        if (context.mounted) {
+          showAppDialog(
+            context,
+            "Lỗi",
+            "Tài khoản hoặc mật khẩu không đúng, vui lòng thử lại sau",
+          );
+        }
+      }
       AppLog.warning(userToken?.toJson());
     }
     // Get.offAllNamed(AppRoute.homeScreen);

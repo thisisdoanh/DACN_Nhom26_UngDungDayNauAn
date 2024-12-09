@@ -117,7 +117,10 @@ class ApiClient {
 
       if (_isSuccessful(response?.statusCode ?? -1)) {
         if (isEncrypt) {
-          dynamic responseData = json.decode('{${response?.data}}' ?? '');
+          String rawData = response?.data ?? "";
+          String rawDataToDecode = rawData[0] == "{" || rawData.isEmpty ? rawData : "{${response?.data}}";
+
+          dynamic responseData = json.decode(rawDataToDecode);
           Map<String, dynamic> dataOut = {
             'code': 1000,
             'data': responseData,

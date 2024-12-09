@@ -26,11 +26,11 @@ abstract class AppBaseScreen<T extends AppBaseController> extends GetView<T> {
       () => controller.isShowLoading.value
           ? Scaffold(
               backgroundColor: Colors.black.withOpacity(0.3),
-              body: SizedBox(
-                height: 40.sp,
-                width: 40.sp,
-                child: const Center(
-                  child: CupertinoActivityIndicator(
+              body: Center(
+                child: SizedBox(
+                  height: 60.sp,
+                  width: 60.sp,
+                  child: const CupertinoActivityIndicator(
                     color: Colors.white,
                   ),
                 ),

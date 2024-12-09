@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:tutorial/data/model/category_response_model.dart';
+import 'package:tutorial/data/model/recipe_response_model.dart';
+
 import '../../common/utils/app_utils.dart';
 import '../model/base_response.dart';
 import '../model/user_token_model.dart';
@@ -14,8 +17,8 @@ class ApiService {
         endPoint: ApiConstant.epAuthToken,
         method: ApiClient.post,
         data: jsonEncode({
-          "email": "chien.haui0807@gmail.com",
-          "password": "123456789",
+          "email": mail,
+          "password": password,
         }));
 
     if (response.result == true) {
@@ -26,6 +29,40 @@ class ApiService {
       showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
 
       return Future.value(null);
+    }
+  }
+
+  static Future<List<CategoryModel>> getCategories() async {
+    BaseResponse response = await ApiClient.instance.request(
+      endPoint: ApiConstant.epCategories,
+      method: ApiClient.get,
+    );
+
+    if (response.result == true) {
+      CategoryResponse categoryResponse = CategoryResponse.fromMap(response.data);
+
+      return categoryResponse.data ?? [];
+    } else {
+      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+
+      return Future.value([]);
+    }
+  }
+
+  static Future<List<RecipeModel>> getRecipes() async {
+    BaseResponse response = await ApiClient.instance.request(
+      endPoint: ApiConstant.epFindAllRecipe,
+      method: ApiClient.get,
+    );
+
+    if (response.result == true) {
+      RecipeResponse recipeResponse = RecipeResponse.fromMap(response.data);
+
+      return recipeResponse.data?.items ?? [];
+    } else {
+      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+
+      return Future.value([]);
     }
   }
 }

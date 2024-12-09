@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tutorial/data/model/recipe_response_model.dart';
+
+import '../../data/model/category_response_model.dart';
 
 class AppController extends SuperController {
+  RxList<CategoryModel> listCategory = RxList();
+  RxList<RecipeModel> listRecipe = RxList();
+
   @override
   void onInit() {
     // TODO: implement onInit
