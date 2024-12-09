@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tutorial/common/utils/app_log.dart';
+import 'package:tutorial/data/model/user_token_model.dart';
+import 'package:tutorial/data/provider/api_service.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/res/string/app_string.dart';
@@ -16,10 +18,16 @@ class LoginController extends AppBaseController {
   RxString firstErrorText = "".obs;
   RxString secondErrorText = "".obs;
 
-  void onPressLogin() {
+  void onPressLogin() async {
     AppLog.info("onPressLogin");
-    // _validate();
-    Get.offAllNamed(AppRoute.homeScreen);
+    if (_validate()) {
+      UserToken? userToken = await ApiService.getVerifyAccount(
+        mail: emailTextEditingController.text.trim(),
+        password: passwordTextEditingController.text,
+      );
+      AppLog.warning(userToken?.toJson());
+    }
+    // Get.offAllNamed(AppRoute.homeScreen);
   }
 
   void onPressShowPassword() {
