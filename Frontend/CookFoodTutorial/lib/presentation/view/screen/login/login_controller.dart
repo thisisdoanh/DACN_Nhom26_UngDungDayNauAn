@@ -14,15 +14,17 @@ import '../../../../common/utils/app_utils.dart';
 class LoginController extends AppBaseController {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   RxBool isHidePass = true.obs;
-  final TextEditingController emailTextEditingController = TextEditingController();
-  final TextEditingController passwordTextEditingController = TextEditingController();
+  final TextEditingController emailTextEditingController =
+      TextEditingController();
+  final TextEditingController passwordTextEditingController =
+      TextEditingController();
   RxString firstErrorText = "".obs;
   RxString secondErrorText = "".obs;
 
   @override
   void onReady() async {
-    appController.listCategory.value = await ApiService.getCategories();
-    appController.listRecipe.value = await ApiService.getRecipes();
+  //  appController.listCategory.value = await ApiService.getCategories();
+    //appController.listRecipe.value = await ApiService.getRecipes();
 
     super.onReady();
   }
@@ -48,7 +50,6 @@ class LoginController extends AppBaseController {
       } else {
         Get.offAllNamed(AppRoute.homeScreen);
       }
-      AppLog.warning(userToken?.toJson());
     }
   }
 
@@ -84,9 +85,10 @@ class LoginController extends AppBaseController {
   }
 
   bool _validate() {
-    firstErrorText.value = validateEmailAndReturnValue(emailTextEditingController.text.trim());
-    secondErrorText.value =
-        validateValueNotEmpty(passwordTextEditingController.text.trim(), StringConstants.password.tr);
+    firstErrorText.value =
+        validateEmailAndReturnValue(emailTextEditingController.text.trim());
+    secondErrorText.value = validateValueNotEmpty(
+        passwordTextEditingController.text.trim(), StringConstants.password.tr);
 
     if (firstErrorText.value.isNotEmpty || secondErrorText.value.isNotEmpty) {
       return false;

@@ -13,39 +13,45 @@ class FoodCard extends StatelessWidget {
   final IconData? timerIcon;
   final Color? timerColor;
   final RecipeModel recipeModel;
+  final Function()? onTap;
 
   const FoodCard({
     super.key,
     this.timerIcon,
     this.timerColor,
     required this.recipeModel,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    AppLog.info("${recipeModel.recipeName}${recipeModel.imageUrl}${recipeModel.image}");
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
-      decoration: BoxDecoration(
-        color: AppColors.primaryGray.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(AppDimens.radius16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildFavourAndImage(),
-          Gap(8.h),
-          _buildMealType(),
-          Gap(8.h),
-          _buildFoodName(),
-          Gap(8.h),
-          _buildTime(),
-          Gap(8.h),
-          _buildRateFood(),
-        ],
+    AppLog.info(
+        "${recipeModel.recipeName}${recipeModel.imageUrl}${recipeModel.image}");
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
+        decoration: BoxDecoration(
+          color: AppColors.primaryGray.withOpacity(0.4),
+          borderRadius: BorderRadius.circular(AppDimens.radius16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildFavourAndImage(),
+            Gap(8.h),
+            _buildMealType(),
+            Gap(8.h),
+            _buildFoodName(),
+            Gap(8.h),
+            _buildTime(),
+            Gap(8.h),
+            _buildRateFood(),
+          ],
+        ),
       ),
     );
   }

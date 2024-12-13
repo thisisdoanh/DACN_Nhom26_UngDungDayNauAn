@@ -14,6 +14,7 @@ import 'package:tutorial/presentation/view/resources/app_text_theme.dart';
 import 'package:tutorial/presentation/view/screen/food_detail/food_detail_controller.dart';
 import 'package:tutorial/presentation/view/screen/food_detail/ui/instruction_screen.dart';
 import 'package:tutorial/presentation/view/screen/food_detail/ui/rating_screen.dart';
+import 'package:tutorial/presentation/view/widget/app_image_widget.dart';
 import 'package:tutorial/presentation/view/widget/app_outline_button.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
@@ -23,11 +24,16 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
   @override
   Widget buildWidget() {
     return BackGroundShare(
-      body: Column(
-        children: [
-          _buildAppBar(),
-          _buildBody(),
-        ],
+      body: Obx(
+        () => Visibility(
+          visible: !controller.isShowLoading.value,
+          child: Column(
+            children: [
+              _buildAppBar(),
+              _buildBody(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -41,9 +47,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildFoodType(),
                   _buildFoodNameAndFavour(),
-                  _buildFoodRate(),
                   _buildTimeAndImage(),
                   _buildDivider(),
                   _buildIngredient(),
@@ -92,23 +96,31 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
           StringConstants.ingredient.tr,
           fontSize: AppDimens.fontSmall,
         ),
-        Gap(8.h),
-        Row(
-          children: [
-            ClipOval(
-              child: Container(
-                height: 4,
-                width: 4,
-                color: AppColors.primaryColor,
-              ),
-            ),
-            Gap(8.w),
-            UtilWidget.buildText(
-              "StringConstants.ingredient.tr",
-              fontSize: AppDimens.font14,
-            ),
-          ],
-        ),
+        Gap(16.h),
+        ListView.builder(
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: controller.recipeModel.ingredients?.length,
+            itemBuilder: (context, index) {
+              final ingreduent = controller.recipeModel.ingredients?[index];
+              return Row(
+                children: [
+                  ClipOval(
+                    child: Container(
+                      height: 4,
+                      width: 4,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                  Gap(8.w),
+                  UtilWidget.buildText(
+                    "${ingreduent?.name ?? ''}${(ingreduent?.amount?.trim().isEmpty ?? true) ? '' : ' : ${ingreduent?.amount}'}",
+                    fontSize: AppDimens.font14,
+                  ),
+                ],
+              ).paddingOnly(bottom: AppDimens.paddingLittleSmall);
+            })
       ],
     );
   }
@@ -118,7 +130,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
 
   Widget _buildFoodType() {
     return UtilWidget.buildText(
-      FoodModel.foodTest.mealType,
+      controller.recipeModel.category?.name ?? '',
       fontSize: AppDimens.font14,
       textColor: AppColors.textNote,
     );
@@ -130,19 +142,15 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //timer
+            _buildFoodType(),
+            _buildFoodRate(),
             _buildRowCustom(
               Icons.timer_outlined,
-              FoodModel.foodTest.time,
-            ),
-            Gap(16.h),
-            //portion
-            _buildRowCustom(
-              Icons.food_bank_outlined,
-              '4 khẩu phần ăn',
+              controller.recipeModel.cookTime ?? '',
             ),
           ],
         ),
+        const Spacer(),
         _buildFoodImage(),
       ],
     );
@@ -166,19 +174,27 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
   }
 
   Widget _buildFoodImage() {
-    return Expanded(
-      child: ClipOval(
-        child: Image.network(
-          FoodModel.foodTest.imageUrl,
+    return Container(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+      clipBehavior: Clip.hardEdge,
+      child: ClipRRect(
+        child: AppImageWidget.network(
+          path: controller.recipeModel.imageUrl ??
+              controller.recipeModel.image ??
+              "",
           fit: BoxFit.cover,
+          width: Get.width / 2,
+          height: Get.width / 2,
         ),
-      ).paddingOnly(left: AppDimens.paddingLarge),
+      ),
     );
   }
 
   Widget _buildFoodRate() {
     return RatingBarIndicator(
-      rating: FoodModel.foodTest.rating,
+      rating: controller.recipeModel.rating ?? 4,
       itemBuilder: (context, index) => const Icon(
         Icons.star,
         color: AppColors.primaryColor,
@@ -186,7 +202,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
       itemCount: 5,
       itemSize: 20.0,
       direction: Axis.horizontal,
-    );
+    ).paddingSymmetric(vertical: 12);
   }
 
   Widget _buildFoodNameAndFavour() {
@@ -194,7 +210,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         UtilWidget.buildText(
-          FoodModel.foodTest.foodName,
+          controller.recipeModel.recipeName ?? '',
           fontSize: AppDimens.fontMedium,
         ),
         Obx(

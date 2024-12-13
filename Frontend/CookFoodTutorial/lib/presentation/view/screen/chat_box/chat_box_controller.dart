@@ -84,16 +84,21 @@ class ChatBoxController extends AppBaseController {
   }
 
   void sendQuestion() async {
-    //await scrollToBottom();
+    await scrollToBottom();
     final question = textCtrl.text;
     final message = Message(
-        initialText: question, images: List.from(imageFiles), isMe: true);
+        id: DateTime.now().millisecondsSinceEpoch,
+        initialText: question,
+        images: List.from(imageFiles),
+        isMe: true);
     messageList.add(message);
-
     textCtrl.clear();
     imageFiles.clear();
-
-    final messageResponse = Message(initialText: '', images: [], isMe: false);
+    final messageResponse = Message(
+        id: DateTime.now().millisecondsSinceEpoch,
+        initialText: '',
+        images: [],
+        isMe: false);
     messageList.add(messageResponse);
 
     isShowLoading.value = true;
@@ -101,6 +106,5 @@ class ChatBoxController extends AppBaseController {
     isShowLoading.value = false;
 
     messageResponse.text.value = response;
-   // await scrollToBottom();
   }
 }

@@ -99,7 +99,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               fontWeight: FontWeight.w700,
             ),
             InkWell(
-              onTap: () => Get.toNamed(AppRoute.favouriteFoodSreen),
+              onTap: () => controller.onPressFavorite(),
               child: UtilWidget.buildText(
                 StringConstants.seeAll,
                 textColor: AppColors.primaryColor,
@@ -150,7 +150,9 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               fontWeight: FontWeight.w700,
             ),
             InkWell(
-              onTap: () => Get.toNamed(AppRoute.suggestFoodSreen),
+              onTap: () => Get.toNamed(
+                AppRoute.suggestFoodSreen,
+              ),
               child: UtilWidget.buildText(
                 StringConstants.seeAll,
                 textColor: AppColors.primaryColor,
@@ -172,7 +174,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                 height: 8.sp,
               );
             },
-            itemBuilder: (context, index) => FoodSuggestItemSmall(recipeModel: controller.listRandom[index]),
+            itemBuilder: (context, index) =>
+                FoodSuggestItemSmall(recipeModel: controller.listRandom[index]),
           ),
         ),
         Gap(20.h),
@@ -251,7 +254,10 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     );
   }
 
-  _buildItemDrawer({required Function() function, required String icon, required String title}) {
+  _buildItemDrawer(
+      {required Function() function,
+      required String icon,
+      required String title}) {
     return AppTouchable(
       onPressed: function,
       child: Row(
@@ -279,57 +285,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
   @override
   Widget buildWidget() {
     return BackGroundShare(
-      drawer: Builder(
-        builder: (context) => Drawer(
-          width: Get.width,
-          backgroundColor: AppColors.black,
-          child: Stack(
-            children: [
-              AppImageWidget.asset(
-                path: AppImage.bgDrawer,
-                width: Get.width,
-                height: Get.height,
-                fit: BoxFit.cover,
-              ),
-              Positioned.fill(
-                child: ColoredBox(
-                  color: AppColors.black.withOpacity(0.3),
-                ),
-              ),
-              AppScrollView(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Gap(60.h),
-                    _buildUserInfo(context),
-                    Gap(30.h),
-                    _buildItemDrawer(
-                      function: () => controller.onPressHome(),
-                      icon: AppImage.icHome,
-                      title: StringConstants.home.tr,
-                    ),
-                    Gap(30.h),
-                    _buildItemDrawer(
-                      function: () => controller.onPressFavorite(),
-                      icon: AppImage.icFavorite,
-                      title: StringConstants.favorite.tr,
-                    ),
-                    Gap(30.h),
-                    _buildItemDrawer(
-                      function: () => controller.onPressHistory(),
-                      icon: AppImage.icHistory,
-                      title: StringConstants.history.tr,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      hasChatBox: true,
+      drawer: _buildDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -346,6 +303,60 @@ class HomeScreen extends AppBaseScreen<HomeController> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Builder _buildDrawer() {
+    return Builder(
+      builder: (context) => Drawer(
+        width: Get.width,
+        backgroundColor: AppColors.black,
+        child: Stack(
+          children: [
+            AppImageWidget.asset(
+              path: AppImage.bgDrawer,
+              width: Get.width,
+              height: Get.height,
+              fit: BoxFit.cover,
+            ),
+            Positioned.fill(
+              child: ColoredBox(
+                color: AppColors.black.withOpacity(0.3),
+              ),
+            ),
+            AppScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Gap(60.h),
+                  _buildUserInfo(context),
+                  Gap(30.h),
+                  _buildItemDrawer(
+                    function: () => controller.onPressHome(),
+                    icon: AppImage.icHome,
+                    title: StringConstants.home.tr,
+                  ),
+                  Gap(30.h),
+                  _buildItemDrawer(
+                    function: () => controller.onPressFavorite(),
+                    icon: AppImage.icFavorite,
+                    title: StringConstants.favorite.tr,
+                  ),
+                  Gap(30.h),
+                  _buildItemDrawer(
+                    function: () => controller.onPressHistory(),
+                    icon: AppImage.icHistory,
+                    title: StringConstants.history.tr,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

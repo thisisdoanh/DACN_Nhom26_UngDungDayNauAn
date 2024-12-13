@@ -28,16 +28,6 @@ class BackGroundShare extends StatelessWidget {
         body: Container(
           padding: padding ?? const EdgeInsets.symmetric(horizontal: AppDimens.paddingMedium),
           color: AppColors.black,
-          // decoration: const BoxDecoration(
-          //   gradient: LinearGradient(
-          //     begin: Alignment.topCenter,
-          //     end: Alignment.bottomCenter,
-          //     colors: [
-          //       AppColors.primaryText,
-          //       AppColors.dsGray3,
-          //     ],
-          //   ),
-          // ),
           child: body,
         ),
         floatingActionButton: hasChatBox
@@ -45,7 +35,7 @@ class BackGroundShare extends StatelessWidget {
                 onTap: () {
                   Get.bottomSheet(
                     SDSBottomSheet(
-                      title: 'Chat With AI',
+                      title: 'Chat với AI',
                       body: ChatBoxScreen(),
                       miniSizeHeight: Get.height * 0.7,
                     ),

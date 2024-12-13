@@ -17,10 +17,8 @@ class ChatBoxScreen extends GetView<ChatBoxController> {
   final controller = Get.put(ChatBoxController());
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      //if (controller.scrollController.hasClients) {
-      controller.scrollToBottom();
-      //}
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
+     await controller.scrollToBottom();
     });
     return Center(
       child: Obx(
@@ -56,19 +54,22 @@ class ChatBoxScreen extends GetView<ChatBoxController> {
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.grey.withOpacity(0.2),
                   ),
-                  child: Column(
-                    crossAxisAlignment: message.isMe
-                        ? CrossAxisAlignment.end
-                        : CrossAxisAlignment.start,
-                    children: [
-                      message.images.isEmpty
-                          ? const SizedBox.shrink()
-                          : _buildListAskedQuestion(message),
-                      message.text.value.isNotEmpty || message.images.isNotEmpty
-                          ? _buildResponseView(message)
-                          : _buildResponseLoadding()
-                    ],
-                  ).paddingSymmetric(horizontal: 16, vertical: 8),
+                  child: Obx(
+                    () => Column(
+                      crossAxisAlignment: message.isMe
+                          ? CrossAxisAlignment.end
+                          : CrossAxisAlignment.start,
+                      children: [
+                        message.images.isEmpty
+                            ? const SizedBox.shrink()
+                            : _buildListAskedQuestion(message),
+                        message.text.value.isNotEmpty ||
+                                message.images.isNotEmpty
+                            ? _buildResponseView(message)
+                            : _buildResponseLoadding()
+                      ],
+                    ).paddingSymmetric(horizontal: 16, vertical: 8),
+                  ),
                 ).paddingOnly(
                   top: 16,
                   right: message.isMe ? 0 : 32,
@@ -150,8 +151,9 @@ class ChatBoxScreen extends GetView<ChatBoxController> {
   Widget _buildIconBotton() {
     return IconButton(
       onPressed: () {
-        if (controller.textCtrl.text.isEmpty && controller.imageFiles.isEmpty)
+        if (controller.textCtrl.text.isEmpty && controller.imageFiles.isEmpty) {
           return;
+        }
         controller.sendQuestion();
       },
       icon: const Icon(

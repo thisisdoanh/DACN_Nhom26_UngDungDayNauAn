@@ -17,12 +17,16 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
   Widget buildWidget() {
     final double itemWidth = Get.width / 2;
     const double itemHeight = 250;
-    return BackGroundShare(
-      body: Column(
-        children: [
-          _buildAppBar(),
-          _buildBody(itemWidth, itemHeight),
-        ],
+    return Obx(
+      () => BackGroundShare(
+        body: controller.isShowLoading.value
+            ? Container()
+            : Column(
+                children: [
+                  _buildAppBar(),
+                  _buildBody(itemWidth, itemHeight),
+                ],
+              ),
       ),
     );
   }

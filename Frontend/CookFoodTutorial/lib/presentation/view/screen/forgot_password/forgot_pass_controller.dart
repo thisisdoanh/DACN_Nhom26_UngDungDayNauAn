@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/common/utils/app_utils.dart';
+import 'package:tutorial/data/provider/api_service.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/screen/forgot_password/ui/input_otp_screen.dart';
@@ -61,9 +62,15 @@ class ForgotPassController extends AppBaseController {
     return isValid;
   }
 
-  void forgotPass() {
+  void forgotPass() async {
     if (_validateEmail()) {
-      Get.to(const InputOtpScreen());
+      showLoading();
+      final isSuccess =
+          await ApiService.getOtp(emailTextEditingController.text.trim());
+      hideLoading();
+      if (isSuccess) {
+        Get.to(const InputOtpScreen());
+      }
     }
   }
 

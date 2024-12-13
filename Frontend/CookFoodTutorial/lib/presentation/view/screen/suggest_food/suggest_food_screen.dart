@@ -15,12 +15,16 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   @override
   Widget buildWidget() {
-    return BackGroundShare(
-      body: Column(
-        children: [
-          _buildAppBar(),
-          _buildBody(),
-        ],
+    return Obx(
+      () => BackGroundShare(
+        body: controller.isShowLoading.value
+            ? Container()
+            : Column(
+                children: [
+                  _buildAppBar(),
+                  _buildBody(),
+                ],
+              ),
       ),
     );
   }
@@ -48,11 +52,11 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
         shrinkWrap: true,
         itemCount: controller.appController.listRecipe.length,
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () => Get.toNamed(AppRoute.foodDetailScreen),
-            child: FoodCard(
-              recipeModel: controller.appController.listRecipe[index],
-            ),
+          final food = controller.appController.listRecipe[index];
+          return FoodCard(
+            recipeModel: food,
+            onTap: () =>
+                Get.toNamed(AppRoute.foodDetailScreen, arguments: food),
           );
         },
       ),
