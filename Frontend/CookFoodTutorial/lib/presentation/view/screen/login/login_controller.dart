@@ -22,7 +22,7 @@ class LoginController extends AppBaseController {
   @override
   void onReady() async {
     appController.listCategory.value = await ApiService.getCategories();
-    // appController.listRecipe.value = await ApiService.getRecipes();
+    appController.listRecipe.value = await ApiService.getRecipes();
 
     super.onReady();
   }
