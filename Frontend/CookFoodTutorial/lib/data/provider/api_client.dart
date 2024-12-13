@@ -118,6 +118,7 @@ class ApiClient {
       if (_isSuccessful(response?.statusCode ?? -1)) {
         if (isEncrypt) {
           String rawData = response?.data ?? "";
+
           String rawDataToDecode = rawData[0] == "{" || rawData.isEmpty ? rawData : "{${response?.data}}";
 
           dynamic responseData = json.decode(rawDataToDecode);

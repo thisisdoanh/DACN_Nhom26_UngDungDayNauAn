@@ -4,6 +4,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tutorial/common/utils/app_log.dart';
 
 import '../resources/app_color.dart';
 
@@ -93,8 +94,7 @@ class AppImageWidget extends StatelessWidget {
         fit: fit ?? BoxFit.contain,
         width: width,
         height: height,
-        colorFilter:
-            color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
+        colorFilter: color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
       );
     }
     return SvgPicture.network(
@@ -122,6 +122,7 @@ class AppImageWidget extends StatelessWidget {
       height: height,
       placeholder: (context, url) => placeholder ?? _placeholder,
       errorWidget: (context, url, error) {
+        AppLog.error(url, tag: "errorWidget");
         return errorWidget ?? _errorWidget;
       },
       cacheManager: CacheManager(

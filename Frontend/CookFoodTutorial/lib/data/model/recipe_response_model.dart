@@ -61,6 +61,7 @@ class RecipeModel {
   List<Instruction>? instructions;
   Category? category;
   User? user;
+  double? rating;
   String? image;
   String? imageUrl;
 
@@ -75,6 +76,7 @@ class RecipeModel {
     this.user,
     this.image,
     this.imageUrl,
+    this.rating,
   });
 
   factory RecipeModel.fromJson(String str) => RecipeModel.fromMap(json.decode(str));
@@ -96,6 +98,7 @@ class RecipeModel {
         user: json["user"] == null ? null : User.fromMap(json["user"]),
         image: json["image"],
         imageUrl: json["imageUrl"],
+        rating: json["rating"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -109,6 +112,7 @@ class RecipeModel {
         "user": user?.toMap(),
         "image": image,
         "imageUrl": imageUrl,
+        "rating": rating,
       };
 }
 

@@ -46,10 +46,13 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
           crossAxisSpacing: AppDimens.paddingVerySmall,
         ),
         shrinkWrap: true,
+        itemCount: controller.appController.listRecipe.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () => Get.toNamed(AppRoute.foodDetailScreen),
-            child: FoodCard(food: FoodModel.foodTest),
+            child: FoodCard(
+              recipeModel: controller.appController.listRecipe[index],
+            ),
           );
         },
       ),

@@ -3,18 +3,22 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 
 class FoodCard extends StatelessWidget {
-  final FoodModel food;
   final IconData? timerIcon;
   final Color? timerColor;
+  final RecipeModel recipeModel;
 
-  const FoodCard(
-      {super.key, required this.food, this.timerIcon, this.timerColor});
+  const FoodCard({
+    super.key,
+    this.timerIcon,
+    this.timerColor,
+    required this.recipeModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,7 @@ class FoodCard extends StatelessWidget {
 
   Widget _buildRateFood() {
     return RatingBarIndicator(
-      rating: food.rating,
+      rating: recipeModel.rating ?? 5,
       itemBuilder: (context, index) => const Icon(
         Icons.star,
         color: AppColors.primaryColor,
@@ -67,8 +71,8 @@ class FoodCard extends StatelessWidget {
         Gap(4.w),
         Expanded(
           child: UtilWidget.buildText(
+            recipeModel.cookTime ?? "Unknown",
             textAlign: TextAlign.left,
-            food.time,
             textColor: timerColor ?? AppColors.primaryColor,
             fontSize: AppDimens.fontSmall,
           ),
@@ -79,7 +83,7 @@ class FoodCard extends StatelessWidget {
 
   Widget _buildFoodName() {
     return UtilWidget.buildText(
-      food.foodName,
+      recipeModel.recipeName ?? "Unknown",
       fontSize: AppDimens.fontSmall,
       textColor: AppColors.white,
     );
@@ -87,7 +91,7 @@ class FoodCard extends StatelessWidget {
 
   Widget _buildMealType() {
     return UtilWidget.buildText(
-      food.mealType,
+      recipeModel.category?.name ?? "Unknown",
       fontSize: AppDimens.font14,
       textColor: const Color.fromARGB(255, 0, 157, 255),
     );
@@ -104,14 +108,18 @@ class FoodCard extends StatelessWidget {
             child: Align(
               alignment: Alignment.topLeft,
               child: InkWell(
-                onTap: food.isFavorite.toggle,
-                child: Obx(
-                  () => Icon(
-                    food.isFavorite.value
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: AppColors.primaryColor,
-                  ),
+                // onTap: food.isFavorite.toggle,
+
+                // child: Obx(
+                //   () => Icon(
+                //     // food.isFavorite.value ? Icons.favorite : Icons.favorite_border,
+                //     Icons.favorite_border,
+                //     color: AppColors.primaryColor,
+                //   ),
+                // ),
+                child: Icon(
+                  Icons.favorite_border,
+                  color: AppColors.primaryColor,
                 ),
               ),
             ),
@@ -120,8 +128,8 @@ class FoodCard extends StatelessWidget {
             flex: 6,
             child: ClipOval(
               //borderRadius: BorderRadius.circular(AppDimens.radius8),
-              child: Image.network(
-                food.imageUrl,
+              child: AppImageWidget.network(
+                path: recipeModel.imageUrl ?? "",
                 fit: BoxFit.cover,
               ),
             ),

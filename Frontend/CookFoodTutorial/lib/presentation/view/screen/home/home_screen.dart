@@ -114,7 +114,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           height: 210.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: controller.appController.listRecipe.length,
             shrinkWrap: true,
             itemBuilder: (context, index) => Container(
               height: 210.h,
@@ -123,7 +123,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                 right: 10.w,
               ),
               child: FoodCard(
-                food: FoodModel.foodTest,
+                recipeModel: controller.appController.listRecipe[index],
                 timerIcon: Icons.timer,
                 timerColor: AppColors.white,
               ),
@@ -169,8 +169,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               height: 8.sp,
             );
           },
-          itemBuilder: (context, index) =>
-              FoodSuggestItemSmall(food: FoodModel.foodTest),
+          itemBuilder: (context, index) => FoodSuggestItemSmall(food: FoodModel.foodTest),
         ),
         Gap(20.h),
       ],
@@ -248,10 +247,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     );
   }
 
-  _buildItemDrawer(
-      {required Function() function,
-      required String icon,
-      required String title}) {
+  _buildItemDrawer({required Function() function, required String icon, required String title}) {
     return AppTouchable(
       onPressed: function,
       child: Row(

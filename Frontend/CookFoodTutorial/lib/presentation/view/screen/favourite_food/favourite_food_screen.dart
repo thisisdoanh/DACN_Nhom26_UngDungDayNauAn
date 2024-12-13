@@ -47,13 +47,16 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
           crossAxisSpacing: AppDimens.paddingMedium,
           mainAxisSpacing: AppDimens.paddingMedium,
         ),
-        itemCount: 20,
+        itemCount: controller.appController.listRecipe.length,
         itemBuilder: (context, index) {
           return InkWell(
-              onTap: () {
-                Get.toNamed(AppRoute.foodDetailScreen);
-              },
-              child: FoodCard(food: FoodModel.foodTest));
+            onTap: () {
+              Get.toNamed(AppRoute.foodDetailScreen);
+            },
+            child: FoodCard(
+              recipeModel: controller.appController.listRecipe[index],
+            ),
+          );
         },
       ),
     );
@@ -75,8 +78,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimens.radius8),
-          border: Border.all(color: AppColors.white)),
+          borderRadius: BorderRadius.circular(AppDimens.radius8), border: Border.all(color: AppColors.white)),
       child: const Icon(
         Icons.filter_alt_rounded,
         color: AppColors.white,
