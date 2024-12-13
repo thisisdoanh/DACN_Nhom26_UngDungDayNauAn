@@ -45,10 +45,11 @@ class LoginController extends AppBaseController {
             "Tài khoản hoặc mật khẩu không đúng, vui lòng thử lại sau",
           );
         }
+      } else {
+        Get.offAllNamed(AppRoute.homeScreen);
       }
       AppLog.warning(userToken?.toJson());
     }
-    // Get.offAllNamed(AppRoute.homeScreen);
   }
 
   void onPressShowPassword() {

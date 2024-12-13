@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:tutorial/common/utils/app_log.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
@@ -22,6 +23,7 @@ class FoodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLog.info("${recipeModel.recipeName}${recipeModel.imageUrl}${recipeModel.image}");
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -103,33 +105,25 @@ class FoodCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            flex: 4,
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: InkWell(
-                // onTap: food.isFavorite.toggle,
-
-                // child: Obx(
-                //   () => Icon(
-                //     // food.isFavorite.value ? Icons.favorite : Icons.favorite_border,
-                //     Icons.favorite_border,
-                //     color: AppColors.primaryColor,
-                //   ),
-                // ),
-                child: Icon(
-                  Icons.favorite_border,
-                  color: AppColors.primaryColor,
-                ),
+          const Align(
+            alignment: Alignment.topLeft,
+            child: InkWell(
+              child: Icon(
+                Icons.favorite_border,
+                color: AppColors.primaryColor,
               ),
             ),
           ),
-          Expanded(
-            flex: 6,
-            child: ClipOval(
-              //borderRadius: BorderRadius.circular(AppDimens.radius8),
+          Container(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            clipBehavior: Clip.hardEdge,
+            child: ClipRRect(
               child: AppImageWidget.network(
-                path: recipeModel.imageUrl ?? "",
+                path: recipeModel.imageUrl ?? recipeModel.image ?? "",
+                width: 80.r,
+                height: 80.r,
                 fit: BoxFit.cover,
               ),
             ),

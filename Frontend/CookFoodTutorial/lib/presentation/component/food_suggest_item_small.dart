@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
 
 import '../view/app_view.dart';
@@ -9,8 +10,8 @@ import '../view/resources/app_dimen.dart';
 import 'text_share.dart';
 
 class FoodSuggestItemSmall extends StatelessWidget {
-  const FoodSuggestItemSmall({super.key, required this.food});
-  final FoodModel food;
+  const FoodSuggestItemSmall({super.key, required this.recipeModel});
+  final RecipeModel recipeModel;
 
   @override
   Widget build(BuildContext context) {
@@ -36,36 +37,41 @@ class FoodSuggestItemSmall extends StatelessWidget {
       child: Row(
         children: [
           AppImageWidget.network(
-            path: food.imageUrl,
+            path: recipeModel.imageUrl ?? recipeModel.image ?? "",
             height: 56.w,
             width: 66.h,
+            fit: BoxFit.cover,
           ),
+          Gap(10.w),
           Expanded(
-            child: Center(
-              child: Column(
-                children: [
-                  Text(
-                    food.foodName,
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    recipeModel.recipeName ?? "Unknown",
+                    textAlign: TextAlign.start,
                     style: TextStyle(
                       color: AppColors.white,
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  RatingBarIndicator(
-                    rating: food.rating,
-                    itemBuilder: (context, index) => const Icon(
-                      Icons.star,
-                      color: AppColors.primaryColor,
-                    ),
-                    itemCount: 5,
-                    itemSize: 20.0,
-                    direction: Axis.horizontal,
+                ),
+                RatingBarIndicator(
+                  rating: recipeModel.rating ?? 5,
+                  itemBuilder: (context, index) => const Icon(
+                    Icons.star,
+                    color: AppColors.primaryColor,
                   ),
-                ],
-              ),
+                  itemCount: 5,
+                  itemSize: 20.0,
+                  direction: Axis.horizontal,
+                ),
+              ],
             ),
           ),
+          Gap(10.w),
           Column(
             children: [
               Icon(
@@ -80,7 +86,7 @@ class FoodSuggestItemSmall extends StatelessWidget {
                   ),
                   Gap(4.w),
                   UtilWidget.buildText(
-                    food.time,
+                    recipeModel.cookTime ?? "Unknown",
                     textColor: AppColors.primaryColor,
                     fontSize: AppDimens.fontSmall,
                   ),

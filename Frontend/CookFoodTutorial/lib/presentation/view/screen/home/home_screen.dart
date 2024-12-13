@@ -112,20 +112,22 @@ class HomeScreen extends AppBaseScreen<HomeController> {
         Gap(10.h),
         SizedBox(
           height: 210.h,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: controller.appController.listRecipe.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) => Container(
-              height: 210.h,
-              width: itemWidth,
-              margin: EdgeInsets.only(
-                right: 10.w,
-              ),
-              child: FoodCard(
-                recipeModel: controller.appController.listRecipe[index],
-                timerIcon: Icons.timer,
-                timerColor: AppColors.white,
+          child: Obx(
+            () => ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.listHighRating.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) => Container(
+                height: 210.h,
+                width: itemWidth,
+                margin: EdgeInsets.only(
+                  right: 10.w,
+                ),
+                child: FoodCard(
+                  recipeModel: controller.listHighRating[index],
+                  timerIcon: Icons.timer,
+                  timerColor: AppColors.white,
+                ),
               ),
             ),
           ),
@@ -159,17 +161,19 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           ],
         ),
         Gap(10.h),
-        ListView.separated(
-          itemCount: 10,
-          shrinkWrap: true,
-          primary: false,
-          padding: EdgeInsets.zero,
-          separatorBuilder: (context, index) {
-            return Container(
-              height: 8.sp,
-            );
-          },
-          itemBuilder: (context, index) => FoodSuggestItemSmall(food: FoodModel.foodTest),
+        Obx(
+          () => ListView.separated(
+            itemCount: controller.listRandom.length,
+            shrinkWrap: true,
+            primary: false,
+            padding: EdgeInsets.zero,
+            separatorBuilder: (context, index) {
+              return Container(
+                height: 8.sp,
+              );
+            },
+            itemBuilder: (context, index) => FoodSuggestItemSmall(recipeModel: controller.listRandom[index]),
+          ),
         ),
         Gap(20.h),
       ],

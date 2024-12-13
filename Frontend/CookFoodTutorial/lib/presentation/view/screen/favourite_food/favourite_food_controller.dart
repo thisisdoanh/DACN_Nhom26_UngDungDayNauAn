@@ -1,5 +1,3 @@
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 
-class FavoriteFoodController extends AppBaseController{
-  
-}
+class FavoriteFoodController extends AppBaseController {}
