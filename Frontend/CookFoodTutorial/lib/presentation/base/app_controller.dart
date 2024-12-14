@@ -53,7 +53,7 @@ class AppController extends SuperController {
     // TODO: implement onResumed
   }
 
-  void showFilterBottomSheet(Function() onPressApply) {
+  void showFilterBottomSheet(Function(List<RecipeModel>) onPressApply) {
     Get.bottomSheet(
       Container(
         constraints: BoxConstraints(
@@ -62,6 +62,7 @@ class AppController extends SuperController {
         child: FilterWidget(
           listCategory: listCategory.toList(),
           onPressApply: onPressApply,
+          listRecipe: listRecipe.toList(),
         ),
       ),
       backgroundColor: AppColors.dsGray2D,

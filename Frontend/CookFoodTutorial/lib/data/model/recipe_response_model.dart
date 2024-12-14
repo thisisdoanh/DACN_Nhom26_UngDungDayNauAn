@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'category_response_model.dart';
+
 class RecipeResponse {
   int? status;
   String? message;
@@ -59,7 +61,7 @@ class RecipeModel {
   String? cookTime;
   List<Ingredient>? ingredients;
   List<Instruction>? instructions;
-  Category? category;
+  CategoryModel? category;
   User? user;
   double? rating;
   String? image;
@@ -94,7 +96,7 @@ class RecipeModel {
         instructions: json["instructions"] == null
             ? []
             : List<Instruction>.from(json["instructions"]!.map((x) => Instruction.fromMap(x))),
-        category: json["category"] == null ? null : Category.fromMap(json["category"]),
+        category: json["category"] == null ? null : CategoryModel.fromMap(json["category"]),
         user: json["user"] == null ? null : User.fromMap(json["user"]),
         image: json["image"],
         imageUrl: json["imageUrl"],
@@ -113,30 +115,6 @@ class RecipeModel {
         "image": image,
         "imageUrl": imageUrl,
         "rating": rating,
-      };
-}
-
-class Category {
-  int? id;
-  String? name;
-
-  Category({
-    this.id,
-    this.name,
-  });
-
-  factory Category.fromJson(String str) => Category.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory Category.fromMap(Map<String, dynamic> json) => Category(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "name": name,
       };
 }
 

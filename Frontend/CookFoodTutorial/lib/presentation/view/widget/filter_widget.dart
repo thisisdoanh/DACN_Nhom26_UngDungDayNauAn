@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/view/widget/app_touchable.dart';
 
+import '../../../common/utils/app_log.dart';
 import '../../../common/utils/app_utils.dart';
 import '../../../data/model/category_response_model.dart';
 import '../resources/app_color.dart';
 
 class FilterWidget extends StatefulWidget {
-  const FilterWidget({super.key, required this.listCategory, required this.onPressApply});
+  const FilterWidget({
+    super.key,
+    required this.listCategory,
+    required this.listRecipe,
+    required this.onPressApply,
+  });
 
   final List<CategoryModel> listCategory;
-  final Function() onPressApply;
+  final List<RecipeModel> listRecipe;
+  final Function(List<RecipeModel>) onPressApply;
 
   @override
   State<FilterWidget> createState() => _FilterWidgetState();
@@ -21,7 +29,7 @@ class FilterWidget extends StatefulWidget {
 class _FilterWidgetState extends State<FilterWidget> {
   List<CategoryModel> listCategorySelected = [];
   double firstValue = 0;
-  double secondValue = 60;
+  double secondValue = 120;
   TextStyle labelTextStyle = TextStyle(
     color: AppColors.white,
     fontSize: 13.sp,
@@ -62,7 +70,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               onPressed: () {
                 listCategorySelected = [];
                 firstValue = 0;
-                secondValue = 60;
+                secondValue = 120;
                 setState(() {});
               },
               child: Text(
@@ -166,7 +174,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 child: RangeSlider(
                   values: RangeValues(firstValue, secondValue),
                   min: 0,
-                  max: 60,
+                  max: 120,
                   activeColor: AppColors.primaryColor,
                   inactiveColor: const Color(0xFF474747),
                   onChanged: (value) {
@@ -184,7 +192,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             Positioned(
               bottom: 0,
               left: 12.w +
-                  (firstValue / 60 * (Get.width - 32.w - 20.w)) -
+                  (firstValue / 120 * (Get.width - 32.w - 20.w)) -
                   getTextWidth("${firstValue.toStringAsFixed(0)} phút", labelTextStyle, context) / 2,
               child: Text(
                 "${firstValue.toStringAsFixed(0)} phút",
@@ -193,7 +201,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             ),
             Positioned(
               bottom: 0,
-              left: (secondValue / 60 * (Get.width - 32.w - 20.w)) -
+              left: (secondValue / 120 * (Get.width - 32.w - 20.w)) -
                   getTextWidth("${secondValue.toStringAsFixed(0)} phút", labelTextStyle, context) / 2,
               child: Text(
                 "${secondValue.toStringAsFixed(0)} phút",
@@ -205,7 +213,24 @@ class _FilterWidgetState extends State<FilterWidget> {
         Gap(20.h),
         AppTouchable(
           onPressed: () {
-            widget.onPressApply.call();
+            List<RecipeModel> listRecipeFiltered = [];
+
+            listRecipeFiltered = widget.listRecipe.where(
+              (recipe) {
+                int prepTime = parseTimeToMinutes(recipe.prepTime);
+                int cookTime = parseTimeToMinutes(recipe.cookTime);
+                int totalTime = prepTime + cookTime;
+
+                return listCategorySelected.any(
+                      (category) => category.name == recipe.category?.name,
+                    ) &&
+                    (totalTime <= secondValue && totalTime >= firstValue);
+              },
+            ).toList();
+
+            AppLog.info(listRecipeFiltered, tag: "Filtered");
+
+            widget.onPressApply.call(listRecipeFiltered);
             Get.back();
           },
           width: 366.w,

@@ -89,3 +89,24 @@ double getTextWidth(String text, TextStyle style, BuildContext context) {
   )..layout(minWidth: 0, maxWidth: double.infinity);
   return textPainter.size.width;
 }
+
+int parseTimeToMinutes(String? time) {
+  if (time == null) return 0;
+  final regex = RegExp(r'(\d+)([hp])'); // Tìm các cặp số + đơn vị 'h' hoặc 'p'
+  final matches = regex.allMatches(time);
+
+  double totalMinutes = 0;
+
+  for (final match in matches) {
+    final value = double.parse(match.group(1)!); // Lấy giá trị số
+    final unit = match.group(2); // Lấy đơn vị ('h' hoặc 'p')
+
+    if (unit == 'h') {
+      totalMinutes += value * 60; // Chuyển giờ thành phút
+    } else if (unit == 'p') {
+      totalMinutes += value; // Giữ nguyên phút
+    }
+  }
+
+  return totalMinutes.toInt();
+}

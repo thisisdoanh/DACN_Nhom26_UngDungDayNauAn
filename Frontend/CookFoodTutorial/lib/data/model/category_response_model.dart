@@ -43,7 +43,7 @@ class CategoryModel {
 
   factory CategoryModel.fromMap(Map<String, dynamic> json) => CategoryModel(
         id: json["id"],
-        name: json["name"],
+        name: json["name"].toString().trim(),
       );
 
   Map<String, dynamic> toMap() => {
