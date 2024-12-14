@@ -77,9 +77,9 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
   }
 
   Widget _buildIconFilter() {
-    return Container(
+    return AppTouchable(
+      onPressed: () => controller.appController.showFilterBottomSheet(),
       height: AppDimens.sizeTextField,
-      alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimens.radius8), border: Border.all(color: AppColors.white)),

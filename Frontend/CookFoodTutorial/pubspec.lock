@@ -661,6 +661,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  searchfield:
+    dependency: "direct main"
+    description:
+      name: searchfield
+      sha256: "8d23d53967ac5b0774611150b286dacd70c9c5de74d3db433bda2104b4803755"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -778,6 +786,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      sha256: b2a9f0fd585ef96c081c37697b46d48d3b0f3fe6bddc5011a3542962814fafa8
+      url: "https://pub.dev"
+    source: hosted
+    version: "28.1.33"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: b1071c698b502e7d55f91352a8b82d42f49f4c96e523d43b6fade5d5af710048
+      url: "https://pub.dev"
+    source: hosted
+    version: "28.1.33"
+  syncfusion_flutter_sliders:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_sliders
+      sha256: c5978a10c5b97e982e59ca485de86673e0d3a67ea34e2245c7f7fdf9109cbc5f
+      url: "https://pub.dev"
+    source: hosted
+    version: "28.1.33"
   synchronized:
     dependency: transitive
     description:

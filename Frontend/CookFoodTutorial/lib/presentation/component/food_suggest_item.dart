@@ -2,56 +2,78 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:tutorial/common/utils/app_log.dart';
+import 'package:get/get.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
+import 'package:tutorial/presentation/view/screen/home/home_controller.dart';
 
 class FoodCard extends StatelessWidget {
   final IconData? timerIcon;
   final Color? timerColor;
   final RecipeModel recipeModel;
-  final Function()? onTap;
 
   const FoodCard({
     super.key,
     this.timerIcon,
     this.timerColor,
     required this.recipeModel,
-    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    AppLog.info(
-        "${recipeModel.recipeName}${recipeModel.imageUrl}${recipeModel.image}");
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
-        decoration: BoxDecoration(
-          color: AppColors.primaryGray.withOpacity(0.4),
-          borderRadius: BorderRadius.circular(AppDimens.radius16),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildFavourAndImage(),
-            Gap(8.h),
-            _buildMealType(),
-            Gap(8.h),
-            _buildFoodName(),
-            Gap(8.h),
-            _buildTime(),
-            Gap(8.h),
-            _buildRateFood(),
-          ],
-        ),
+//     return InkWell(
+//       onTap: onTap,
+//       child: Container(
+//         height: double.infinity,
+//         width: double.infinity,
+//         padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
+//         decoration: BoxDecoration(
+//           color: AppColors.primaryGray.withOpacity(0.4),
+//           borderRadius: BorderRadius.circular(AppDimens.radius16),
+//         ),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           mainAxisSize: MainAxisSize.min,
+//           children: [
+//             _buildFavourAndImage(),
+//             Gap(8.h),
+//             _buildMealType(),
+//             Gap(8.h),
+//             _buildFoodName(),
+//             Gap(8.h),
+//             _buildTime(),
+//             Gap(8.h),
+//             _buildRateFood(),
+//           ],
+//         ),
+// =======
+    return AppTouchable(
+      onPressed: () {
+        Get.find<HomeController>().onPressItemRecipe(recipeModel);
+      },
+      height: double.infinity,
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
+      decoration: BoxDecoration(
+        color: AppColors.primaryGray.withOpacity(0.4),
+        borderRadius: BorderRadius.circular(AppDimens.radius16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildFavourAndImage(),
+          Gap(8.h),
+          _buildMealType(),
+          Gap(8.h),
+          _buildFoodName(),
+          Gap(8.h),
+          _buildTime(),
+          Gap(8.h),
+          _buildRateFood(),
+        ],
       ),
     );
   }

@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:searchfield/searchfield.dart';
+import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
 import 'package:tutorial/presentation/component/backgroud_screen.dart';
@@ -115,7 +119,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           child: Obx(
             () => ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: controller.listHighRating.length,
+              itemCount: min(controller.appController.listRecipeHighRating.length, 5),
               shrinkWrap: true,
               itemBuilder: (context, index) => Container(
                 height: 210.h,
@@ -124,7 +128,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                   right: 10.w,
                 ),
                 child: FoodCard(
-                  recipeModel: controller.listHighRating[index],
+                  recipeModel: controller.appController.listRecipeHighRating[index],
                   timerIcon: Icons.timer,
                   timerColor: AppColors.white,
                 ),
@@ -165,7 +169,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
         Gap(10.h),
         Obx(
           () => ListView.separated(
-            itemCount: controller.listRandom.length,
+            itemCount: min(controller.appController.listRecipeRandom.length, 10),
             shrinkWrap: true,
             primary: false,
             padding: EdgeInsets.zero,
@@ -175,7 +179,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               );
             },
             itemBuilder: (context, index) =>
-                FoodSuggestItemSmall(recipeModel: controller.listRandom[index]),
+                FoodSuggestItemSmall(recipeModel: controller.appController.listRecipeRandom[index]),
           ),
         ),
         Gap(20.h),
@@ -184,27 +188,52 @@ class HomeScreen extends AppBaseScreen<HomeController> {
   }
 
   Widget _buildSearchBar() {
-    return Row(
-      children: [
-        _buildTextFieldSearch(),
-      ],
-    );
-  }
-
-  Widget _buildTextFieldSearch() {
-    return Expanded(
-      child: AppTextField(
-        hintText: StringConstants.searchRecipe.tr,
-        backgroundColor: AppColors.transparent,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.transparent,
         border: Border.all(
           color: AppColors.white,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(AppDimens.radius8),
-        suffixIcon: const Icon(
-          Icons.search,
-          color: AppColors.white,
-        ),
+      ),
+      alignment: Alignment.center,
+      child: Row(
+        children: [
+          Expanded(
+            child: SearchField<RecipeModel>(
+              suggestionStyle: const TextStyle(fontSize: 18, color: Colors.pink),
+              suggestions: controller.appController.listRecipe
+                  .map(
+                    (element) => SearchFieldListItem<RecipeModel>(
+                      element.recipeName ?? "Unknown",
+                      item: element,
+                      child: Text(
+                        element.recipeName ?? "Unknown",
+                      ),
+                    ),
+                  )
+                  .toList(),
+              onSuggestionTap: (p0) {
+                controller.onPressItemRecipe(p0.item);
+              },
+              searchInputDecoration: SearchInputDecoration(
+                hintText: StringConstants.searchRecipe.tr,
+                hintStyle: AppTextTheme.labelLarge(AppColors.dsGray4),
+                suffixIcon: const Icon(
+                  Icons.search,
+                  color: AppColors.white,
+                ),
+                cursorColor: AppColors.white,
+                contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              ),
+              suggestionsDecoration: SuggestionDecoration(
+                color: AppColors.colorBackgrounDialog,
+                borderRadius: BorderRadius.circular(20.sp),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -254,10 +283,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     );
   }
 
-  _buildItemDrawer(
-      {required Function() function,
-      required String icon,
-      required String title}) {
+  _buildItemDrawer({required Function() function, required String icon, required String title}) {
     return AppTouchable(
       onPressed: function,
       child: Row(

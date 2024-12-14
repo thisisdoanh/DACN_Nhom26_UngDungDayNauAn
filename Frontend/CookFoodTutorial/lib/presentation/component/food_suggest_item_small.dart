@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
 
 import '../view/app_view.dart';
 import '../view/resources/app_dimen.dart';
+import '../view/screen/home/home_controller.dart';
 import 'text_share.dart';
 
 class FoodSuggestItemSmall extends StatelessWidget {
@@ -15,17 +17,18 @@ class FoodSuggestItemSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppTouchable(
+      onPressed: () {
+        Get.find<HomeController>().onPressItemRecipe(recipeModel);
+      },
       padding: EdgeInsets.symmetric(
         horizontal: 16.w,
         vertical: 8.h,
       ),
-      decoration: ShapeDecoration(
+      decoration: BoxDecoration(
         color: const Color(0xFF373737),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        shadows: const [
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
           BoxShadow(
             color: Color(0x3F000000),
             blurRadius: 4,

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
+import 'package:tutorial/presentation/view/app_view.dart';
+import 'package:tutorial/presentation/view/widget/filter_widget.dart';
 
 import '../../data/model/category_response_model.dart';
 
 class AppController extends SuperController {
   RxList<CategoryModel> listCategory = RxList();
   RxList<RecipeModel> listRecipe = RxList();
+  RxList<RecipeModel> listRecipeHighRating = RxList();
+  RxList<RecipeModel> listRecipeRandom = RxList();
 
   @override
   void onInit() {
@@ -47,5 +51,14 @@ class AppController extends SuperController {
   @override
   void onResumed() {
     // TODO: implement onResumed
+  }
+
+  void showFilterBottomSheet() {
+    Get.bottomSheet(
+      FilterWidget(
+        listCategory: listCategory.toList(),
+      ),
+      backgroundColor: AppColors.dsGray2D,
+    );
   }
 }

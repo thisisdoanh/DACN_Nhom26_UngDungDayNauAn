@@ -1,27 +1,24 @@
 import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/common/utils/app_log.dart';
+import 'package:tutorial/common/utils/app_utils.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/data/provider/api_service.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
 
 class HomeController extends AppBaseController {
-  RxList<RecipeModel> listHighRating = RxList();
-  RxList<RecipeModel> listRandom = RxList();
-
   @override
   void onInit() async {
-    listHighRating.value = appController.listRecipe
+    appController.listRecipeHighRating.value = appController.listRecipe
+        .toList()
         .sorted(
           (a, b) => (b.rating ?? 5).compareTo(a.rating ?? 5),
         )
-        .take(5)
         .toList();
-    listRandom.value =
-        (appController.listRecipe.toList()..shuffle()).take(10).toList();
 
     await fetchData();
+    appController.listRecipeRandom.value = (appController.listRecipe.toList()..shuffle()).toList();
     super.onInit();
   }
 
@@ -57,4 +54,14 @@ class HomeController extends AppBaseController {
   }
 
   void onPressLogout() {}
+
+  void onPressItemRecipe(RecipeModel? recipeModel) {
+    if (recipeModel == null) {
+      showToast("Có lỗi khi chọn món ăn. Vui lòng chọn lại!");
+      return;
+    }
+    Get.toNamed(AppRoute.foodDetailScreen, arguments: {
+      "recipe_model": recipeModel,
+    });
+  }
 }

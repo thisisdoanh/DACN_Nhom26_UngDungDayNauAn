@@ -34,6 +34,10 @@ dependencies:
   connectivity_plus: ^6.1.0
   dio: ^5.7.0
   collection: ^1.18.0
+  searchfield: 1.2.0
+  syncfusion_flutter_sliders: ^28.1.33
+  syncfusion_flutter_charts: ^28.1.33
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
