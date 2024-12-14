@@ -12,6 +12,7 @@ class AppTextField extends StatelessWidget {
   final String? errorText;
   final TextEditingController? textEditingController;
   final Function(String)? onChanged;
+  final Function(String)? onSubmitted;
   final TextInputType? keyboardType;
   final bool? readOnly;
   final Function()? onPressed;
@@ -23,6 +24,7 @@ class AppTextField extends StatelessWidget {
   final bool? isHide;
   final BoxBorder? border;
   final BorderRadiusGeometry? borderRadius;
+  final TextInputAction? textInputAction;
 
   const AppTextField({
     super.key,
@@ -32,6 +34,7 @@ class AppTextField extends StatelessWidget {
     this.errorText,
     this.textEditingController,
     this.onChanged,
+    this.onSubmitted,
     this.keyboardType,
     this.readOnly,
     this.onPressed,
@@ -43,6 +46,7 @@ class AppTextField extends StatelessWidget {
     this.isHide,
     this.border,
     this.borderRadius,
+    this.textInputAction,
   });
 
   @override
@@ -76,6 +80,8 @@ class AppTextField extends StatelessWidget {
             style: AppTextTheme.labelLarge(AppColors.white),
             cursorColor: AppColors.white,
             obscureText: isHide ?? false,
+            textInputAction: textInputAction,
+            onSubmitted: onSubmitted,
             decoration: InputDecoration(
               contentPadding: contentPadding ??
                   EdgeInsets.symmetric(
@@ -83,8 +89,7 @@ class AppTextField extends StatelessWidget {
                     horizontal: 16.0.sp,
                   ),
               focusedBorder: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: outlineColor ?? Colors.transparent),
+                borderSide: BorderSide(color: outlineColor ?? Colors.transparent),
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               errorBorder: OutlineInputBorder(
@@ -92,8 +97,7 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: outlineColor ?? Colors.transparent),
+                borderSide: BorderSide(color: outlineColor ?? Colors.transparent),
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               hintText: hintText,
