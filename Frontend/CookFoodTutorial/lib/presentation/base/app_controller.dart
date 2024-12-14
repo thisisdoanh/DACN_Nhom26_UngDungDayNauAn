@@ -53,12 +53,19 @@ class AppController extends SuperController {
     // TODO: implement onResumed
   }
 
-  void showFilterBottomSheet() {
+  void showFilterBottomSheet(Function() onPressApply) {
     Get.bottomSheet(
-      FilterWidget(
-        listCategory: listCategory.toList(),
+      Container(
+        constraints: BoxConstraints(
+          maxHeight: Get.height * 0.6, // Giới hạn chiều cao là 90% màn hình
+        ),
+        child: FilterWidget(
+          listCategory: listCategory.toList(),
+          onPressApply: onPressApply,
+        ),
       ),
       backgroundColor: AppColors.dsGray2D,
+      isScrollControlled: true,
     );
   }
 }

@@ -9,9 +9,10 @@ import '../../../data/model/category_response_model.dart';
 import '../resources/app_color.dart';
 
 class FilterWidget extends StatefulWidget {
-  const FilterWidget({super.key, required this.listCategory});
+  const FilterWidget({super.key, required this.listCategory, required this.onPressApply});
 
   final List<CategoryModel> listCategory;
+  final Function() onPressApply;
 
   @override
   State<FilterWidget> createState() => _FilterWidgetState();
@@ -21,7 +22,7 @@ class _FilterWidgetState extends State<FilterWidget> {
   List<CategoryModel> listCategorySelected = [];
   double firstValue = 0;
   double secondValue = 60;
-  TextStyle labelTextStyle =  TextStyle(
+  TextStyle labelTextStyle = TextStyle(
     color: AppColors.white,
     fontSize: 13.sp,
     fontFamily: 'Segoe UI',
@@ -44,7 +45,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             ),
           ),
         ),
-        Gap(32.h),
+        Gap(20.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -58,7 +59,12 @@ class _FilterWidgetState extends State<FilterWidget> {
               ),
             ),
             AppTouchable(
-              onPressed: () {},
+              onPressed: () {
+                listCategorySelected = [];
+                firstValue = 0;
+                secondValue = 60;
+                setState(() {});
+              },
               child: Text(
                 'Tải lại',
                 style: TextStyle(
@@ -149,29 +155,76 @@ class _FilterWidgetState extends State<FilterWidget> {
         ),
         Gap(12.h),
         Stack(
+          clipBehavior: Clip.none,
           children: [
-            RangeSlider(
-              values: RangeValues(firstValue, secondValue),
-              min: 0,
-              max: 60,
-              activeColor: AppColors.primaryColor,
-              inactiveColor: const Color(0xFF474747),
-              onChanged: (value) {
-                firstValue = value.start;
-                secondValue = value.end;
-                setState(() {});
-              },
-              labels: RangeLabels(
-                "${firstValue.toStringAsFixed(0)} phút",
-                "${secondValue.toStringAsFixed(0)} phút",
+            Container(
+              margin: EdgeInsets.only(bottom: 20.h),
+              child: SliderTheme(
+                data: SliderThemeData(
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 10.w),
+                ),
+                child: RangeSlider(
+                  values: RangeValues(firstValue, secondValue),
+                  min: 0,
+                  max: 60,
+                  activeColor: AppColors.primaryColor,
+                  inactiveColor: const Color(0xFF474747),
+                  onChanged: (value) {
+                    firstValue = value.start.roundToDouble();
+                    secondValue = value.end.roundToDouble();
+                    setState(() {});
+                  },
+                  labels: RangeLabels(
+                    "${firstValue.toStringAsFixed(0)} phút",
+                    "${secondValue.toStringAsFixed(0)} phút",
+                  ),
+                ),
               ),
             ),
             Positioned(
-                bottom: 0,
-                left: (firstValue / 60 * (Get.width - 32.w) ) - getTextWidth("$firstValue phút",labelTextStyle, context )/2,
-                child: Text("$firstValue phút")),
+              bottom: 0,
+              left: 12.w +
+                  (firstValue / 60 * (Get.width - 32.w - 20.w)) -
+                  getTextWidth("${firstValue.toStringAsFixed(0)} phút", labelTextStyle, context) / 2,
+              child: Text(
+                "${firstValue.toStringAsFixed(0)} phút",
+                style: labelTextStyle,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: (secondValue / 60 * (Get.width - 32.w - 20.w)) -
+                  getTextWidth("${secondValue.toStringAsFixed(0)} phút", labelTextStyle, context) / 2,
+              child: Text(
+                "${secondValue.toStringAsFixed(0)} phút",
+                style: labelTextStyle,
+              ),
+            ),
           ],
         ),
+        Gap(20.h),
+        AppTouchable(
+          onPressed: () {
+            widget.onPressApply.call();
+            Get.back();
+          },
+          width: 366.w,
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFF6B00),
+            borderRadius: BorderRadius.circular(23.73),
+          ),
+          child: Text(
+            'Áp dụng',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30.sp,
+              fontFamily: 'Lora',
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+        Gap(20.h),
       ],
     ).paddingSymmetric(horizontal: 16.w);
   }

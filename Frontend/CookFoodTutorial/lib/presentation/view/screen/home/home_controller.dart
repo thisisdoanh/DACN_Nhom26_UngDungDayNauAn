@@ -10,6 +10,8 @@ import 'package:tutorial/presentation/route/app_route.dart';
 class HomeController extends AppBaseController {
   @override
   void onInit() async {
+    await fetchData();
+
     appController.listRecipeHighRating.value = appController.listRecipe
         .toList()
         .sorted(
@@ -17,7 +19,6 @@ class HomeController extends AppBaseController {
         )
         .toList();
 
-    await fetchData();
     appController.listRecipeRandom.value = (appController.listRecipe.toList()..shuffle()).toList();
     super.onInit();
   }
