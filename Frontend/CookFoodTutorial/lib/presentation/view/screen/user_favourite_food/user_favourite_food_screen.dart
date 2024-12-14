@@ -7,11 +7,12 @@ import 'package:tutorial/presentation/component/food_suggest_item.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
-import 'package:tutorial/presentation/view/screen/favourite_food/favourite_food_controller.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
-class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
-  const FavouriteFoodScreen({super.key});
+import 'user_favourite_food_controller.dart';
+
+class UserFavouriteFoodScreen extends AppBaseScreen<UserFavoriteFoodController> {
+  const UserFavouriteFoodScreen({super.key});
 
   @override
   Widget buildWidget() {
@@ -51,14 +52,14 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
           crossAxisSpacing: AppDimens.paddingMedium,
           mainAxisSpacing: AppDimens.paddingMedium,
         ),
-        itemCount: controller.appController.listRecipe.length,
+        itemCount: controller.listRecipe.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
               Get.toNamed(AppRoute.foodDetailScreen);
             },
             child: FoodCard(
-              recipeModel: controller.appController.listRecipe[index],
+              recipeModel: controller.listRecipe[index],
             ),
           );
         },
@@ -79,6 +80,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
   Widget _buildIconFilter() {
     return AppTouchable(
       onPressed: () => controller.appController.showFilterBottomSheet(
+        controller.listRecipe.toList(),
         (p0) {},
       ),
       height: AppDimens.sizeTextField,
@@ -112,7 +114,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
 
   Widget _buildAppBar() {
     return AppBarShare(
-      title: StringConstants.mostFavourite.tr,
+      title: "Yêu thích",
       action: InkWell(
         onTap: Get.back,
         child: const Icon(

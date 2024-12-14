@@ -1,11 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:get/get.dart';
-import 'package:tutorial/common/utils/app_log.dart';
 import 'package:tutorial/common/utils/app_utils.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
+import 'package:tutorial/data/model/user_info_response.dart';
 import 'package:tutorial/data/provider/api_service.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
+
+import '../../../../common/utils/app_log.dart';
 
 class HomeController extends AppBaseController {
   @override
@@ -25,9 +27,16 @@ class HomeController extends AppBaseController {
 
   Future fetchData() async {
     await Future.wait([
+      getUserInfo(),
       getListRecipe(),
       getListCategory(),
     ]);
+  }
+
+  Future getUserInfo() async {
+    appController.userInfo = await ApiService.getUserInfo() ?? UserInfo();
+    appController.listRecipeUserFavorite.value = await ApiService.getRecipeFavorite(appController.userInfo.id ?? 1);
+    AppLog.info(appController.listRecipeUserFavorite.value, tag: "appController.listRecipeUserFavorite.value");
   }
 
   Future getListRecipe() async {
@@ -45,9 +54,7 @@ class HomeController extends AppBaseController {
   }
 
   void onPressFavorite() {
-    AppLog.info(appController.listCategory.toJson(), tag: "listCategory");
-    AppLog.info(appController.listRecipe.toJson(), tag: "listRecipe");
-    Get.toNamed(AppRoute.favouriteFoodSreen);
+    Get.toNamed(AppRoute.userFavoriteScreen);
   }
 
   void onPressHistory() {

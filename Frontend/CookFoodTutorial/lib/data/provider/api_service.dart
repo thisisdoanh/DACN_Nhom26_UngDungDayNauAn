@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:tutorial/data/model/category_response_model.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
+import 'package:tutorial/data/model/user_info_response.dart';
 
 import '../../common/utils/app_utils.dart';
 import '../model/base_response.dart';
@@ -25,6 +26,23 @@ class ApiService {
       UserToken userToken = UserToken.fromMap(response.data);
 
       return userToken;
+    } else {
+      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+
+      return Future.value(null);
+    }
+  }
+
+  static Future<UserInfo?> getUserInfo() async {
+    BaseResponse response = await ApiClient.instance.request(
+      endPoint: ApiConstant.epUserInfo,
+      method: ApiClient.get,
+    );
+
+    if (response.result == true) {
+      UserInfoResponse userInfoResponse = UserInfoResponse.fromMap(response.data);
+
+      return userInfoResponse.data;
     } else {
       showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
 
@@ -66,9 +84,12 @@ class ApiService {
     }
   }
 
-  static Future<List<RecipeModel>> getRecipeFavorite() async {
+  static Future<List<RecipeModel>> getRecipeFavorite(int? userID) async {
+    if (userID == null) {
+      return Future.value([]);
+    }
     BaseResponse response = await ApiClient.instance.request(
-      endPoint: ApiConstant.epFindAllRecipe,
+      endPoint: "${ApiConstant.epRecipeFavorite}$userID",
       method: ApiClient.get,
     );
 

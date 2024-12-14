@@ -79,6 +79,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
   Widget _buildIconFilter() {
     return AppTouchable(
       onPressed: () => controller.appController.showFilterBottomSheet(
+        controller.listRecipe.toList(),
         (p0) {},
       ),
       height: AppDimens.sizeTextField,

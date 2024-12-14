@@ -18,6 +18,8 @@ import '../view/screen/login/login_binding.dart';
 import '../view/screen/login/login_screen.dart';
 import '../view/screen/register/register_binding.dart';
 import '../view/screen/register/register_screen.dart';
+import '../view/screen/user_favourite_food/user_favourite_food_binding.dart';
+import '../view/screen/user_favourite_food/user_favourite_food_screen.dart';
 import 'app_route.dart';
 
 class AppPage {
@@ -66,6 +68,11 @@ class AppPage {
       name: AppRoute.favouriteFoodSreen,
       page: () => const FavouriteFoodScreen(),
       binding: FavouriteFoodBinding(),
+    ),
+    GetPage(
+      name: AppRoute.userFavoriteScreen,
+      page: () => const UserFavouriteFoodScreen(),
+      binding: UserFavouriteFoodBinding(),
     ),
   ];
 }

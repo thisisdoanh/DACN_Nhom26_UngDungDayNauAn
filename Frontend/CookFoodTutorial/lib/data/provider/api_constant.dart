@@ -8,6 +8,7 @@ class ApiConstant {
 
   // End point
   static const String epAuthToken = "/auth/token";
+  static const String epUserInfo = "/api/v1/users/myInfo";
   static const String epFindAllRecipe = "/api/v1/recipes/find-all";
   static const String epFindRecipe = "/api/v1/recipes";
   static const String epRecipeFavorite = "/api/v1/favorite-recipe/";
