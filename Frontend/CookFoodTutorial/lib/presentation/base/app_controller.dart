@@ -11,6 +11,7 @@ class AppController extends SuperController {
   RxList<CategoryModel> listCategory = RxList();
   RxList<RecipeModel> listRecipe = RxList();
   RxList<RecipeModel> listRecipeUserFavorite = RxList();
+  RxList<RecipeModel> listRecipeHistory = RxList();
   RxList<RecipeModel> listRecipeHighRating = RxList();
   RxList<RecipeModel> listRecipeRandom = RxList();
 
@@ -72,5 +73,13 @@ class AppController extends SuperController {
       backgroundColor: AppColors.dsGray2D,
       isScrollControlled: true,
     );
+  }
+
+  Future<void> updateFavorite(RecipeModel recipeModel) async {
+    if (listRecipeUserFavorite.any((element) => element.id == recipeModel.id)) {
+      listRecipeUserFavorite.remove(recipeModel);
+    } else {
+      listRecipeUserFavorite.add(recipeModel);
+    }
   }
 }

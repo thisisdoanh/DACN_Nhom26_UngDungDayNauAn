@@ -40,7 +40,7 @@ void mainDelegate() async {
       builder: (context, widget) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: AppBinding(),
-        initialRoute: AppRoute.homeScreen,
+        initialRoute: AppRoute.splashScreen,
         defaultTransition: Transition.cupertino,
         transitionDuration: const Duration(milliseconds: 500),
         getPages: AppPage.pages,

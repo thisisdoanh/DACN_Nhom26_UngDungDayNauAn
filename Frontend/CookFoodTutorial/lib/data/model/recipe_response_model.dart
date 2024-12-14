@@ -17,11 +17,22 @@ class RecipeResponse {
 
   String toJson() => json.encode(toMap());
 
-  factory RecipeResponse.fromMap(Map<String, dynamic> json) => RecipeResponse(
-        status: json["status"],
-        message: json["message"],
-        data: json["data"] == null ? null : Data.fromMap(json["data"]),
-      );
+  factory RecipeResponse.fromMap(Map<String, dynamic> json) {
+    Map<String, dynamic> dataMap = {};
+    if (json["data"] is! Map) {
+      dataMap = {
+        "items": json["data"],
+      };
+    } else {
+      dataMap = json["data"];
+    }
+
+    return RecipeResponse(
+      status: json["status"],
+      message: json["message"],
+      data: json["data"] == null ? null : Data.fromMap(dataMap),
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         "status": status,
@@ -43,10 +54,19 @@ class Data {
 
   String toJson() => json.encode(toMap());
 
-  factory Data.fromMap(Map<String, dynamic> json) => Data(
-        lastElementId: json["lastElementId"],
-        items: json["items"] == null ? [] : List<RecipeModel>.from(json["items"]!.map((x) => RecipeModel.fromMap(x))),
+  factory Data.fromMap(Map<String, dynamic> json) {
+    if (json is List) {
+      return Data(
+        lastElementId: null,
+        items: List<RecipeModel>.from((json as List).map((x) => RecipeModel.fromMap(x))),
       );
+    }
+
+    return Data(
+      lastElementId: json["lastElementId"],
+      items: json["items"] == null ? [] : List<RecipeModel>.from(json["items"]!.map((x) => RecipeModel.fromMap(x))),
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         "lastElementId": lastElementId,

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
+import 'package:tutorial/presentation/base/app_controller.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
@@ -23,32 +24,6 @@ class FoodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: onTap,
-//       child: Container(
-//         height: double.infinity,
-//         width: double.infinity,
-//         padding: const EdgeInsets.all(AppDimens.paddingVerySmall),
-//         decoration: BoxDecoration(
-//           color: AppColors.primaryGray.withOpacity(0.4),
-//           borderRadius: BorderRadius.circular(AppDimens.radius16),
-//         ),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             _buildFavourAndImage(),
-//             Gap(8.h),
-//             _buildMealType(),
-//             Gap(8.h),
-//             _buildFoodName(),
-//             Gap(8.h),
-//             _buildTime(),
-//             Gap(8.h),
-//             _buildRateFood(),
-//           ],
-//         ),
-// =======
     return AppTouchable(
       onPressed: () {
         Get.find<HomeController>().onPressItemRecipe(recipeModel);
@@ -133,12 +108,19 @@ class FoodCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Align(
+          Align(
             alignment: Alignment.topLeft,
             child: InkWell(
-              child: Icon(
-                Icons.favorite_border,
-                color: AppColors.primaryColor,
+              onTap: () async {
+                Get.find<AppController>().updateFavorite(recipeModel);
+              },
+              child: Obx(
+                () => Icon(
+                  Get.find<AppController>().listRecipeUserFavorite.any((element) => element.id == recipeModel.id)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  color: AppColors.primaryColor,
+                ),
               ),
             ),
           ),

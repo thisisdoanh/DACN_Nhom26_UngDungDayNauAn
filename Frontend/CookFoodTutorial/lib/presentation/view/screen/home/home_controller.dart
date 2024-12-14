@@ -12,7 +12,7 @@ import '../../../../common/utils/app_log.dart';
 class HomeController extends AppBaseController {
   @override
   void onInit() async {
-    await fetchData();
+    // await fetchData();
 
     appController.listRecipeHighRating.value = appController.listRecipe
         .toList()
@@ -54,6 +54,10 @@ class HomeController extends AppBaseController {
   }
 
   void onPressFavorite() {
+    Get.toNamed(AppRoute.favouriteFoodSreen);
+  }
+
+  void onPressUserFavorite() {
     Get.toNamed(AppRoute.userFavoriteScreen);
   }
 
@@ -68,6 +72,7 @@ class HomeController extends AppBaseController {
       showToast("Có lỗi khi chọn món ăn. Vui lòng chọn lại!");
       return;
     }
+    appController.listRecipeHistory.add(recipeModel);
     Get.toNamed(AppRoute.foodDetailScreen, arguments: {
       "recipe_model": recipeModel,
     });

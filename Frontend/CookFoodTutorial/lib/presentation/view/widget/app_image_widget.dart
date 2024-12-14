@@ -115,8 +115,9 @@ class AppImageWidget extends StatelessWidget {
         height: height,
       );
     }
+
     return CachedNetworkImage(
-      imageUrl: path,
+      imageUrl: path == "https://timage.cooky.vn/recipe/g3/24673/s640/recipe-cover-r24673.jpg" ? "" : path,
       fit: fit,
       width: width,
       height: height,

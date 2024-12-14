@@ -368,7 +368,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                   ),
                   Gap(30.h),
                   _buildItemDrawer(
-                    function: () => controller.onPressFavorite(),
+                    function: () => controller.onPressUserFavorite(),
                     icon: AppImage.icFavorite,
                     title: StringConstants.favorite.tr,
                   ),

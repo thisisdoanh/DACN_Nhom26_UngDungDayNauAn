@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
 
+import '../base/app_controller.dart';
 import '../view/app_view.dart';
 import '../view/resources/app_dimen.dart';
 import '../view/screen/home/home_controller.dart';
@@ -77,9 +78,18 @@ class FoodSuggestItemSmall extends StatelessWidget {
           Gap(10.w),
           Column(
             children: [
-              Icon(
-                FoodModel.foodTest.isFavorite.value ? Icons.favorite : Icons.favorite_border,
-                color: AppColors.primaryColor,
+              InkWell(
+                onTap: () async {
+                  Get.find<AppController>().updateFavorite(recipeModel);
+                },
+                child: Obx(
+                  () => Icon(
+                    Get.find<AppController>().listRecipeUserFavorite.any((element) => element.id == recipeModel.id)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
               ),
               Row(
                 children: [
