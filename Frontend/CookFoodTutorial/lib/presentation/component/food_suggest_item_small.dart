@@ -40,7 +40,7 @@ class FoodSuggestItemSmall extends StatelessWidget {
       child: Row(
         children: [
           AppImageWidget.network(
-            path: recipeModel.imageUrl ?? recipeModel.image ?? "",
+            path: recipeModel.image ?? "",
             height: 56.w,
             width: 66.h,
             fit: BoxFit.cover,

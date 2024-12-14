@@ -57,8 +57,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
           ),
           _buildBtn(
             text: StringConstants.instruction.tr,
-            onPressed: () =>
-                controller.goToGuideScreen(const InstructionScreen()),
+            onPressed: () => controller.goToGuideScreen(const InstructionScreen()),
           ),
           _buildBtn(
             text: StringConstants.rating.tr,
@@ -125,8 +124,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
     );
   }
 
-  Widget _buildDivider() => const Divider(color: AppColors.dsGray2)
-      .paddingAll(AppDimens.paddingMedium);
+  Widget _buildDivider() => const Divider(color: AppColors.dsGray2).paddingAll(AppDimens.paddingMedium);
 
   Widget _buildFoodType() {
     return UtilWidget.buildText(
@@ -181,9 +179,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
       clipBehavior: Clip.hardEdge,
       child: ClipRRect(
         child: AppImageWidget.network(
-          path: controller.recipeModel.imageUrl ??
-              controller.recipeModel.image ??
-              "",
+          path: controller.recipeModel.image ?? "",
           fit: BoxFit.cover,
           width: Get.width / 2,
           height: Get.width / 2,
@@ -217,12 +213,8 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
           () => IconButton(
             onPressed: FoodModel.foodTest.isFavorite.toggle,
             icon: Icon(
-              FoodModel.foodTest.isFavorite.value
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              color: FoodModel.foodTest.isFavorite.value
-                  ? AppColors.primaryColor
-                  : null,
+              FoodModel.foodTest.isFavorite.value ? Icons.favorite : Icons.favorite_border,
+              color: FoodModel.foodTest.isFavorite.value ? AppColors.primaryColor : null,
             ),
           ),
         ),

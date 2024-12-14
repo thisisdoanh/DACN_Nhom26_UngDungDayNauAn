@@ -149,7 +149,7 @@ class FoodCard extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             child: ClipRRect(
               child: AppImageWidget.network(
-                path: recipeModel.imageUrl ?? recipeModel.image ?? "",
+                path: recipeModel.image ?? "",
                 width: 80.r,
                 height: 80.r,
                 fit: BoxFit.cover,

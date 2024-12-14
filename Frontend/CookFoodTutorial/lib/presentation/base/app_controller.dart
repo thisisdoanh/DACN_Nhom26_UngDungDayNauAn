@@ -9,6 +9,7 @@ import '../../data/model/category_response_model.dart';
 class AppController extends SuperController {
   RxList<CategoryModel> listCategory = RxList();
   RxList<RecipeModel> listRecipe = RxList();
+  RxList<RecipeModel> listRecipeUserFavorite = RxList();
   RxList<RecipeModel> listRecipeHighRating = RxList();
   RxList<RecipeModel> listRecipeRandom = RxList();
 
