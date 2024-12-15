@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_controller.dart';
+
+import 'suggest_food_controller.dart';
 
 class SuggestFoodBinding extends Bindings {
   @override

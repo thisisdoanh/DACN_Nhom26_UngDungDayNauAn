@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
 import 'package:tutorial/presentation/component/backgroud_screen.dart';
-import 'package:tutorial/presentation/component/food_suggest_item.dart';
-import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
-import 'package:tutorial/presentation/view/screen/favourite_food/favourite_food_controller.dart';
-import 'package:tutorial/res/string/app_string.dart';
 
-class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
+import '../../../component/food_suggest_item.dart';
+import '../../../component/search_widget.dart';
+import 'favourite_food_controller.dart';
+
+class FavouriteFoodScreen extends AppBaseScreen<FavouriteFoodController> {
   const FavouriteFoodScreen({super.key});
 
   @override
@@ -51,15 +51,10 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
           crossAxisSpacing: AppDimens.paddingMedium,
           mainAxisSpacing: AppDimens.paddingMedium,
         ),
-        itemCount: controller.appController.listRecipe.length,
+        itemCount: controller.listRecipeFilter.length,
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              Get.toNamed(AppRoute.foodDetailScreen);
-            },
-            child: FoodCard(
-              recipeModel: controller.appController.listRecipe[index],
-            ),
+          return FoodCard(
+            recipeModel: controller.listRecipeFilter[index],
           );
         },
       ),
@@ -80,7 +75,9 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
     return AppTouchable(
       onPressed: () => controller.appController.showFilterBottomSheet(
         controller.listRecipe.toList(),
-        (p0) {},
+        (p0) {
+          controller.listRecipeFilter.value = p0;
+        },
       ),
       height: AppDimens.sizeTextField,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
@@ -95,25 +92,15 @@ class FavouriteFoodScreen extends AppBaseScreen<FavoriteFoodController> {
 
   Widget _buildTextFieldSearch() {
     return Expanded(
-      child: AppTextField(
-        hintText: StringConstants.searchRecipe.tr,
-        backgroundColor: AppColors.transparent,
-        border: Border.all(
-          color: AppColors.white,
-          width: 1,
-        ),
-        suffixIcon: const Icon(
-          Icons.search,
-          color: AppColors.white,
-        ),
-        borderRadius: BorderRadius.circular(AppDimens.radius8),
+      child: SearchWidget(
+        listRecipe: controller.listRecipe.toList(),
       ),
     );
   }
 
   Widget _buildAppBar() {
     return AppBarShare(
-      title: StringConstants.mostFavourite.tr,
+      title: "Được yêu thích nhất",
       action: InkWell(
         onTap: Get.back,
         child: const Icon(
