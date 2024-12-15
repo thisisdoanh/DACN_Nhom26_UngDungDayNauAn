@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/presentation/base/app_base_screen.dart';
+import 'package:tutorial/presentation/base/app_controller.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
 import 'package:tutorial/presentation/component/backgroud_screen.dart';
-import 'package:tutorial/presentation/component/food_suggest_item.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/view/resources/app_color.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
@@ -49,22 +49,101 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
                 children: [
                   _buildFoodNameAndFavour(),
                   _buildTimeAndImage(),
+                  Gap(16.h),
                   _buildDivider(),
+                  Gap(16.h),
                   _buildIngredient(),
+                  Gap(16.h),
+                  _buildDivider(),
+                  Gap(16.h),
+                  _buildReview()
                 ],
               ),
             ),
           ),
           _buildBtn(
             text: StringConstants.instruction.tr,
-            onPressed: () => controller.goToGuideScreen(const InstructionScreen()),
+            onPressed: () =>
+                controller.goToGuideScreen(const InstructionScreen()),
           ),
           _buildBtn(
             text: StringConstants.rating.tr,
-            onPressed: () => controller.goToRatingScreen(const RatingScreen()),
+            onPressed: () {
+              controller.commentCtrl.clear();
+              controller.goToRatingScreen(const RatingScreen());
+            },
           ),
         ],
       ).paddingAll(AppDimens.paddingMedium),
+    );
+  }
+
+  Widget _buildReview() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        UtilWidget.buildText(
+          'Đánh giá',
+          fontSize: AppDimens.fontSmall,
+        ),
+        controller.commentList.isEmpty
+            ? UtilWidget.buildText(
+                'Đánh giá trống!',
+                fontSize: AppDimens.fontSmall,
+              )
+            : ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                itemCount: controller.commentList.length,
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (context, index) =>
+                    _buildDivider().paddingSymmetric(horizontal: 12),
+                itemBuilder: (context, index) {
+                  final comment = controller.commentList[index];
+                  final isMe =
+                      comment.user?.id == controller.appController.userInfo.id;
+                  final indexName = comment.user?.email?.indexOf('@');
+                  return SizedBox(
+                    height: 60,
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(0),
+                      minVerticalPadding: 0,
+                      trailing: isMe
+                          ? Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell(
+                                  onTap: () => controller.deleteComment(
+                                      comment),
+                                  child: const Icon(Icons.delete_sweep),
+                                ),
+                                const Gap(8),
+                                InkWell(
+                                  onTap: () {
+                                    controller.curentStart.value =
+                                        comment.rating?.toInt() ?? 4;
+                                    controller.commentCtrl.text =
+                                        comment.comment ?? "";
+                                    controller.goToRatingScreen(
+                                      RatingScreen(comment: comment),
+                                    );
+                                  },
+                                  child: const Icon(Icons.edit),
+                                ),
+                              ],
+                            )
+                          : null,
+                      title: UtilWidget.buildText(
+                        maxLines: 10,
+                        "${comment.user?.email?.substring(0, indexName) ?? ''}: ${comment.comment ?? ""}",
+                        fontSize: 14,
+                      ),
+                      subtitle: _buildFoodRate(comment.rating?.toDouble() ?? 4),
+                    ),
+                  );
+                },
+              ),
+      ],
     );
   }
 
@@ -97,34 +176,38 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
         ),
         Gap(16.h),
         ListView.builder(
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: controller.recipeModel.ingredients?.length,
-            itemBuilder: (context, index) {
-              final ingreduent = controller.recipeModel.ingredients?[index];
-              return Row(
-                children: [
-                  ClipOval(
-                    child: Container(
-                      height: 4,
-                      width: 4,
-                      color: AppColors.primaryColor,
-                    ),
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: controller.recipeModel.ingredients?.length,
+          itemBuilder: (context, index) {
+            final ingredient = controller.recipeModel.ingredients?[index];
+            return Row(
+              children: [
+                ClipOval(
+                  child: Container(
+                    height: 4,
+                    width: 4,
+                    color: AppColors.primaryColor,
                   ),
-                  Gap(8.w),
-                  UtilWidget.buildText(
-                    "${ingreduent?.name ?? ''}${(ingreduent?.amount?.trim().isEmpty ?? true) ? '' : ' : ${ingreduent?.amount}'}",
+                ),
+                Gap(8.w),
+                Expanded(
+                  child: UtilWidget.buildText(
+                    maxLines: 5,
+                    "${ingredient?.name ?? ''}${(ingredient?.amount?.trim().isEmpty ?? true) ? '' : ' : ${ingredient?.amount}'}",
                     fontSize: AppDimens.font14,
                   ),
-                ],
-              ).paddingOnly(bottom: AppDimens.paddingLittleSmall);
-            })
+                ),
+              ],
+            ).paddingOnly(bottom: AppDimens.paddingLittleSmall);
+          },
+        )
       ],
     );
   }
 
-  Widget _buildDivider() => const Divider(color: AppColors.dsGray2).paddingAll(AppDimens.paddingMedium);
+  Widget _buildDivider() => const Divider(color: AppColors.dsGray2);
 
   Widget _buildFoodType() {
     return UtilWidget.buildText(
@@ -141,7 +224,7 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildFoodType(),
-            _buildFoodRate(),
+            _buildFoodRate(controller.recipeModel.rating ?? 4),
             _buildRowCustom(
               Icons.timer_outlined,
               controller.recipeModel.cookTime ?? '',
@@ -188,9 +271,9 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
     );
   }
 
-  Widget _buildFoodRate() {
+  Widget _buildFoodRate(double rate) {
     return RatingBarIndicator(
-      rating: controller.recipeModel.rating ?? 4,
+      rating: rate,
       itemBuilder: (context, index) => const Icon(
         Icons.star,
         color: AppColors.primaryColor,
@@ -198,28 +281,36 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
       itemCount: 5,
       itemSize: 20.0,
       direction: Axis.horizontal,
-    ).paddingSymmetric(vertical: 12);
+    ).paddingSymmetric(vertical: 4);
   }
 
   Widget _buildFoodNameAndFavour() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        UtilWidget.buildText(
-          controller.recipeModel.recipeName ?? '',
-          fontSize: AppDimens.fontMedium,
+        Flexible(
+          child: UtilWidget.buildText(
+            controller.recipeModel.recipeName ?? '',
+            fontSize: AppDimens.fontMedium,
+          ),
         ),
-        Obx(
-          () => IconButton(
-            onPressed: FoodModel.foodTest.isFavorite.toggle,
-            icon: Icon(
-              FoodModel.foodTest.isFavorite.value ? Icons.favorite : Icons.favorite_border,
-              color: FoodModel.foodTest.isFavorite.value ? AppColors.primaryColor : null,
+        InkWell(
+          onTap: () async {
+            Get.find<AppController>().updateFavorite(controller.recipeModel);
+          },
+          child: Obx(
+            () => Icon(
+              Get.find<AppController>()
+                      .listRecipeUserFavorite
+                      .any((element) => element.id == controller.recipeModel.id)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              color: AppColors.primaryColor,
             ),
           ),
         ),
       ],
-    );
+    ).paddingSymmetric(vertical: 12);
   }
 
   Widget _buildAppBar() {

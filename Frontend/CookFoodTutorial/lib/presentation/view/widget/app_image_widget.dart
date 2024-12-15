@@ -149,14 +149,19 @@ class AppImageWidget extends StatelessWidget {
 
   ImageType get imageType {
     int length = path.length;
-    String lastString = path.substring(length - 5).toUpperCase();
-    if (lastString.contains('.json'.toUpperCase())) {
-      return ImageType.lottie;
-    } else if (lastString.contains('.svg'.toUpperCase())) {
-      return ImageType.svg;
-    } else {
-      return ImageType.image;
-    }
+  try {
+        String lastString = path.substring(length - 5).toUpperCase();
+      if (lastString.contains('.json'.toUpperCase())) {
+        return ImageType.lottie;
+      } else if (lastString.contains('.svg'.toUpperCase())) {
+        return ImageType.svg;
+      } else {
+        return ImageType.image;
+      }
+  } catch (e) {
+    return ImageType.image;
+  }
+
   }
 }
 

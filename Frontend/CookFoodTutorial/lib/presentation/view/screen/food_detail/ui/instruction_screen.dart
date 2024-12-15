@@ -15,15 +15,17 @@ class InstructionScreen extends AppBaseScreen<FoodDetailController> {
   FoodDetailController get controller => Get.find<FoodDetailController>();
   @override
   Widget buildWidget() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildFoodType(),
-          _buildTimer(),
-          _buildDivider(),
-          _buildMaking()
-        ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildFoodType(),
+            _buildTimer(),
+            _buildDivider(),
+            _buildMaking()
+          ],
+        ),
       ),
     );
   }
@@ -32,37 +34,40 @@ class InstructionScreen extends AppBaseScreen<FoodDetailController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        UtilWidget.buildText(StringConstants.making.tr,
-            fontSize: AppDimens.fontSmall),
+        UtilWidget.buildText(
+          StringConstants.making.tr,
+          fontSize: AppDimens.fontSmall,
+        ),
         Gap(16.h),
         ListView.builder(
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: controller.recipeModel.instructions?.length,
-            itemBuilder: (context, index) {
-              final ingreduent = controller.recipeModel.instructions?[index];
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipOval(
-                    child: Container(
-                      height: 4,
-                      width: 4,
-                      color: AppColors.primaryColor,
-                    ).paddingAll(8),
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: controller.recipeModel.instructions?.length,
+          itemBuilder: (context, index) {
+            final ingreduent = controller.recipeModel.instructions?[index];
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipOval(
+                  child: Container(
+                    height: 4,
+                    width: 4,
+                    color: AppColors.primaryColor,
+                  ).paddingAll(8),
+                ),
+                Gap(8.w),
+                Flexible(
+                  child: UtilWidget.buildText(
+                    maxLines: 10,
+                    ingreduent?.description ?? '',
+                    fontSize: AppDimens.font14,
                   ),
-                  Gap(8.w),
-                  Flexible(
-                    child: UtilWidget.buildText(
-                      maxLines: 5,
-                      ingreduent?.description ?? '',
-                      fontSize: AppDimens.font14,
-                    ),
-                  ),
-                ],
-              ).paddingOnly(bottom: AppDimens.paddingLittleSmall);
-            })
+                ),
+              ],
+            ).paddingOnly(bottom: AppDimens.paddingLittleSmall);
+          },
+        ),
       ],
     );
   }

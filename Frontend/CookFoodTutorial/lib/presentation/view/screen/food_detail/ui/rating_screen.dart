@@ -3,16 +3,18 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:tutorial/data/model/comment_response.dart';
 import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
-import 'package:tutorial/presentation/view/resources/app_color.dart';
+import 'package:tutorial/presentation/view/app_view.dart';
 import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 import 'package:tutorial/presentation/view/screen/food_detail/food_detail_controller.dart';
 import 'package:tutorial/presentation/view/widget/app_outline_button.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
 class RatingScreen extends AppBaseScreen<FoodDetailController> {
-  const RatingScreen({super.key});
+  const RatingScreen({super.key, this.comment});
+  final CommentModel? comment;
 
   @override
   Widget buildWidget() {
@@ -23,8 +25,9 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
           margin: const EdgeInsetsDirectional.all(AppDimens.paddingMedium),
           padding: const EdgeInsetsDirectional.all(AppDimens.paddingMedium),
           decoration: BoxDecoration(
-              color: AppColors.colorBackgrounDialog,
-              borderRadius: BorderRadius.circular(AppDimens.radius16)),
+            color: AppColors.colorBackgrounDialog,
+            borderRadius: BorderRadius.circular(AppDimens.radius16),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,16 +35,17 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
               _buildLableScreen(),
               _buildDivider(),
               _buildRateFood(),
+              _buildInputComment(),
               _buildDivider(),
               Row(
                 children: [
-                  _buildBtnConfirm(
-                      isConfirm: false,
-                      onConfirm: () {
-                        Get.back();
-                      }),
+                  _buildBtnConfirm(isConfirm: false),
                   Gap(12.w),
-                  _buildBtnConfirm(onConfirm: Get.back),
+                  _buildBtnConfirm(
+                    onConfirm: () => comment != null
+                        ? controller.updateComment(comment?.commentIndex ?? "")
+                        : controller.createComment(),
+                  ),
                 ],
               ),
             ],
@@ -51,8 +55,21 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
     );
   }
 
+  Widget _buildInputComment() {
+    return AppTextField(
+      maxLines: null,
+      height: null,
+      maxLength: 255,
+      textEditingController: controller.commentCtrl,
+      hintText: 'Nhập đánh giá',
+      borderRadius: BorderRadius.circular(AppDimens.radius8),
+      border: Border.all(color: AppColors.dsGray4, width: 1),
+      backgroundColor: AppColors.transparent,
+    ).paddingSymmetric(vertical: 16);
+  }
+
   Widget _buildBtnConfirm({
-    required VoidCallback onConfirm,
+    VoidCallback? onConfirm,
     bool isConfirm = true,
   }) {
     return Expanded(

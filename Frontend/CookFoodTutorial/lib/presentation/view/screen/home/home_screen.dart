@@ -119,7 +119,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           child: Obx(
             () => ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: min(controller.appController.listRecipeHighRating.length, 5),
+              itemCount:
+                  min(controller.appController.listRecipeHighRating.length, 5),
               shrinkWrap: true,
               itemBuilder: (context, index) => Container(
                 height: 210.h,
@@ -128,7 +129,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                   right: 10.w,
                 ),
                 child: FoodCard(
-                  recipeModel: controller.appController.listRecipeHighRating[index],
+                  recipeModel:
+                      controller.appController.listRecipeHighRating[index],
                   timerIcon: Icons.timer,
                   timerColor: AppColors.white,
                 ),
@@ -169,7 +171,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
         Gap(10.h),
         Obx(
           () => ListView.separated(
-            itemCount: min(controller.appController.listRecipeRandom.length, 10),
+            itemCount:
+                min(controller.appController.listRecipeRandom.length, 10),
             shrinkWrap: true,
             primary: false,
             padding: EdgeInsets.zero,
@@ -178,8 +181,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                 height: 8.sp,
               );
             },
-            itemBuilder: (context, index) =>
-                FoodSuggestItemSmall(recipeModel: controller.appController.listRecipeRandom[index]),
+            itemBuilder: (context, index) => FoodSuggestItemSmall(
+                recipeModel: controller.appController.listRecipeRandom[index]),
           ),
         ),
         Gap(20.h),
@@ -202,7 +205,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
         children: [
           Expanded(
             child: SearchField<RecipeModel>(
-              suggestionStyle: const TextStyle(fontSize: 18, color: Colors.pink),
+              suggestionStyle:
+                  const TextStyle(fontSize: 18, color: Colors.pink),
               suggestions: controller.appController.listRecipe
                   .map(
                     (element) => SearchFieldListItem<RecipeModel>(
@@ -225,7 +229,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                   color: AppColors.white,
                 ),
                 cursorColor: AppColors.white,
-                contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               ),
               suggestionsDecoration: SuggestionDecoration(
                 color: AppColors.colorBackgrounDialog,
@@ -283,7 +288,10 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     );
   }
 
-  _buildItemDrawer({required Function() function, required String icon, required String title}) {
+  _buildItemDrawer(
+      {required Function() function,
+      required String icon,
+      required String title}) {
     return AppTouchable(
       onPressed: function,
       child: Row(

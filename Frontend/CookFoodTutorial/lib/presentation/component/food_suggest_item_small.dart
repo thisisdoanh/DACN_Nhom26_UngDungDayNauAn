@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
-import 'package:tutorial/presentation/component/food_suggest_item.dart';
 
 import '../base/app_controller.dart';
 import '../view/app_view.dart';
@@ -40,11 +39,14 @@ class FoodSuggestItemSmall extends StatelessWidget {
       ),
       child: Row(
         children: [
-          AppImageWidget.network(
-            path: recipeModel.image ?? "",
-            height: 56.w,
-            width: 66.h,
-            fit: BoxFit.cover,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: AppImageWidget.network(
+              path: recipeModel.image ?? "",
+              height: 56.w,
+              width: 66.h,
+              fit: BoxFit.cover,
+            ),
           ),
           Gap(10.w),
           Expanded(
@@ -84,7 +86,9 @@ class FoodSuggestItemSmall extends StatelessWidget {
                 },
                 child: Obx(
                   () => Icon(
-                    Get.find<AppController>().listRecipeUserFavorite.any((element) => element.id == recipeModel.id)
+                    Get.find<AppController>()
+                            .listRecipeUserFavorite
+                            .any((element) => element.id == recipeModel.id)
                         ? Icons.favorite
                         : Icons.favorite_border,
                     color: AppColors.primaryColor,

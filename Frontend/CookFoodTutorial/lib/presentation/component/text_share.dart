@@ -17,7 +17,7 @@ class UtilWidget {
     String? fontFamily = "Lora",
   }) {
     return AutoSizeText(text.tr,
-        maxLines: maxLines ?? 1,
+        maxLines: maxLines,
         overflow: TextOverflow.ellipsis,
         textAlign: textAlign,
         style: Get.textTheme.bodySmall?.copyWith(

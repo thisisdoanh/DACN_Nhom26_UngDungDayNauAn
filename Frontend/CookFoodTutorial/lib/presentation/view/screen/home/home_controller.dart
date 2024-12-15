@@ -21,7 +21,8 @@ class HomeController extends AppBaseController {
         )
         .toList();
 
-    appController.listRecipeRandom.value = (appController.listRecipe.toList()..shuffle()).toList();
+    appController.listRecipeRandom.value =
+        (appController.listRecipe.toList()..shuffle()).toList();
     super.onInit();
   }
 
@@ -35,8 +36,10 @@ class HomeController extends AppBaseController {
 
   Future getUserInfo() async {
     appController.userInfo = await ApiService.getUserInfo() ?? UserInfo();
-    appController.listRecipeUserFavorite.value = await ApiService.getRecipeFavorite(appController.userInfo.id ?? 1);
-    AppLog.info(appController.listRecipeUserFavorite.value, tag: "appController.listRecipeUserFavorite.value");
+    appController.listRecipeUserFavorite.value =
+        await ApiService.getRecipeFavorite(appController.userInfo.id ?? 1);
+    AppLog.info(appController.listRecipeUserFavorite.value,
+        tag: "appController.listRecipeUserFavorite.value");
   }
 
   Future getListRecipe() async {
@@ -73,8 +76,9 @@ class HomeController extends AppBaseController {
       return;
     }
     appController.listRecipeHistory.add(recipeModel);
-    Get.toNamed(AppRoute.foodDetailScreen, arguments: {
-      "recipe_model": recipeModel,
-    });
+    Get.toNamed(
+      AppRoute.foodDetailScreen,
+      arguments: recipeModel,
+    );
   }
 }

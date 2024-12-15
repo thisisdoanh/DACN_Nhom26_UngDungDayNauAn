@@ -25,6 +25,7 @@ class AppTextField extends StatelessWidget {
   final BoxBorder? border;
   final BorderRadiusGeometry? borderRadius;
   final TextInputAction? textInputAction;
+  final double? height;
 
   const AppTextField({
     super.key,
@@ -47,6 +48,7 @@ class AppTextField extends StatelessWidget {
     this.border,
     this.borderRadius,
     this.textInputAction,
+    this.height = AppDimens.sizeTextField,
   });
 
   @override
@@ -55,7 +57,7 @@ class AppTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: AppDimens.sizeTextField,
+          height: height,
           decoration: BoxDecoration(
             color: backgroundColor ?? AppColors.white,
             borderRadius: borderRadius,
@@ -89,7 +91,8 @@ class AppTextField extends StatelessWidget {
                     horizontal: 16.0.sp,
                   ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: outlineColor ?? Colors.transparent),
+                borderSide:
+                    BorderSide(color: outlineColor ?? Colors.transparent),
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               errorBorder: OutlineInputBorder(
@@ -97,7 +100,8 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: outlineColor ?? Colors.transparent),
+                borderSide:
+                    BorderSide(color: outlineColor ?? Colors.transparent),
                 borderRadius: BorderRadius.circular(8.0.sp),
               ),
               hintText: hintText,
