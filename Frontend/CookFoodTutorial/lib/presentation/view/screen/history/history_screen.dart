@@ -8,10 +8,10 @@ import 'package:tutorial/presentation/view/resources/app_dimen.dart';
 
 import '../../../component/food_suggest_item.dart';
 import '../../../component/search_widget.dart';
-import 'user_favourite_food_controller.dart';
+import 'history_controller.dart';
 
-class UserFavouriteFoodScreen extends AppBaseScreen<UserFavoriteFoodController> {
-  const UserFavouriteFoodScreen({super.key});
+class HistoryScreen extends AppBaseScreen<HistoryController> {
+  const HistoryScreen({super.key});
 
   @override
   Widget buildWidget() {
@@ -100,7 +100,7 @@ class UserFavouriteFoodScreen extends AppBaseScreen<UserFavoriteFoodController> 
 
   Widget _buildAppBar() {
     return AppBarShare(
-      title: "Yêu thích",
+      title: "Đã xem gần đây",
       action: InkWell(
         onTap: Get.back,
         child: const Icon(
