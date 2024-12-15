@@ -65,7 +65,7 @@ class HomeController extends AppBaseController {
   }
 
   void onPressHistory() {
-    // Get.toNamed(AppRoute.favouriteFoodSreen);
+    Get.toNamed(AppRoute.historyScreen);
   }
 
   void onPressLogout() {}

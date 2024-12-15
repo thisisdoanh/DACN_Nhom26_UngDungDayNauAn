@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:searchfield/searchfield.dart';
-import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
 import 'package:tutorial/presentation/component/backgroud_screen.dart';
 import 'package:tutorial/presentation/component/food_suggest_item.dart';
 import 'package:tutorial/presentation/component/food_suggest_item_small.dart';
+import 'package:tutorial/presentation/component/search_widget.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
@@ -191,56 +190,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
   }
 
   Widget _buildSearchBar() {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.transparent,
-        border: Border.all(
-          color: AppColors.white,
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(AppDimens.radius8),
-      ),
-      alignment: Alignment.center,
-      child: Row(
-        children: [
-          Expanded(
-            child: SearchField<RecipeModel>(
-              suggestionStyle:
-                  const TextStyle(fontSize: 18, color: Colors.pink),
-              suggestions: controller.appController.listRecipe
-                  .map(
-                    (element) => SearchFieldListItem<RecipeModel>(
-                      element.recipeName ?? "Unknown",
-                      item: element,
-                      child: Text(
-                        element.recipeName ?? "Unknown",
-                      ),
-                    ),
-                  )
-                  .toList(),
-              onSuggestionTap: (p0) {
-                controller.onPressItemRecipe(p0.item);
-              },
-              searchInputDecoration: SearchInputDecoration(
-                hintText: StringConstants.searchRecipe.tr,
-                hintStyle: AppTextTheme.labelLarge(AppColors.dsGray4),
-                suffixIcon: const Icon(
-                  Icons.search,
-                  color: AppColors.white,
-                ),
-                cursorColor: AppColors.white,
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              ),
-              suggestionsDecoration: SuggestionDecoration(
-                color: AppColors.colorBackgrounDialog,
-                borderRadius: BorderRadius.circular(20.sp),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return SearchWidget(
+        listRecipe: controller.appController.listRecipe.toList());
   }
 
   Widget _buildUserInfo(BuildContext context) {

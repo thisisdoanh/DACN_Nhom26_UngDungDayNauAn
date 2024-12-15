@@ -7,6 +7,7 @@ import 'package:tutorial/presentation/view/screen/food_detail/food_detail_bindin
 import 'package:tutorial/presentation/view/screen/food_detail/ui/food_detail_screen.dart';
 import 'package:tutorial/presentation/view/screen/forgot_password/forgot_pass_binding.dart';
 import 'package:tutorial/presentation/view/screen/forgot_password/ui/forgot_pass_screen.dart';
+import 'package:tutorial/presentation/view/screen/history/history_binding.dart';
 import 'package:tutorial/presentation/view/screen/home/home_binding.dart';
 import 'package:tutorial/presentation/view/screen/home/home_screen.dart';
 import 'package:tutorial/presentation/view/screen/splash/splash_binding.dart';
@@ -14,6 +15,7 @@ import 'package:tutorial/presentation/view/screen/splash/splash_screen.dart';
 import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_binding.dart';
 import 'package:tutorial/presentation/view/screen/suggest_food/suggest_food_screen.dart';
 
+import '../view/screen/history/history_screen.dart';
 import '../view/screen/login/login_binding.dart';
 import '../view/screen/login/login_screen.dart';
 import '../view/screen/register/register_binding.dart';
@@ -73,6 +75,11 @@ class AppPage {
       name: AppRoute.userFavoriteScreen,
       page: () => const UserFavouriteFoodScreen(),
       binding: UserFavouriteFoodBinding(),
+    ),
+    GetPage(
+      name: AppRoute.historyScreen,
+      page: () => const HistoryScreen(),
+      binding: HistoryBinding(),
     ),
   ];
 }
