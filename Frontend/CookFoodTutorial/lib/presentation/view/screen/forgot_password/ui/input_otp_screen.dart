@@ -50,15 +50,13 @@ class InputOtpScreen extends AppBaseScreen<ForgotPassController> {
         visible: controller.isActiveBtnOtp.value,
         child: AppOutlineButton(
           color: AppColors.primaryColor,
-          onPressed: controller.verifyOtp,
+          onPressed: controller.inputOtp,
           borderRadius: BorderRadius.circular(20.sp),
           width: double.infinity,
           height: AppDimens.btnDefault,
           child: Text(
             StringConstants.next.tr,
-            style: AppTextTheme.headlineSmall(
-              AppColors.white
-            )?.copyWith(
+            style: AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
               fontWeight: FontWeight.w700,
             ),
           ),

@@ -119,7 +119,7 @@ class VerifyAccSuccessScreen extends AppBaseScreen<ForgotPassController> {
   Widget _buildBtnContinue() {
     return AppOutlineButton(
       color: AppColors.primaryColor,
-      onPressed: () => controller.forgotPassSuccess(),
+      onPressed: () => controller.verifyAcc(),
       borderRadius: BorderRadius.circular(20.sp),
       width: double.infinity,
       height: AppDimens.btnDefault,

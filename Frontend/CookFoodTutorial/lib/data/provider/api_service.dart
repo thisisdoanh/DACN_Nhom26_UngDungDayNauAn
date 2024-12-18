@@ -15,7 +15,8 @@ import 'api_constant.dart';
 class ApiService {
   ApiService._();
 
-  static Future<UserToken?> getVerifyAccount({required String mail, required String password}) async {
+  static Future<UserToken?> getVerifyAccount(
+      {required String mail, required String password}) async {
     BaseResponse response = await ApiClient.instance.request(
         endPoint: ApiConstant.epAuthToken,
         method: ApiClient.post,
@@ -29,13 +30,18 @@ class ApiService {
 
       return userToken;
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
 
       return Future.value(null);
     }
   }
 
-  static Future<UserInfo?> createAccount({required String mail, required String password, required String name}) async {
+  static Future<UserInfo?> createAccount(
+      {required String mail,
+      required String password,
+      required String name}) async {
     Map<String, String> mapName = splitName(name);
     BaseResponse response = await ApiClient.instance.request(
       endPoint: ApiConstant.epRegister,
@@ -57,7 +63,9 @@ class ApiService {
 
       return userInfo;
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
 
       return Future.value(null);
     }
@@ -70,11 +78,14 @@ class ApiService {
     );
 
     if (response.result == true) {
-      UserInfoResponse userInfoResponse = UserInfoResponse.fromMap(response.data);
+      UserInfoResponse userInfoResponse =
+          UserInfoResponse.fromMap(response.data);
 
       return userInfoResponse.data;
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
 
       return Future.value(null);
     }
@@ -87,11 +98,14 @@ class ApiService {
     );
 
     if (response.result == true) {
-      CategoryResponse categoryResponse = CategoryResponse.fromMap(response.data);
+      CategoryResponse categoryResponse =
+          CategoryResponse.fromMap(response.data);
 
       return categoryResponse.data ?? [];
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
 
       return Future.value([]);
     }
@@ -108,7 +122,9 @@ class ApiService {
 
       return recipeResponse.data?.items ?? [];
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
 
       return Future.value([]);
     }
@@ -128,22 +144,64 @@ class ApiService {
 
       return recipeResponse.data?.items ?? [];
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
 
       return Future.value([]);
     }
   }
 
-  static Future<bool> getOtp(String email) async {
+  static Future<bool> forgotPass(String email) async {
     BaseResponse response = await ApiClient.instance.request(
-      endPoint: ApiConstant.epOtp + email,
-      method: ApiClient.get,
+      endPoint: ApiConstant.epForgotPass + email,
+      method: ApiClient.post,
     );
 
     if (response.result == true) {
       return true;
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
+
+      return false;
+    }
+  }
+
+  static Future<bool> inputOtp(String email, String otp) async {
+    BaseResponse response = await ApiClient.instance.request(
+      endPoint: "${ApiConstant.epInputOtp}$email/$otp",
+      method: ApiClient.post,
+    );
+
+    if (response.result == true) {
+      return true;
+    } else {
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
+
+      return false;
+    }
+  }
+
+  static Future<bool> verifyAcc(String email, String pass) async {
+    BaseResponse response = await ApiClient.instance.request(
+      endPoint: ApiConstant.epForgotPass + email,
+      method: ApiClient.post,
+      formData: {
+        "password": pass,
+        "repeatPassword": pass,
+      },
+    );
+
+    if (response.result == true) {
+      return true;
+    } else {
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
 
       return false;
     }
@@ -170,7 +228,9 @@ class ApiService {
   }
 
   static Future<bool> deleteComment(
-      {required int? userId, required int? recipeId, required String commentIndex}) async {
+      {required int? userId,
+      required int? recipeId,
+      required String commentIndex}) async {
     BaseResponse response = await ApiClient.instance.request(
       endPoint: '${ApiConstant.epComment}/$userId/$recipeId/$commentIndex',
       method: ApiClient.delete,
@@ -179,7 +239,9 @@ class ApiService {
     if (response.result == true) {
       return true;
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
       return false;
     }
   }
@@ -194,7 +256,9 @@ class ApiService {
       CommentResponse res = CommentResponse.fromJson(response.data);
       return res.data ?? [];
     } else {
-      showToast((response.message ?? '').isEmpty ? 'Unknown error' : (response.message ?? ''));
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
 
       return [];
     }

@@ -65,7 +65,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                 ),
               ),
               TextSpan(
-                text: ' Denny',
+                text: ' ${controller.appController.userInfo.lastName}',
                 style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: 23.sp,
@@ -114,11 +114,12 @@ class HomeScreen extends AppBaseScreen<HomeController> {
         ),
         Gap(10.h),
         SizedBox(
-          height: 210.h,
+          height: 270.h,
           child: Obx(
             () => ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: min(controller.appController.listRecipeHighRating.length, 5),
+              itemCount:
+                  min(controller.appController.listRecipeHighRating.length, 5),
               shrinkWrap: true,
               itemBuilder: (context, index) => Container(
                 height: 210.h,
@@ -127,7 +128,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                   right: 10.w,
                 ),
                 child: FoodCard(
-                  recipeModel: controller.appController.listRecipeHighRating[index],
+                  recipeModel:
+                      controller.appController.listRecipeHighRating[index],
                   timerIcon: Icons.timer,
                   timerColor: AppColors.white,
                 ),
@@ -168,7 +170,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
         Gap(10.h),
         Obx(
           () => ListView.separated(
-            itemCount: min(controller.appController.listRecipeRandom.length, 10),
+            itemCount:
+                min(controller.appController.listRecipeRandom.length, 10),
             shrinkWrap: true,
             primary: false,
             padding: EdgeInsets.zero,
@@ -177,8 +180,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                 height: 8.sp,
               );
             },
-            itemBuilder: (context, index) =>
-                FoodSuggestItemSmall(recipeModel: controller.appController.listRecipeRandom[index]),
+            itemBuilder: (context, index) => FoodSuggestItemSmall(
+                recipeModel: controller.appController.listRecipeRandom[index]),
           ),
         ),
         Gap(20.h),
@@ -187,7 +190,8 @@ class HomeScreen extends AppBaseScreen<HomeController> {
   }
 
   Widget _buildSearchBar() {
-    return SearchWidget(listRecipe: controller.appController.listRecipe.toList());
+    return SearchWidget(
+        listRecipe: controller.appController.listRecipe.toList());
   }
 
   Widget _buildUserInfo(BuildContext context) {
@@ -205,17 +209,19 @@ class HomeScreen extends AppBaseScreen<HomeController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Denny',
+                controller.appController.userInfo.lastName ?? '',
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 28.sp,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              UtilWidget.buildText(
-                StringConstants.personalInfo,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
+              Expanded(
+                child: UtilWidget.buildText(
+                  controller.appController.userInfo.email ?? '',
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                ),
               )
             ],
           ),
@@ -235,7 +241,10 @@ class HomeScreen extends AppBaseScreen<HomeController> {
     );
   }
 
-  _buildItemDrawer({required Function() function, required String icon, required String title}) {
+  _buildItemDrawer(
+      {required Function() function,
+      required String icon,
+      required String title}) {
     return AppTouchable(
       onPressed: function,
       child: Row(
