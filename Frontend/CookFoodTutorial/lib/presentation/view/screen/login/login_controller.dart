@@ -56,8 +56,7 @@ class LoginController extends AppBaseController {
 
   void onPressLogin() async {
     AppLog.info("onPressLogin");
-    Get.offAllNamed(AppRoute.homeScreen);
-    return;
+
     if (_validate()) {
       showLoading();
       UserToken? userToken = await ApiService.getVerifyAccount(

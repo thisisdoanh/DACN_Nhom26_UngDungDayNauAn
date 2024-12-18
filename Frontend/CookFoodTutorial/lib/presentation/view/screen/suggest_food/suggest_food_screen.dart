@@ -64,7 +64,6 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
                 );
               },
             ),
-
     );
   }
 
@@ -81,7 +80,6 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
   Widget _buildIconFilter() {
     return AppTouchable(
       onPressed: () => controller.appController.showFilterBottomSheet(
-
         controller.listRecipe.toList(),
         (p0) {
           controller.listRecipeFilter.value = p0;
@@ -90,9 +88,7 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
       height: AppDimens.sizeTextField,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimens.radius8),
-          border: Border.all(color: AppColors.white)),
-
+          borderRadius: BorderRadius.circular(AppDimens.radius8), border: Border.all(color: AppColors.white)),
       child: const Icon(
         Icons.filter_alt_rounded,
         color: AppColors.white,
@@ -102,7 +98,6 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   Widget _buildTextFieldSearch() {
     return Expanded(
-
       child: SearchWidget(
         listRecipe: controller.listRecipe.toList(),
       ),
@@ -111,7 +106,7 @@ class SuggestFoodScreen extends AppBaseScreen<SuggestFoodController> {
 
   Widget _buildAppBar() {
     return AppBarShare(
-      title: "Được yêu thích nhất",
+      title: "Gợi ý",
       action: InkWell(
         onTap: Get.back,
         child: const Icon(

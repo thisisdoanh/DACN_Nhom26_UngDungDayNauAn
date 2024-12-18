@@ -14,6 +14,7 @@ class AppImage {
   static const String icFavorite = '${_internalImagePathSvg}ic_favorite.svg';
   static const String icHistory = '${_internalImagePathSvg}ic_history.svg';
   static const String icHome = '${_internalImagePathSvg}ic_home.svg';
+  static const String icLogOut = '${_internalImagePathSvg}ic_log_out.svg';
 
   ///PNG
   static const String imgLogo = '${_internalImagePathPng}img_logo.png';

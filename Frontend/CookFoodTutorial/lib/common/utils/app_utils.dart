@@ -110,3 +110,24 @@ int parseTimeToMinutes(String? time) {
 
   return totalMinutes.toInt();
 }
+
+Map<String, String> splitName(String fullName) {
+  // Loại bỏ khoảng trắng đầu và cuối
+  fullName = fullName.trim();
+
+  // Chia chuỗi thành danh sách các từ
+  List<String> parts = fullName.split(' ');
+
+  if (parts.length < 2) {
+    // Nếu chỉ có một từ, gán nó vào firstName và để lastName trống
+    return {'firstName': fullName, 'lastName': ''};
+  }
+
+  // Lấy firstName là các từ trừ từ cuối cùng
+  String firstName = parts.sublist(0, parts.length - 1).join(' ');
+
+  // Lấy lastName là từ cuối cùng
+  String lastName = parts.last;
+
+  return {'firstName': firstName, 'lastName': lastName};
+}
