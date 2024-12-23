@@ -1,0 +1,20 @@
+
+spring:
+  application:
+    name: CookingApp
+
+  profiles:
+    active: dev
+
+  main:
+    allow-circular-references: true
+
+
+openapi:
+  service:
+    api-docs: api-service
+    server: http://localhost:${server.port}
+    title: API Service
+    version: 1.0.0
+
+
