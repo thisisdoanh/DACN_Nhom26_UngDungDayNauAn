@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:sds_core/core_src.dart';
-import 'package:sds_shared_dep/sds_shared_dep.dart';
-import '../../../account_src.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:tutorial/presentation/base/app_base_widget.dart';
+import 'package:tutorial/presentation/view/screen/biometric/biometric.src.dart';
+import 'package:tutorial/presentation/view/widget/app_image_widget.dart';
 
-class BiometricLogin extends BaseGetWidget<BiometricController> {
+class BiometricLogin extends AppBaseWidget<BiometricController> {
   final VoidCallback func;
   const BiometricLogin({required this.func, super.key});
 
   @override
   BiometricController get controller => Get.put(BiometricControllerImp());
-
   @override
-  Widget buildWidgets() {
+  Widget buildWidget() {
     return Obx(
       () {
-        return SDSElevatedButton(
-          '',
-          () => controller.showPopupBiometricSupport(func: func),
-          childBtn: SvgPicture.asset(
-            controller.biometric.value.iconSvg,
-            colorFilter:
-                const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-            width: AppDimens.sizeImageSmall,
+        return InkWell(
+          onTap: () => controller.showPopupBiometricSupport(func: func),
+          child: AppImageWidget.asset(
+            path: controller.biometric.value.iconSvg,
+            height: 28.sp,
+            width: 28.sp,
+            color: Colors.white,
           ),
-          borderRadius: const BorderRadius.horizontal(
-            right: Radius.circular(ShareDimens.radius4),
-          ),
-          width: ShareDimens.btnMedium,
         );
       },
     );

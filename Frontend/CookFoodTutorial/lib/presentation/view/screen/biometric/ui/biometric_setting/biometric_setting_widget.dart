@@ -2,109 +2,142 @@ part of 'biometric_setting.dart';
 
 extension BiometricWidget on BiometricSetting {
   Widget _buildBiometricSetting() {
-    return Row(children: [
-      SvgPicture.asset(
-              colorFilter:
-                  const ColorFilter.mode(SharedColors.dsGray2, BlendMode.srcIn),
-              width: AppDimens.btnDsIcon,
-              controller.biometric.value.iconSvg)
-          .paddingSymmetric(horizontal: AppDimens.paddingItemList),
-      Expanded(
-        child: ItemUtils.itemSwitch(
-          title: LocaleKeys.biometric_loginWithBiometric.trParams({
-            'biometric': controller.biometric.value.title,
-          }),
-          value: controller.checkSetBiometric.value,
-          onChanged: (_) async {
-            await controller.authCheck(child: _passAuthWidget());
+    return Row(
+      children: [
+        AppImageWidget.asset(
+          path: controller.biometric.value.iconSvg,
+          height: 28.sp,
+          width: 28.sp,
+          color: Colors.white,
+        ),
+        Gap(20.w),
+        Expanded(
+          child: Text(
+            controller.biometric.value.title,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.sp,
+              fontFamily: 'Lora',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        CupertinoSwitch(
+          trackColor: AppColors.dsGray1,
+          activeColor: AppColors.primaryColor,
+          value: controller.haveBiometric.value,
+          onChanged: (_) {
+            Get.dialog(
+              _buildDialogBiometric(),
+              barrierColor: AppColors.transparent,
+            );
           },
         ),
-      ),
-    ]).paddingSymmetric(vertical: AppDimens.defaultPadding);
+      ],
+    );
   }
 
-  Widget _passAuthWidget() {
-    return Obx(
-      () => Form(
-        key: controller.formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            UtilWidget.buildText(
-              LocaleKeys.biometric_password.tr,
-              fontWeight: FontWeight.bold,
-              textAlign: TextAlign.start,
-              fontSize: AppDimens.fontMedium(),
-            ),
-            sdsSizedBox5,
-            UtilWidget.buildText(
-              LocaleKeys.biometric_enterPassword.tr,
-              textAlign: TextAlign.start,
-              fontSize: AppDimens.fontSmall(),
-            ),
-            sdsSizedBoxDefault,
-            _buildPassword(),
-            sdsSizedBoxDefault,
-            if (controller.wrongPassword.value) ...[
-              UtilWidget.buildText(LocaleKeys.login_loginPasswordNotCorrect,
+  Widget _buildDialogBiometric() {
+    return Scaffold(
+      backgroundColor: AppColors.transparent,
+      body: Center(
+        child: Container(
+          margin: const EdgeInsetsDirectional.all(AppDimens.paddingMedium),
+          padding: const EdgeInsetsDirectional.all(AppDimens.paddingMedium),
+          decoration: BoxDecoration(
+            color: AppColors.colorBackgrounDialog,
+            borderRadius: BorderRadius.circular(AppDimens.radius16),
+          ),
+          child: Obx(
+            () => Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                UtilWidget.buildText(
+                  'Mật khẩu sinh trắc học',
+                  fontWeight: FontWeight.bold,
                   textAlign: TextAlign.start,
-                  fontSize: AppDimens.fontSmall(),
-                  textColor: AppColors.colorRed444),
-              sdsSizedBoxDefault,
-            ],
-            SDSBackConfirmButton(
-              titleLeft: LocaleKeys.label_cancel,
-              titleRight: LocaleKeys.label_accept,
-              isBottom: false,
-              functionLeft: () {
-                Get.back();
-                controller.passwordController.clear();
-                controller.wrongPassword.value = false;
-              },
-              function: () async => await controller.checkPassword(),
+                  fontSize: AppDimens.fontMedium,
+                ),
+                const Gap(5),
+                UtilWidget.buildText(
+                  'Nhập mật khẩu sinh trắc học',
+                  textAlign: TextAlign.start,
+                  fontSize: AppDimens.fontSmall,
+                ),
+                const Gap(5),
+                _buildPassword(),
+                const Gap(5),
+                if (controller.wrongPassword.value) ...[
+                  UtilWidget.buildText('Mật khẩu không chính xác',
+                      textAlign: TextAlign.start,
+                      fontSize: AppDimens.fontSmall,
+                      textColor: AppColors.colorRedError),
+                ],
+                const Gap(5),
+                Row(
+                  children: [
+                    _buildBtnConfirm(isConfirm: false),
+                    Gap(12.w),
+                    _buildBtnConfirm(
+                      onConfirm: controller.checkPassword,
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ).paddingAll(AppDimens.defaultPadding),
+      ),
+    );
+  }
+
+  Widget _buildBtnConfirm({
+    VoidCallback? onConfirm,
+    bool isConfirm = true,
+  }) {
+    return Expanded(
+      child: AppOutlineButton(
+        color: isConfirm ? AppColors.primaryColor : AppColors.white,
+        onPressed: isConfirm ? onConfirm : Get.back,
+        border: isConfirm ? null : Border.all(color: AppColors.white),
+        borderRadius: BorderRadius.circular(AppDimens.radius8),
+        width: double.infinity,
+        height: AppDimens.btnMedium,
+        child: UtilWidget.buildText(
+          isConfirm ? StringConstants.next.tr : StringConstants.cancel.tr,
+          textColor: isConfirm ? AppColors.white : AppColors.primaryColor,
+          fontSize: AppDimens.fontMedium,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 
   Widget _buildPassword() {
-    return SDSInputWithLabel(
-      inputLabelModel: SDSInputLabelModel(
-        label: '',
-        isValidate: true,
-        labelTextStyle: const TextStyle(
-          color: AppColors.dsGray2,
-          fontWeight: FontWeight.bold,
-        ),
-        paddingLabel: EdgeInsets.zero,
-      ),
-      inputTextFormModel: SDSInputTextModel(
-        controller: controller.passwordController,
-        iconLeading: Icons.lock,
-        paddingModel: EdgeInsets.zero,
-        hintText: LocaleKeys.login_password.tr,
-        obscureText: true,
-        submitFunc: (v) async => await controller.checkPassword(),
-        focusNode: controller.passwordFocus,
-        inputFormatters: InputFormatterEnum.password,
-        fillColor: Colors.transparent,
-        iconNextTextInputAction: TextInputAction.done,
-        prefixIconColor: AppColors.dsPrimaryBlueBlue,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimens.radius4),
-          borderSide: const BorderSide(
-            width: AppDimens.borderDefault,
-            color: AppColors.dsGray3,
+    return Material(
+      color: AppColors.black,
+      borderRadius: BorderRadius.circular(12),
+      child: AppTextField(
+        maxLines: 1,
+        maxLength: 255,
+        backgroundColor: AppColors.black,
+        borderRadius: BorderRadius.circular(12),
+        hintText: StringConstants.password.tr,
+        isHide: controller.isHidePass.value,
+        outlineColor: AppColors.black,
+        border: Border.all(color: AppColors.black),
+        suffixIcon: AppTouchable(
+          onPressed: controller.isHidePass.toggle,
+          child: Icon(
+            controller.isHidePass.value
+                ? Icons.visibility
+                : Icons.visibility_off,
+            color: AppColors.dsGray4,
+            size: 24.sp,
           ),
         ),
-        validator: (value) {
-          if (value != null && (value.length < 6 || value.length > 50)) {
-            return LocaleKeys.login_errorPassword.tr;
-          }
-          return null;
-        },
+        textEditingController: controller.passwordController,
       ),
     );
   }

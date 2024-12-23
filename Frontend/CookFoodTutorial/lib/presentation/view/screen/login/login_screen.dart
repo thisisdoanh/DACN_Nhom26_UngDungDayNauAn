@@ -1,12 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:tutorial/data/share_preference_utils.dart';
 import 'package:tutorial/presentation/base/app_base_screen.dart';
+import 'package:tutorial/presentation/component/text_share.dart';
+import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
+import 'package:tutorial/presentation/view/resources/app_dimen.dart';
+import 'package:tutorial/presentation/view/resources/app_key.dart';
+import 'package:tutorial/presentation/view/screen/biometric/ui/biometric_login/biometric_login.dart';
 import 'package:tutorial/presentation/view/screen/login/login_controller.dart';
 import 'package:tutorial/presentation/view/widget/app_outline_button.dart';
 import 'package:tutorial/res/string/app_string.dart';
+
+part 'package:tutorial/presentation/view/screen/login/login_widget.dart';
 
 class LoginScreen extends AppBaseScreen<LoginController> {
   const LoginScreen({super.key});
@@ -51,7 +60,8 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                     Gap(28.h),
                     Text(
                       StringConstants.login.tr,
-                      style: AppTextTheme.headlineLarge(AppColors.white)?.copyWith(
+                      style:
+                          AppTextTheme.headlineLarge(AppColors.white)?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -72,7 +82,8 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                         ),
                         hintText: StringConstants.email.tr,
                         keyboardType: TextInputType.emailAddress,
-                        textEditingController: controller.emailTextEditingController,
+                        textEditingController:
+                            controller.emailTextEditingController,
                         errorText: controller.firstErrorText.value,
                         onChanged: controller.onFirstInputChange,
                       ),
@@ -97,12 +108,15 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                         suffixIcon: AppTouchable(
                           onPressed: () => controller.onPressShowPassword(),
                           child: Icon(
-                            controller.isHidePass.value ? Icons.visibility : Icons.visibility_off,
+                            controller.isHidePass.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                             color: AppColors.white,
                             size: 24.sp,
                           ),
                         ),
-                        textEditingController: controller.passwordTextEditingController,
+                        textEditingController:
+                            controller.passwordTextEditingController,
                         errorText: controller.secondErrorText.value,
                         onChanged: controller.onSecondInputChange,
                       ),
@@ -133,17 +147,25 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                       ],
                     ),
                     Gap(16.h),
-                    AppOutlineButton(
-                      onPressed: () => controller.onPressLogin(),
-                      borderRadius: BorderRadius.circular(20.sp),
-                      width: 344.w,
-                      height: 56.h,
-                      child: Text(
-                        StringConstants.login.tr,
-                        style: AppTextTheme.headlineSmall(AppColors.white)?.copyWith(
-                          fontWeight: FontWeight.w700,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AppOutlineButton(
+                          onPressed: () => controller.onPressLogin(),
+                          borderRadius: BorderRadius.circular(20.sp),
+                          height: 56.h,
+                          child: Text(
+                            StringConstants.login.tr,
+                            style: AppTextTheme.headlineSmall(AppColors.white)
+                                ?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
-                      ),
+                        Gap(16.w),
+                        _buildButtonBiometric(),
+                      ],
                     ),
                     Gap(80.h),
                   ],
@@ -163,7 +185,8 @@ class LoginScreen extends AppBaseScreen<LoginController> {
                   onPressed: () => controller.onPressRegister(),
                   child: Text(
                     StringConstants.register.tr,
-                    style: AppTextTheme.titleMedium(AppColors.primaryColor)?.copyWith(
+                    style: AppTextTheme.titleMedium(AppColors.primaryColor)
+                        ?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
                   ),

@@ -136,6 +136,14 @@ class RecipeModel {
         "imageUrl": imageUrl,
         "rating": rating,
       };
+
+        @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RecipeModel && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 class Ingredient {

@@ -16,13 +16,24 @@ class FoodDetailController extends AppBaseController {
   TextEditingController commentCtrl = TextEditingController();
 
   @override
+  void onClose() {
+    appController.commentListGlobal.assignAll(commentList);
+    commentCtrl.clear();
+    super.onClose();
+  }
+
+  @override
   void onInit() async {
     if (Get.arguments is RecipeModel) {
       recipeModel = Get.arguments;
     }
     showLoading();
-    await getComment();
-    await 0.5.seconds.delay();
+    if (appController.commentListGlobal.isNotEmpty &&
+        appController.commentListGlobal.first.recipeId == recipeModel.id) {
+      commentList.addAll(appController.commentListGlobal);
+    } else {
+      await getComment();
+    }
     hideLoading();
     super.onInit();
   }

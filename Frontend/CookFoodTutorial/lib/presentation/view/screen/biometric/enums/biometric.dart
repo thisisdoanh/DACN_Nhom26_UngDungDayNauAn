@@ -6,11 +6,11 @@ extension BiometricExt on Biometric {
   String get title {
     switch (this) {
       case Biometric.faceId:
-        return 'faceId';
+        return 'Bảo mật khuôn mặt';
       case Biometric.fingerprint:
-        return 'fingerprint';
+        return 'Bảo mật vân tay';
       case Biometric.none:
-        return 'none';
+        return 'Không hỗ trợ snh trắc học';
     }
   }
 

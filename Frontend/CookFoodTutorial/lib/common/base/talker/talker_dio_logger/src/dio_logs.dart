@@ -8,10 +8,10 @@ const encoder = JsonEncoder.withIndent('  ');
 
 class DioRequestLog extends TalkerLog {
   DioRequestLog(
-      String title, {
+      super.title, {
         required this.requestOptions,
         required this.settings,
-      }) : super(title);
+      });
 
   final RequestOptions requestOptions;
   final TalkerDioLoggerSettings settings;
@@ -46,10 +46,10 @@ class DioRequestLog extends TalkerLog {
 
 class DioResponseLog extends TalkerLog {
   DioResponseLog(
-      String title, {
+      super.title, {
         required this.response,
         required this.settings,
-      }) : super(title);
+      });
 
   final Response<dynamic> response;
   final TalkerDioLoggerSettings settings;
@@ -91,10 +91,10 @@ class DioResponseLog extends TalkerLog {
 
 class DioErrorLog extends TalkerLog {
   DioErrorLog(
-      String title, {
+      super.title, {
         required this.dioException,
         required this.settings,
-      }) : super(title);
+      });
 
   final DioException dioException;
   final TalkerDioLoggerSettings settings;

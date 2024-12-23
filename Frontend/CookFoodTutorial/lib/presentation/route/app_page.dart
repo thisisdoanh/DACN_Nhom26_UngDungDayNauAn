@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:tutorial/presentation/view/screen/account_info/account_infor_binding.dart';
-import 'package:tutorial/presentation/view/screen/account_info/account_infor_screen.dart';
 import 'package:tutorial/presentation/view/screen/favourite_food/favourite_food_binding.dart';
 import 'package:tutorial/presentation/view/screen/favourite_food/favourite_food_screen.dart';
 import 'package:tutorial/presentation/view/screen/food_detail/food_detail_binding.dart';
@@ -55,11 +53,6 @@ class AppPage {
       name: AppRoute.suggestFoodSreen,
       page: () => const SuggestFoodScreen(),
       binding: SuggestFoodBinding(),
-    ),
-    GetPage(
-      name: AppRoute.accountInforScreen,
-      page: () => const AccountInforScreen(),
-      binding: AccountInforBinding(),
     ),
     GetPage(
       name: AppRoute.foodDetailScreen,

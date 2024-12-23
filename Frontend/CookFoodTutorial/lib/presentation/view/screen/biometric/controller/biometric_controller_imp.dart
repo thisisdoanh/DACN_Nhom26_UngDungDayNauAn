@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:js_interop_unsafe';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,6 @@ class BiometricControllerImp extends BiometricController {
     await checkBiometricSupport();
     if (supportState.value == SupportState.supported) {
       await checkBiometric();
-      await checkAccount();
     }
     super.onInit();
   }
@@ -66,7 +64,7 @@ class BiometricControllerImp extends BiometricController {
   @override
   Future<void> authCheck({required Widget child}) async {
     showPopupBiometricSupport(
-        func: () => startBioMetricAuth("chẳng hiểu", child));
+        func: () => startBioMetricAuth("Xác thực sinh trắc học", child));
   }
 
   Future<void> checkBiometricSupport() async {
@@ -95,7 +93,7 @@ class BiometricControllerImp extends BiometricController {
           options: const AuthenticationOptions(
               biometricOnly: true, stickyAuth: true));
       if (didAuthenticate) {
-        Get.bottomSheet(child);
+        Get.dialog(child);
       } else {
         showToast('Xác thực không thành công!');
       }
@@ -110,44 +108,18 @@ class BiometricControllerImp extends BiometricController {
   @override
   Future<void> checkPassword() async {
     wrongPassword.value = false;
-    // await AppInfor.getUsenamePassword(
-    //   keyUserName: AppKey.keyLoginUserName,
-    //   keyPassword: AppKey.keyLoginPassword,
-    // );
-    if ('AppInfor.password' == passwordController.text) {
-      wrongPassword.value = false;
-      //Close Dialog
-      Get.back();
 
-      await manageBiometricAccount(newAccount: AppInfor.userName).then((_) {
-        checkSetBiometric.value = !checkSetBiometric.value;
-      });
+    if (PreferenceUtils.getString(AppKey.keyPassword)?.trim() ==
+        passwordController.text.trim()) {
+      wrongPassword.value = false;
+      haveBiometric.toggle();
+      PreferenceUtils.setBool(AppKey.keyCheckBiometric, haveBiometric.value);
+      showToast('Thay đổi cấu hình thành công!');
+      Get.back();
     } else {
       wrongPassword.value = true;
     }
     passwordController.clear();
-  }
-
-  Future<bool> checkAccount() async {
-    // await AppInfor.getUsenamePassword(
-    //   keyUserName: AppKey.keyLoginUserName,
-    //   keyPassword: AppKey.keyLoginPassword,
-    // );
-    final savedAccount = PreferenceUtils.getString(AppKey.keyBiometricAccount);
-    checkSetBiometric.value =
-        savedAccount == PreferenceUtils.getString(AppKey.keyAccount);
-    return checkSetBiometric.value;
-  }
-
-  Future<void> manageBiometricAccount({required String newAccount}) async {
-    final savedAccount =
-        PreferenceUtils.getString(AppKey.keyBiometricAccount) ?? "";
-    if (savedAccount == newAccount) {
-      await PreferenceUtils.remove(AppKey.keyBiometricAccount);
-    } else {
-      PreferenceUtils.setString(
-           AppKey.keyBiometricAccount,  newAccount);
-    }
   }
 
   @override
@@ -155,15 +127,17 @@ class BiometricControllerImp extends BiometricController {
     switch (supportState.value) {
       case SupportState.supported:
         return func();
+
       case SupportState.notSetUp:
-        return ShowPopup.showDialogNotification(
-            LocaleKeys.biometric_noBiometric.tr);
+        showToast(
+            'Thiêt bị chưa cài đặt sinh trăc học, hãy vào cài đặt để bật!');
+        break;
       case SupportState.unsupported:
-        return ShowPopup.showDialogNotification(
-            LocaleKeys.biometric_noSupportBiometric.tr);
+        showToast('Thiết bị không hỗ trợ sinh trắc học');
+        break;
       default:
-        return ShowPopup.showDialogNotification(
-            LocaleKeys.biometric_unknownError.tr);
+        showToast('Không tìm thấy sinh trắc học');
+        break;
     }
   }
 }

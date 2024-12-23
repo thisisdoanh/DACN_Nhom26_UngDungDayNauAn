@@ -4,15 +4,17 @@ import 'package:tutorial/common/utils/app_utils.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/data/model/user_info_response.dart';
 import 'package:tutorial/data/provider/api_service.dart';
+import 'package:tutorial/data/share_preference_utils.dart';
 import 'package:tutorial/presentation/base/app_base_controller.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
+import 'package:tutorial/presentation/view/resources/app_key.dart';
 
-import '../../../../common/utils/app_log.dart';
 
 class HomeController extends AppBaseController {
   @override
   void onInit() async {
-    // await fetchData();
+    appController.haveBiometric.value =
+        PreferenceUtils.getBool(AppKey.keyCheckBiometric) ?? false;
 
     appController.listRecipeHighRating.value = appController.listRecipe
         .toList()
@@ -21,7 +23,8 @@ class HomeController extends AppBaseController {
         )
         .toList();
 
-    appController.listRecipeRandom.value = (appController.listRecipe.toList()..shuffle()).toList();
+    appController.listRecipeRandom.value =
+        (appController.listRecipe.toList()..shuffle()).toList();
     super.onInit();
   }
 
@@ -35,8 +38,8 @@ class HomeController extends AppBaseController {
 
   Future getUserInfo() async {
     appController.userInfo = await ApiService.getUserInfo() ?? UserInfo();
-    appController.listRecipeUserFavorite.value = await ApiService.getRecipeFavorite(appController.userInfo.id ?? 1);
-    AppLog.info(appController.listRecipeUserFavorite.value, tag: "appController.listRecipeUserFavorite.value");
+    appController.listRecipeUserFavorite.value =
+        await ApiService.getRecipeFavorite(appController.userInfo.id ?? 1);
   }
 
   Future getListRecipe() async {

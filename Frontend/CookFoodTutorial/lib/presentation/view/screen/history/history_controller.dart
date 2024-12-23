@@ -18,7 +18,7 @@ class HistoryController extends AppBaseController {
         appController.listRecipe[7],
       ]);
     }
-    listRecipe.value = appController.listRecipeHistory.toList();
+    listRecipe.value = appController.listRecipeHistory.toSet().toList();
     listRecipeFilter.value = listRecipe.toList();
     showLoading();
     await 1.seconds.delay();
