@@ -15,6 +15,8 @@ class AppImage {
   static const String icHistory = '${_internalImagePathSvg}ic_history.svg';
   static const String icHome = '${_internalImagePathSvg}ic_home.svg';
   static const String icLogOut = '${_internalImagePathSvg}ic_log_out.svg';
+  static const String icBiometric = '${_internalImagePathSvg}ic_biometric.svg';
+  static const String icfinger = '${_internalImagePathSvg}ic_fingerprint.svg';
 
   ///PNG
   static const String imgLogo = '${_internalImagePathPng}img_logo.png';
