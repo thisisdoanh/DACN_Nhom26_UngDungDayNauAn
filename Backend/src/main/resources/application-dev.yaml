@@ -12,7 +12,7 @@ spring:
       on-profile: dev
 
   datasource:
-    url: jdbc:mysql://localhost:3306/cooking_app #jdbc:mysql://my-sql1:3306/cooking_app
+    url: jdbc:mysql://localhost:3306/recipe #jdbc:mysql://my-sql1:3306/cooking_app
     username: root
     password: abcd1234
     driver-class-name: com.mysql.cj.jdbc.Driver

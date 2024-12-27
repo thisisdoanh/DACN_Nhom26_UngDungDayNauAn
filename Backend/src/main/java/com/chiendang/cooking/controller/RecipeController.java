@@ -56,7 +56,7 @@ public class RecipeController {
 
 
     @Operation(method = "GET", summary = "Get all recipe", description = "Send a request via this API to get all user")
-    @GetMapping
+    @GetMapping("/approved")
     public ResponseData<List<RecipeResponse>> findAllRecipe(){
         try {
             return new ResponseData<>(HttpStatus.OK.value(), "Lấy danh sách thành công", recipeService.getAllRecipeApproved() );
