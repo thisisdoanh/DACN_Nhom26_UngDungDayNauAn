@@ -23,7 +23,7 @@ class AppDialog extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   const AppDialog({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.messageWidget,
@@ -41,7 +41,7 @@ class AppDialog extends StatelessWidget {
     this.hideGroupButton,
     this.fullContentWidget,
     this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

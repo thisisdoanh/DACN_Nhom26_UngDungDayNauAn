@@ -38,6 +38,39 @@ class ApiService {
     }
   }
 
+  static Future<UserInfo?> createAccount(
+      {required String mail,
+      required String password,
+      required String name}) async {
+    Map<String, String> mapName = splitName(name);
+    BaseResponse response = await ApiClient.instance.request(
+      endPoint: ApiConstant.epRegister,
+      method: ApiClient.post,
+      data: jsonEncode(
+        {
+          "email": mail,
+          "password": password,
+          "firstName": mapName['firstName'],
+          "lastName": mapName['lastName'],
+          "dob": "01/01/1970",
+          "roles": ["USER"],
+        },
+      ),
+    );
+
+    if (response.result == true) {
+      UserInfo userInfo = UserInfo.fromMap(response.data);
+
+      return userInfo;
+    } else {
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
+
+      return Future.value(null);
+    }
+  }
+
   static Future<UserInfo?> getUserInfo() async {
     BaseResponse response = await ApiClient.instance.request(
       endPoint: ApiConstant.epUserInfo,
@@ -119,10 +152,48 @@ class ApiService {
     }
   }
 
-  static Future<bool> getOtp(String email) async {
+  static Future<bool> forgotPass(String email) async {
     BaseResponse response = await ApiClient.instance.request(
-      endPoint: ApiConstant.epOtp + email,
-      method: ApiClient.get,
+      endPoint: ApiConstant.epForgotPass + email,
+      method: ApiClient.post,
+    );
+
+    if (response.result == true) {
+      return true;
+    } else {
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
+
+      return false;
+    }
+  }
+
+  static Future<bool> inputOtp(String email, String otp) async {
+    BaseResponse response = await ApiClient.instance.request(
+      endPoint: "${ApiConstant.epInputOtp}$email/$otp",
+      method: ApiClient.post,
+    );
+
+    if (response.result == true) {
+      return true;
+    } else {
+      showToast((response.message ?? '').isEmpty
+          ? 'Unknown error'
+          : (response.message ?? ''));
+
+      return false;
+    }
+  }
+
+  static Future<bool> verifyAcc(String email, String pass) async {
+    BaseResponse response = await ApiClient.instance.request(
+      endPoint: ApiConstant.epForgotPass + email,
+      method: ApiClient.post,
+      formData: {
+        "password": pass,
+        "repeatPassword": pass,
+      },
     );
 
     if (response.result == true) {

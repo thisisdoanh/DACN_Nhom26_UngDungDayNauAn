@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tutorial/data/model/comment_response.dart';
 import 'package:tutorial/data/model/recipe_response_model.dart';
 import 'package:tutorial/data/model/user_info_response.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
@@ -14,49 +15,17 @@ class AppController extends SuperController {
   RxList<RecipeModel> listRecipeHistory = RxList();
   RxList<RecipeModel> listRecipeHighRating = RxList();
   RxList<RecipeModel> listRecipeRandom = RxList();
+  RxList<CommentModel> commentListGlobal = RxList();
+  final RxBool haveBiometric = RxBool(false);
 
   UserInfo userInfo = UserInfo();
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
 
-  @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
-  }
 
   Future<void> updateLocale(Locale locale) async {
     Get.updateLocale(locale);
   }
 
-  @override
-  void onDetached() {
-    // TODO: implement onDetached
-  }
-
-  @override
-  void onHidden() {
-    // TODO: implement onHidden
-  }
-
-  @override
-  void onInactive() {
-    // TODO: implement onInactive
-  }
-
-  @override
-  void onPaused() {
-    // TODO: implement onPaused
-  }
-
-  @override
-  void onResumed() {
-    // TODO: implement onResumed
-  }
 
   void showFilterBottomSheet(List<RecipeModel> listRecipeInput, Function(List<RecipeModel>) onPressApply) {
     Get.bottomSheet(
@@ -81,5 +50,25 @@ class AppController extends SuperController {
     } else {
       listRecipeUserFavorite.add(recipeModel);
     }
+  }
+  
+  @override
+  void onDetached() {
+  }
+  
+  @override
+  void onHidden() {
+  }
+  
+  @override
+  void onInactive() {
+  }
+  
+  @override
+  void onPaused() {
+  }
+  
+  @override
+  void onResumed() {
   }
 }

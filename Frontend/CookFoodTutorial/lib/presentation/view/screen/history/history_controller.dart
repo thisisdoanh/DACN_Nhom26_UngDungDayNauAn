@@ -8,15 +8,17 @@ class HistoryController extends AppBaseController {
 
   @override
   void onInit() async {
-    appController.listRecipeHistory.addAll([
-      appController.listRecipe[0],
-      appController.listRecipe[2],
-      appController.listRecipe[2],
-      appController.listRecipe[5],
-      appController.listRecipe[6],
-      appController.listRecipe[7],
-    ]);
-    listRecipe.value = appController.listRecipeHistory.toList();
+    if (appController.listRecipeHistory.isEmpty) {
+      appController.listRecipeHistory.addAll([
+        appController.listRecipe[0],
+        appController.listRecipe[2],
+        appController.listRecipe[2],
+        appController.listRecipe[5],
+        appController.listRecipe[6],
+        appController.listRecipe[7],
+      ]);
+    }
+    listRecipe.value = appController.listRecipeHistory.toSet().toList();
     listRecipeFilter.value = listRecipe.toList();
     showLoading();
     await 1.seconds.delay();

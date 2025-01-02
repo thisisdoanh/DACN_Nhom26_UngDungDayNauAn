@@ -1,16 +1,43 @@
-# accurate
 
-A new Flutter project.
 
-## Getting Started
+## Prerequisite
+- Cài đặt JDK 17+ nếu chưa thì [cài đặt JDK](https://tayjava.vn/cai-dat-jdk-tren-macos-window-linux-ubuntu/)
+- Install Maven 3.5+ nếu chưa thì [cài đặt Maven](https://tayjava.vn/cai-dat-maven-tren-macos-window-linux-ubuntu/)
+- Install IntelliJ nếu chưa thì [cài đặt IntelliJ](https://tayjava.vn/cai-dat-intellij-tren-macos-va-window/)
+- Install MySQL nếu chưa thì [cài đặt MySQL](https://www.youtube.com/watch?v=Z6xSj0A1FYw)
+## Technical Stacks
+- Java 17
+- Spring Boot 3.2.3
+- PostgresSQL
+- Kafka
+- Redis
+- Maven 3.5+
+- Lombok
+- DevTools
+- Docker, Docker compose
 
-This project is a starting point for a Flutter application.
+## Build application
+```bash
+mvn clean package -P dev|test|uat|prod
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Run application
+- Maven statement
+```bash
+./mvnw spring-boot:run
+```
+- Jar statement
+```bash
+java -jar target/recipe-service.jar
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Docker
+```bash
+docker build -t recipe-service .
+docker run -d recipe-service:latest recipe-service
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Package application
+```bash
+docker build -t recipe-service .
+```

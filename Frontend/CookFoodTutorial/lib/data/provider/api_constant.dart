@@ -9,11 +9,14 @@ class ApiConstant {
 
   // End point
   static const String epAuthToken = "/auth/token";
+  static const String epRegister = "/api/v1/users";
   static const String epUserInfo = "/api/v1/users/myInfo";
   static const String epFindAllRecipe = "/api/v1/recipes/find-all";
   static const String epFindRecipe = "/api/v1/recipes";
   static const String epRecipeFavorite = "/api/v1/favorite-recipe/";
   static const String epCategories = "/api/v1/categories";
-  static const String epOtp = '/forgot-password/verify-mail/';
   static const String epComment = "/api/v1/review";
+  static const String epForgotPass = '/forgot-password/verify-mail/';
+  static const String epInputOtp = '/forgot-password/verify-otp/';
+  static const String epVerifyAcc = '/forgot-password/change-password/';
 }

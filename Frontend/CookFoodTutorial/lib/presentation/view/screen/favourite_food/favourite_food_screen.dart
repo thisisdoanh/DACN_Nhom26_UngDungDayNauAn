@@ -44,7 +44,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavouriteFoodController> {
 
   Widget _buildListFood(double itemWidth, double itemHeight) {
     return Expanded(
-      child: controller.listRecipeTemp.isEmpty
+      child: controller.listRecipeFilter.isEmpty
           ? const Center(
               child: Text('Không có dữ liệu'),
             )
@@ -55,16 +55,13 @@ class FavouriteFoodScreen extends AppBaseScreen<FavouriteFoodController> {
                 crossAxisSpacing: AppDimens.paddingMedium,
                 mainAxisSpacing: AppDimens.paddingMedium,
               ),
-              itemCount: controller.listRecipeTemp.length,
+              itemCount: controller.listRecipeFilter.length,
               itemBuilder: (context, index) {
-                return 
-                 FoodCard(
-                    recipeModel: controller.listRecipeTemp[index],
-                  
+                return FoodCard(
+                  recipeModel: controller.listRecipeFilter[index],
                 );
               },
             ),
-
     );
   }
 
@@ -94,8 +91,7 @@ class FavouriteFoodScreen extends AppBaseScreen<FavouriteFoodController> {
       height: AppDimens.sizeTextField,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimens.radius8),
-          border: Border.all(color: AppColors.white)),
+          borderRadius: BorderRadius.circular(AppDimens.radius8), border: Border.all(color: AppColors.white)),
       child: const Icon(
         Icons.filter_alt_rounded,
         color: AppColors.white,
@@ -156,10 +152,9 @@ class FavouriteFoodScreen extends AppBaseScreen<FavouriteFoodController> {
 //           ],
 //         ),
 // =======
-      child: SearchWidget(
-        listRecipe: controller.listRecipe.toList(),
-      )
-    );
+        child: SearchWidget(
+      listRecipe: controller.listRecipe.toList(),
+    ));
   }
 
   Widget _buildAppBar() {

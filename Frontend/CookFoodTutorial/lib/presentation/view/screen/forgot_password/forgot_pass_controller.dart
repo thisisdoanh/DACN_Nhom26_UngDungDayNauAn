@@ -66,22 +66,47 @@ class ForgotPassController extends AppBaseController {
     if (_validateEmail()) {
       showLoading();
       final isSuccess =
-          await ApiService.getOtp(emailTextEditingController.text.trim());
+          await ApiService.forgotPass(emailTextEditingController.text.trim());
       hideLoading();
-      //  if (isSuccess) {
-      Get.to(const InputOtpScreen());
-      //}
+      if (isSuccess) {
+        Get.to(const InputOtpScreen());
+      } else {
+        showToast('Gửi mail thất bại, hãy thử lại sau!');
+      }
     }
   }
 
-  void forgotPassSuccess() {
+  void verifyAcc() async {
     if (_validatePass()) {
-      Get.toNamed(AppRoute.homeScreen);
+      showLoading();
+      final isSuccess = await ApiService.verifyAcc(
+        emailTextEditingController.text.trim(),
+        verifyPasswordCtrl.text.trim(),
+      );
+      hideLoading();
+      if (isSuccess) {
+        Get.toNamed(AppRoute.homeScreen);
+        showToast('Đổi mật khẩu thành công!');
+      } else {
+        showToast('Có lỗi xảy ra, vui lòng thử lại!');
+      }
     }
   }
 
-  void verifyOtp() {
-    Get.to(const VerifyAccSuccessScreen());
+  void inputOtp() async {
+    if (_validateEmail()) {
+      showLoading();
+      final isSuccess = await ApiService.inputOtp(
+        emailTextEditingController.text.trim(),
+        otpValues.fold<String>('', (sum, element) => sum + element),
+      );
+      hideLoading();
+      if (isSuccess) {
+        Get.to(const VerifyAccSuccessScreen());
+      } else {
+        showToast('Otp không đúng hoặc đã tồn tại!');
+      }
+    }
   }
 
   void updateOtpValue(int index, String value) {

@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:tutorial/data/model/comment_response.dart';
 import 'package:tutorial/presentation/base/app_base_screen.dart';
 import 'package:tutorial/presentation/base/app_controller.dart';
 import 'package:tutorial/presentation/component/appbar.dart';
@@ -103,47 +104,52 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
                   final isMe =
                       comment.user?.id == controller.appController.userInfo.id;
                   final indexName = comment.user?.email?.indexOf('@');
-                  return SizedBox(
-                    height: 60,
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.all(0),
-                      minVerticalPadding: 0,
-                      trailing: isMe
-                          ? Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                InkWell(
-                                  onTap: () => controller.deleteComment(
-                                      comment),
-                                  child: const Icon(Icons.delete_sweep),
-                                ),
-                                const Gap(8),
-                                InkWell(
-                                  onTap: () {
-                                    controller.curentStart.value =
-                                        comment.rating?.toInt() ?? 4;
-                                    controller.commentCtrl.text =
-                                        comment.comment ?? "";
-                                    controller.goToRatingScreen(
-                                      RatingScreen(comment: comment),
-                                    );
-                                  },
-                                  child: const Icon(Icons.edit),
-                                ),
-                              ],
-                            )
-                          : null,
-                      title: UtilWidget.buildText(
-                        maxLines: 10,
-                        "${comment.user?.email?.substring(0, indexName) ?? ''}: ${comment.comment ?? ""}",
-                        fontSize: 14,
-                      ),
-                      subtitle: _buildFoodRate(comment.rating?.toDouble() ?? 4),
-                    ),
-                  );
+                  return _buildReviewItem(isMe, comment, indexName);
                 },
               ),
       ],
+    );
+  }
+
+  Widget _buildReviewItem(bool isMe, CommentModel comment, int? indexName) {
+    return SizedBox(
+      height: 60,
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(0),
+        minVerticalPadding: 0,
+        trailing: isMe
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                    onTap: () => controller.deleteComment(comment),
+                    child: const Icon(Icons.delete_sweep),
+                  ),
+                  const Gap(8),
+                  InkWell(
+                    onTap: () {
+                      controller.curentStart.value =
+                          comment.rating?.toInt() ?? 4;
+                      controller.commentCtrl.text = comment.comment ?? "";
+                      controller.goToRatingScreen(
+                        RatingScreen(comment: comment),
+                      );
+                    },
+                    child: const Icon(
+                      Icons.edit,
+                      size: 22,
+                    ),
+                  ),
+                ],
+              )
+            : null,
+        title: UtilWidget.buildText(
+          maxLines: 10,
+          "${comment.user?.email?.substring(0, indexName) ?? ''}: ${comment.comment ?? ""}",
+          fontSize: 14,
+        ),
+        subtitle: _buildFoodRate(comment.rating?.toDouble() ?? 4),
+      ),
     );
   }
 
@@ -314,15 +320,6 @@ class FoodDetailScreen extends AppBaseScreen<FoodDetailController> {
   }
 
   Widget _buildAppBar() {
-    return AppBarShare(
-      hasBackIcon: true,
-      action: IconButton(
-        onPressed: () {},
-        icon: const Icon(
-          Icons.notifications,
-          size: AppDimens.sizeImage35,
-        ),
-      ),
-    );
+    return const AppBarShare(hasBackIcon: true);
   }
 }

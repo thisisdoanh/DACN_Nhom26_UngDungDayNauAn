@@ -1,0 +1,41 @@
+
+server:
+  port: 8084
+spring:
+  config:
+    active:
+      on-profile: test
+
+  application:
+    name: CookingApp
+
+  main:
+    allow-circular-references: true
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/cooking_app
+    username: root
+    password: abcd1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    url: jdbc:oracle:thin:@localhost:1521:orcl
+#    username: cooking
+#    password: abcd1234
+  jpa:
+    properties:
+      hibernate:
+
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+
+openapi:
+  service:
+    api-docs: api-service
+    server: http://localhost:${server.port}
+    title: API Service
+    version: 1.0.0
+
+

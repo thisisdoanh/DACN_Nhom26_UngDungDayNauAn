@@ -1,0 +1,36 @@
+
+server:
+  port: 8083
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+spring:
+  config:
+    active:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/recipe #jdbc:mysql://my-sql1:3306/cooking_app
+    username: root
+    password: abcd1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+openapi:
+  service:
+    api-docs: api-service
+    server: http://localhost:${server.port}
+    title: API Service
+    version: 1.0.0
+
+

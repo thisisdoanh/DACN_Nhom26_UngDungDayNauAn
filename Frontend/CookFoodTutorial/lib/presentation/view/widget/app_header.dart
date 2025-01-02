@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../res/image/app_image.dart';
 import '../app_view.dart';
 
 class AppHeader extends StatelessWidget {

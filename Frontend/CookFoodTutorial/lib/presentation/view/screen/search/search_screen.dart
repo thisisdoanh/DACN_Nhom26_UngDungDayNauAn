@@ -52,7 +52,8 @@ class _SearchScreenState extends State<SearchScreen> {
       height: AppDimens.sizeTextField,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimens.radius8), border: Border.all(color: AppColors.white)),
+          borderRadius: BorderRadius.circular(AppDimens.radius8),
+          border: Border.all(color: AppColors.white)),
       child: const Icon(
         Icons.filter_alt_rounded,
         color: AppColors.white,
@@ -86,6 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
         borderRadius: BorderRadius.circular(AppDimens.radius8),
         textInputAction: TextInputAction.search,
         onSubmitted: onSubmitted,
+        onChanged: onSubmitted,
       ),
     );
   }

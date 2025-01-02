@@ -33,7 +33,6 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildLableScreen(),
-              _buildDivider(),
               _buildRateFood(),
               _buildInputComment(),
               _buildDivider(),
@@ -62,10 +61,10 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
       maxLength: 255,
       textEditingController: controller.commentCtrl,
       hintText: 'Nhập đánh giá',
-      borderRadius: BorderRadius.circular(AppDimens.radius8),
-      border: Border.all(color: AppColors.dsGray4, width: 1),
-      backgroundColor: AppColors.transparent,
-    ).paddingSymmetric(vertical: 16);
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: AppColors.black),
+      backgroundColor: AppColors.black,
+    );
   }
 
   Widget _buildBtnConfirm({
@@ -93,7 +92,7 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
   Widget _buildLableScreen() {
     return UtilWidget.buildText(
       StringConstants.ratingLableDialog.tr,
-      fontSize: AppDimens.fontSmall,
+      fontSize: AppDimens.fontMedium,
       fontWeight: FontWeight.bold,
     );
   }
@@ -127,7 +126,7 @@ class RatingScreen extends AppBaseScreen<FoodDetailController> {
         itemCount: 5,
         itemSize: (Get.width - 40) / 10,
         direction: Axis.horizontal,
-      ),
+      ).paddingSymmetric(vertical: 12),
     );
   }
 

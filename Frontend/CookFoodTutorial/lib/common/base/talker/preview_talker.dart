@@ -23,7 +23,7 @@ Future<void> main() async {
 }
 
 class YourCustomLog extends TalkerLog {
-  YourCustomLog(String message) : super(message);
+  YourCustomLog(super.message);
 
   /// Your custom log title
   @override

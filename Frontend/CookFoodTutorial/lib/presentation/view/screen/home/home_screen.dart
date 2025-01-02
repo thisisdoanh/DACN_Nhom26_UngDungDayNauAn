@@ -13,6 +13,7 @@ import 'package:tutorial/presentation/component/search_widget.dart';
 import 'package:tutorial/presentation/component/text_share.dart';
 import 'package:tutorial/presentation/route/app_route.dart';
 import 'package:tutorial/presentation/view/app_view.dart';
+import 'package:tutorial/presentation/view/screen/biometric/biometric.src.dart';
 import 'package:tutorial/presentation/view/screen/home/home_controller.dart';
 import 'package:tutorial/res/string/app_string.dart';
 
@@ -28,7 +29,6 @@ class HomeScreen extends AppBaseScreen<HomeController> {
           margin: EdgeInsets.only(left: 16.w),
           onPressed: () {
             Scaffold.of(context).openDrawer();
-            // controller.advancedDrawerController.showDrawer();
           },
           child: Center(
             child: AppImageWidget.asset(
@@ -36,13 +36,6 @@ class HomeScreen extends AppBaseScreen<HomeController> {
               height: 24.sp,
               width: 24.sp,
             ),
-          ),
-        ),
-        action: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.notifications,
-            size: AppDimens.sizeImage35,
           ),
         ),
       ),
@@ -65,7 +58,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                 ),
               ),
               TextSpan(
-                text: ' Denny',
+                text: ' ${controller.appController.userInfo.lastName}',
                 style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: 23.sp,
@@ -114,7 +107,7 @@ class HomeScreen extends AppBaseScreen<HomeController> {
         ),
         Gap(10.h),
         SizedBox(
-          height: 210.h,
+          height: 270.h,
           child: Obx(
             () => ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -195,48 +188,52 @@ class HomeScreen extends AppBaseScreen<HomeController> {
   }
 
   Widget _buildUserInfo(BuildContext context) {
-    return Row(
-      children: [
-        const CircleAvatar(
-          foregroundImage: NetworkImage(
-            "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.933601817.1727827200&semt=ais_hybrid",
-          ),
-          radius: 50,
-        ),
-        Gap(12.sp),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Denny',
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 28.sp,
-                  fontWeight: FontWeight.w700,
-                ),
+    return SizedBox(
+        height: 60,
+        child: Row(
+          children: [
+            const CircleAvatar(
+              foregroundImage: NetworkImage(
+                "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.933601817.1727827200&semt=ais_hybrid",
               ),
-              UtilWidget.buildText(
-                StringConstants.personalInfo,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-              )
-            ],
-          ),
-        ),
-        AppTouchable(
-          onPressed: () {
-            Scaffold.of(context).closeDrawer();
-            // controller.advancedDrawerController.hideDrawer();
-          },
-          child: const Icon(
-            Icons.arrow_back_sharp,
-            color: AppColors.primaryColor,
-            size: AppDimens.fontLargest,
-          ),
-        ),
-      ],
-    );
+              radius: 50,
+            ),
+            Gap(12.sp),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.appController.userInfo.lastName ?? '',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 28.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Expanded(
+                    child: UtilWidget.buildText(
+                      controller.appController.userInfo.email ?? '',
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            AppTouchable(
+              onPressed: () {
+                Scaffold.of(context).closeDrawer();
+                // controller.advancedDrawerController.hideDrawer();
+              },
+              child: const Icon(
+                Icons.arrow_back_sharp,
+                color: AppColors.primaryColor,
+                size: AppDimens.fontLargest,
+              ),
+            ),
+          ],
+        ));
   }
 
   _buildItemDrawer(
@@ -251,15 +248,18 @@ class HomeScreen extends AppBaseScreen<HomeController> {
             path: icon,
             height: 28.sp,
             width: 28.sp,
+            color: Colors.white,
           ),
           Gap(20.w),
-          Text(
-            title,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24.sp,
-              fontFamily: 'Lora',
-              fontWeight: FontWeight.w600,
+          Flexible(
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24.sp,
+                fontFamily: 'Lora',
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],
@@ -336,6 +336,14 @@ class HomeScreen extends AppBaseScreen<HomeController> {
                     function: () => controller.onPressHistory(),
                     icon: AppImage.icHistory,
                     title: StringConstants.history.tr,
+                  ),
+                  Gap(30.h),
+                  const BiometricSetting(),
+                  Gap(30.h),
+                  _buildItemDrawer(
+                    function: () => controller.onPressLogOut(),
+                    icon: AppImage.icLogOut,
+                    title: "Đăng xuất",
                   ),
                 ],
               ),

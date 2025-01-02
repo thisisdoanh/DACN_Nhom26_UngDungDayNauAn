@@ -1,0 +1,35 @@
+services:
+ mysql:
+   image: mysql:latest
+   container_name: my-sql1
+   cap_add:
+     - SYS_NICE
+   restart: always
+   environment:
+     - MYSQL_DATABASE= cooking_app
+     - MYSQL_ROOT_PASSWORD= abcd1234
+   ports:
+     - '3306:3306'
+   volumes:
+     - mysql_data:/var/lib/mysql
+     - ./recipe1.sql:/docker-entrypoint-initdb.d/recipe1.sql
+   networks:
+     - default
+
+ recipe-service:
+   container_name: recipe-service
+   build:
+       context: ./
+       dockerfile: Dockerfile
+   ports:
+     - "8083:8083"
+   networks:
+     - default
+
+networks:
+  default:
+    name: recipe-service
+volumes:
+  mysql_data:
+
+
