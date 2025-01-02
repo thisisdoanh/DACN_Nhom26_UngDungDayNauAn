@@ -68,9 +68,9 @@ class ForgotPassController extends AppBaseController {
       final isSuccess =
           await ApiService.getOtp(emailTextEditingController.text.trim());
       hideLoading();
-      if (isSuccess) {
-        Get.to(const InputOtpScreen());
-      }
+      //  if (isSuccess) {
+      Get.to(const InputOtpScreen());
+      //}
     }
   }
 
